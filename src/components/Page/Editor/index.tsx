@@ -4,12 +4,13 @@ import { useBlockImageContext } from "src/store/useBlockImage";
 import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorContext } from "src/store/useEditor";
-import { Console } from "console";
 
 const EditorComponent = () => {
   // 入力画像用のキャンバス
-  const { setMainCanvas, setMinecraftImage, translate, zoomIn, zoomOut, render } = useEditorContext();
+  const { init, translate, zoomIn, zoomOut, showNaviBox, render } = useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
+  const naviCanvas = useRef<HTMLCanvasElement>(null!);
+  const canvasContainer = useRef<HTMLDivElement>(null!);
   const { blueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockImageContext();
   let minecraftImageWidth: number;
@@ -24,24 +25,21 @@ const EditorComponent = () => {
     minecraftImageWidth = blueprint[0].length * 16;
     minecraftImageHeight = blueprint.length * 16;
     const minecraftImage = geenrateImageFromBlueprint(blueprint, blockImageDataDict);
-    /* setup main canvas */
-    setMainCanvas(mainCanvas.current);
-    setMinecraftImage(minecraftImage);
+    /* setup canvas */
+    init(mainCanvas.current, naviCanvas.current, minecraftImage, blueprint[0].length, blueprint.length);
     render();
     /* zoom event */
-    mainCanvas.current.addEventListener("wheel", (e) => handleWheel(e), { passive: false });
+    canvasContainer.current.addEventListener("wheel", (e) => handleWheel(e), { passive: false });
 
     /* translate event */
-    mainCanvas.current.addEventListener("mouseup", () => {
-      console.log("press false");
+    canvasContainer.current.addEventListener("mouseup", () => {
       pressing = false;
     });
-    mainCanvas.current.addEventListener("mouseout", () => {
-      console.log("press false");
+    canvasContainer.current.addEventListener("mouseout", () => {
       pressing = false;
     });
-    mainCanvas.current.addEventListener("mousedown", (e) => handleMouseDown(e));
-    mainCanvas.current.addEventListener("mousemove", (e) => handleMouseMove(e));
+    canvasContainer.current.addEventListener("mousedown", (e) => handleMouseDown(e));
+    canvasContainer.current.addEventListener("mousemove", (e) => handleMouseMove(e));
   }, []);
 
   const getCoordiante = (event: MouseEvent | WheelEvent) => {
@@ -49,13 +47,6 @@ const EditorComponent = () => {
     const x = (event.clientX - rect.left) / (rect.right - rect.left);
     const y = (event.clientY - rect.top) / (rect.bottom - rect.top);
     return { x, y };
-  };
-
-  const left = () => {
-    translate(-16, 0);
-  };
-  const right = () => {
-    translate(16, 0);
   };
 
   const handleWheel = (event: WheelEvent) => {
@@ -69,17 +60,18 @@ const EditorComponent = () => {
   };
 
   const handleMouseMove = (event: MouseEvent) => {
-    console.log("move", pressing);
-    if (!pressing) return;
     const { x, y } = getCoordiante(event);
-    console.log(x, y, mouseX, mouseY);
-    translate(x - mouseX, y - mouseY);
-    mouseX = x;
-    mouseY = y;
+    if (pressing) {
+      translate(x - mouseX, y - mouseY);
+      mouseX = x;
+      mouseY = y;
+    }
+    if (!pressing) {
+      showNaviBox(x, y);
+    }
   };
   const handleMouseDown = (event: MouseEvent) => {
     const { x, y } = getCoordiante(event);
-    console.log("mouse down", x, y);
     mouseX = x;
     mouseY = y;
     pressing = true;
@@ -87,20 +79,14 @@ const EditorComponent = () => {
 
   return (
     <>
-      <div className="flex justify-center m-4">
-        <button onClick={left} className="m-2 text-xl">
-          {"<"}
-        </button>
-        <button onClick={right} className="m-2 text-xl">
-          {">"}
-        </button>
-      </div>
-
       <div className="text-xl text-center">Editor</div>
-
       <div className="flex justify-center">
-        <div className="w-[50vw] flex justify-center">
-          <canvas id="main-canvas" ref={mainCanvas} className="w-[95%] border-2"></canvas>
+        <div
+          ref={canvasContainer}
+          className="w-[50vw] h-[50vw] flex justify-center items-center relative border-2"
+        >
+          <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
+          <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>
         </div>
       </div>
       <div className="flex justify-center mt-4">

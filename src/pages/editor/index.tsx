@@ -5,7 +5,7 @@ import { EditorProvider } from "src/store/useEditor";
 const Editor: NextPage = () => {
   return (
     <EditorProvider>
-      <EditorComponent />;
+      <EditorComponent />
     </EditorProvider>
   );
 };
