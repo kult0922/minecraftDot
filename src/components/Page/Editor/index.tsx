@@ -69,11 +69,11 @@ const EditorComponent = () => {
     }
     /* pen by drag */
     if (mode == "pen" && pressing) {
-      putBlock(x, y, inkBlockJavaId);
+      putBlock(x, y, penSize, inkBlockJavaId);
     }
-    /* show navi box by hover */
-    if (!pressing && mode == "pen") {
-      showNaviBox(x, y);
+    /* show navi box by hover & drag */
+    if (mode == "pen") {
+      showNaviBox(x, y, penSize);
     }
     mouseX = x;
     mouseY = y;
@@ -81,7 +81,7 @@ const EditorComponent = () => {
   const handleMouseDown = (event: React.MouseEvent) => {
     const { x, y } = getCoordiante(event);
     if (mode == "pen") {
-      putBlock(x, y, inkBlockJavaId);
+      putBlock(x, y, penSize, inkBlockJavaId);
     }
     mouseX = x;
     mouseY = y;

@@ -14,8 +14,8 @@ const EditorCanvasContext = createContext(
     translate: (x: number, y: number) => void;
     zoomIn: (x: number, y: number) => void;
     zoomOut: (x: number, y: number) => void;
-    showNaviBox: (x: number, y: number) => void;
-    putBlock: (x: number, y: number, javaId: string) => void;
+    showNaviBox: (x: number, y: number, size: number) => void;
+    putBlock: (x: number, y: number, size: number, javaId: string) => void;
     render: () => void;
   }
 );
@@ -85,40 +85,46 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     const dy = py - minecraftImageY;
     const blockX = Math.floor(dx / blockSize);
     const blockY = Math.floor(dy / blockSize);
-    const rectX = minecraftImageX + blockX * blockSize;
-    const rectY = minecraftImageY + blockY * blockSize;
 
-    return { rectX, rectY, blockSize };
+    return { blockX, blockY, blockSize };
   };
 
-  const showNaviBox = (x: number, y: number) => {
+  const showNaviBox = (x: number, y: number, size: number) => {
     naviCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
-    const { rectX, rectY, blockSize } = getBlockCoordinate(x, y);
+    const { blockX, blockY, blockSize } = getBlockCoordinate(x, y);
+
+    const beginBlockX = blockX - Math.floor(size / 2);
+    const beginBlockY = blockY - Math.floor(size / 2);
+    const rectX = minecraftImageX + beginBlockX * blockSize;
+    const rectY = minecraftImageY + beginBlockY * blockSize;
+
     naviCanvasContext.strokeStyle = "#000";
-    naviCanvasContext.strokeRect(rectX, rectY, blockSize, blockSize);
+    naviCanvasContext.strokeRect(rectX, rectY, blockSize * size, blockSize * size);
     naviCanvasContext.strokeStyle = "#fff";
-    naviCanvasContext.strokeRect(rectX - 5, rectY - 5, blockSize + 10, blockSize + 10);
+    naviCanvasContext.strokeRect(rectX - 5, rectY - 5, blockSize * size + 10, blockSize * size + 10);
+  };
+
+  const putBlock = (x: number, y: number, size: number, javaId: string) => {
+    const { blockX, blockY } = getBlockCoordinate(x, y);
+
+    const beginX = blockX - Math.floor(size / 2);
+    const endX = blockX + Math.floor(size / 2);
+    const beginY = blockY - Math.floor(size / 2);
+    const endY = blockY + Math.floor(size / 2);
+
+    for (let i = beginX; i <= endX; i++) {
+      for (let j = beginY; j <= endY; j++) {
+        minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, i * 16, j * 16);
+      }
+    }
+
+    render();
   };
 
   const translate = (x: number, y: number) => {
     const { px, py } = toPixelCoordinate(x, y);
     minecraftImageX += px;
     minecraftImageY += py;
-    render();
-  };
-
-  const putBlock = (x: number, y: number, javaId: string) => {
-    const { px, py } = toPixelCoordinate(x, y);
-    const blockSize = minecraftImageWidth / widthBlockNumber;
-    const dx = px - minecraftImageX;
-    const dy = py - minecraftImageY;
-    const blockX = Math.floor(dx / blockSize);
-    const blockY = Math.floor(dy / blockSize);
-    const rectX = blockX * 16;
-    const rectY = blockY * 16;
-
-    minecraftImageContext.clearRect(rectX, rectY, 16, 16);
-    minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, rectX, rectY);
     render();
   };
 
