@@ -5,6 +5,7 @@ const MyDocument = () => {
     <Html lang="ja-JP">
       <Head>
         <meta name="application-name" content="MyApp" />
+        <meta charSet="utf-8" content="user-scalable=no" />
       </Head>
       <body>
         <Main />
