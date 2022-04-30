@@ -1,7 +1,8 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
+import { useBlockImageContext } from "../useBlockImage";
 
-const EditorContext = createContext(
+const EditorCanvasContext = createContext(
   {} as {
     init: (
       mainCanvas_: HTMLCanvasElement,
@@ -14,16 +15,17 @@ const EditorContext = createContext(
     zoomIn: (x: number, y: number) => void;
     zoomOut: (x: number, y: number) => void;
     showNaviBox: (x: number, y: number) => void;
+    putBlock: (x: number, y: number, javaId: string) => void;
     render: () => void;
   }
 );
 
-export function useEditorContext() {
-  return useContext(EditorContext);
+export function useEditorCanvasContext() {
+  return useContext(EditorCanvasContext);
 }
 
-export function EditorProvider({ children }: { children?: ReactNode }) {
-  const canvasSize = 2000;
+export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
+  const canvasSize = 1000;
   const zoomStep = 0.5;
   let minecraftImageX = 0;
   let minecraftImageY = 0;
@@ -37,6 +39,8 @@ export function EditorProvider({ children }: { children?: ReactNode }) {
   let mainCanvasContext: CanvasRenderingContext2D;
   let naviCanvasContext: CanvasRenderingContext2D;
   let minecraftImage: HTMLCanvasElement;
+  let minecraftImageContext: CanvasRenderingContext2D;
+  const { blockImageDataDict } = useBlockImageContext();
 
   const init = (
     mainCanvas_: HTMLCanvasElement,
@@ -58,10 +62,11 @@ export function EditorProvider({ children }: { children?: ReactNode }) {
     naviCanvas.height = canvasSize;
     mainCanvasContext.imageSmoothingEnabled = false;
     naviCanvasContext.imageSmoothingEnabled = false;
-    naviCanvasContext.lineWidth = 6;
+    naviCanvasContext.lineWidth = 4;
 
     /* iamge set */
     minecraftImage = getBufferCanvas(image, image.width, image.height);
+    minecraftImageContext = minecraftImage.getContext("2d")!;
     /* block number */
     widthBlockNumber = widthBlockNumber_;
     heightBlockNumber = heightBlockNumber_;
@@ -73,23 +78,47 @@ export function EditorProvider({ children }: { children?: ReactNode }) {
     return { px, py };
   };
 
-  const showNaviBox = (x: number, y: number) => {
-    naviCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
+  const getBlockCoordinate = (x: number, y: number) => {
     const { px, py } = toPixelCoordinate(x, y);
     const blockSize = minecraftImageWidth / widthBlockNumber;
     const dx = px - minecraftImageX;
     const dy = py - minecraftImageY;
     const blockX = Math.floor(dx / blockSize);
     const blockY = Math.floor(dy / blockSize);
-    const naviRectX = minecraftImageX + blockX * blockSize;
-    const naviRectY = minecraftImageY + blockY * blockSize;
-    naviCanvasContext.strokeRect(naviRectX, naviRectY, blockSize, blockSize);
+    const rectX = minecraftImageX + blockX * blockSize;
+    const rectY = minecraftImageY + blockY * blockSize;
+
+    return { rectX, rectY, blockSize };
+  };
+
+  const showNaviBox = (x: number, y: number) => {
+    naviCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
+    const { rectX, rectY, blockSize } = getBlockCoordinate(x, y);
+    naviCanvasContext.strokeStyle = "#000";
+    naviCanvasContext.strokeRect(rectX, rectY, blockSize, blockSize);
+    naviCanvasContext.strokeStyle = "#fff";
+    naviCanvasContext.strokeRect(rectX - 5, rectY - 5, blockSize + 10, blockSize + 10);
   };
 
   const translate = (x: number, y: number) => {
     const { px, py } = toPixelCoordinate(x, y);
     minecraftImageX += px;
     minecraftImageY += py;
+    render();
+  };
+
+  const putBlock = (x: number, y: number, javaId: string) => {
+    const { px, py } = toPixelCoordinate(x, y);
+    const blockSize = minecraftImageWidth / widthBlockNumber;
+    const dx = px - minecraftImageX;
+    const dy = py - minecraftImageY;
+    const blockX = Math.floor(dx / blockSize);
+    const blockY = Math.floor(dy / blockSize);
+    const rectX = blockX * 16;
+    const rectY = blockY * 16;
+
+    minecraftImageContext.clearRect(rectX, rectY, 16, 16);
+    minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, rectX, rectY);
     render();
   };
 
@@ -140,7 +169,8 @@ export function EditorProvider({ children }: { children?: ReactNode }) {
     zoomIn,
     zoomOut,
     showNaviBox,
+    putBlock,
   };
 
-  return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>;
+  return <EditorCanvasContext.Provider value={value}>{children}</EditorCanvasContext.Provider>;
 }

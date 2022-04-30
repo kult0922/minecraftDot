@@ -40,7 +40,6 @@ const HomeComponent = () => {
 
   /* src image load */
   useEffect(() => {
-    console.log("processing use effect");
     const ctxIn = getContext(canvasInRef.current, 256, 256);
     ctxIn.imageSmoothingEnabled = false;
     (async () => {
@@ -48,8 +47,6 @@ const HomeComponent = () => {
       const image = await loadImage("/assets/sample1_256.png");
       ctxIn.drawImage(image, 0, 0);
       setSrc(ctxIn.getImageData(0, 0, 256, 256));
-      console.log("src iamge load end");
-      console.log(srcImage);
     })();
   }, []);
 

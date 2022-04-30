@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import EditorComponent from "src/components/Page/Editor";
-import { EditorProvider } from "src/store/useEditor";
+import { EditorCanvasProvider } from "src/store/useEditorCanvas";
 
 const Editor: NextPage = () => {
   return (
-    <EditorProvider>
+    <EditorCanvasProvider>
       <EditorComponent />
-    </EditorProvider>
+    </EditorCanvasProvider>
   );
 };
 
