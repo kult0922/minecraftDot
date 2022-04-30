@@ -21,10 +21,10 @@ const geenrateImageFromBlueprint = (
 
       for (let k = 0; k < blockSize; k++) {
         for (let l = 0; l < blockSize; l++) {
-          image[t(jj + k, ii + l, 0, width)] = blockImageData?.imageData.data[t(l, k, 0, 16)]!;
-          image[t(jj + k, ii + l, 1, width)] = blockImageData?.imageData.data[t(l, k, 1, 16)]!;
-          image[t(jj + k, ii + l, 2, width)] = blockImageData?.imageData.data[t(l, k, 2, 16)]!;
-          image[t(jj + k, ii + l, 3, width)] = blockImageData?.imageData.data[t(l, k, 3, 16)]!;
+          image[t(jj + k, ii + l, 0, width)] = blockImageData?.imageData.data[t(k, l, 0, 16)]!;
+          image[t(jj + k, ii + l, 1, width)] = blockImageData?.imageData.data[t(k, l, 1, 16)]!;
+          image[t(jj + k, ii + l, 2, width)] = blockImageData?.imageData.data[t(k, l, 2, 16)]!;
+          image[t(jj + k, ii + l, 3, width)] = blockImageData?.imageData.data[t(k, l, 3, 16)]!;
         }
       }
     }
