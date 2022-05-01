@@ -89,7 +89,7 @@ const EditorBoard = () => {
           onMouseDown={(e) => handleMouseDown(e)}
           onMouseUp={(e) => handleMouseUp(e)}
           onWheel={(e) => handleWheel(e)}
-          className="w-[50vw] h-[50vw] flex justify-center items-center relative border-2"
+          className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2"
         >
           <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
           <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>

@@ -9,11 +9,11 @@ const SideToolBar = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="">
+        <div className="mb-2">
           <img
             src={getBlockBasic(inkBlockJavaId).imagePath}
             width="32"
-            className="border-2 rendering-pixelated"
+            className="border-4 border-lime-500 rendering-pixelated"
           ></img>
         </div>
         <ToolButton id="pen" onChange={() => setMode("pen")} selected={mode == "pen"}>

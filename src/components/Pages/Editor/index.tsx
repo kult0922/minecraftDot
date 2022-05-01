@@ -6,8 +6,12 @@ const EditorPageComponent = () => {
   return (
     <>
       <div className="text-xl text-center">Editor</div>
-      <SideToolBar />
-      <EditorBoard />
+      <div className="flex justify-center">
+        <div className="mr-1">
+          <SideToolBar />
+        </div>
+        <EditorBoard />
+      </div>
 
       <div className="flex justify-center mt-4">
         <Link href="/">
