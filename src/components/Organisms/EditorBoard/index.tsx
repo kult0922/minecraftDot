@@ -55,6 +55,7 @@ const EditorBoard = () => {
     const { x, y } = getCoordiante(event);
     /* translate by drag */
     if (mode == "hand" && pressing) {
+      canvasContainer.current.style.cursor = "grabbing";
       translate(x - mouseX, y - mouseY);
     }
     /* pen by drag */
@@ -70,20 +71,27 @@ const EditorBoard = () => {
   };
   const handleMouseDown = (event: React.MouseEvent) => {
     const { x, y } = getCoordiante(event);
-    if (mode == "pen") {
-      putBlock(x, y, penSize, inkBlockJavaId);
-    }
+    if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
+    if (mode == "pen") putBlock(x, y, penSize, inkBlockJavaId);
     setPressing(true);
     setMouseX(x);
     setMouseY(y);
   };
   const handleMouseUp = (event: React.MouseEvent) => {
+    if (mode == "hand") canvasContainer.current.style.cursor = "grab";
     setPressing(false);
   };
 
   const handleMouseLeave = (event: React.MouseEvent) => {
     clearNaviCanvas();
     setPressing(false);
+  };
+  const handleMouseEnter = (event: React.MouseEvent) => {
+    if (mode == "hand") canvasContainer.current.style.cursor = "grab";
+    if (mode == "pen") canvasContainer.current.style.cursor = "crosshair";
+    if (mode == "bucket") canvasContainer.current.style.cursor = "cell";
+    if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
+    if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
   };
 
   return (
@@ -96,6 +104,7 @@ const EditorBoard = () => {
           onMouseUp={(e) => handleMouseUp(e)}
           onWheel={(e) => handleWheel(e)}
           onMouseLeave={(e) => handleMouseLeave(e)}
+          onMouseEnter={(e) => handleMouseEnter(e)}
           className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2 
           bg-[url('/assets/canvasBack24.png')]"
         >
