@@ -22,7 +22,7 @@ const SideToolBar = () => {
         <ToolButton id="bucket" onChange={() => setMode("bucket")} selected={mode == "bucket"}>
           <span className="material-icons text-lg">format_color_fill</span>
         </ToolButton>
-        <ToolButton id="dropper" onChange={() => setMode("dropper")} selected={mode == "dropper"}>
+        <ToolButton id="dropper" onChange={() => setMode("picker")} selected={mode == "picker"}>
           <span className="material-icons text-lg">colorize</span>
         </ToolButton>
         <ToolButton id="hand" onChange={() => setMode("hand")} selected={mode == "hand"}>

@@ -1,6 +1,8 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
+import { useBlockDBContext } from "../useBlockDB";
 import { useBlockImageContext } from "../useBlockImage";
+import { useBlueprintContext } from "../useBlueprint";
 
 const EditorCanvasContext = createContext(
   {} as {
@@ -16,6 +18,7 @@ const EditorCanvasContext = createContext(
     zoomOut: (x: number, y: number) => void;
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
+    pickBlock: (x: number, y: number) => string;
     clearNaviCanvas: () => void;
     render: () => void;
   }
@@ -42,6 +45,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let minecraftImage: HTMLCanvasElement;
   let minecraftImageContext: CanvasRenderingContext2D;
   const { blockImageDataDict } = useBlockImageContext();
+  const { blueprint } = useBlueprintContext();
 
   const init = (
     mainCanvas_: HTMLCanvasElement,
@@ -126,6 +130,11 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     render();
   };
 
+  const pickBlock = (x: number, y: number): string => {
+    const { blockX, blockY } = getBlockCoordinate(x, y);
+    return blueprint[blockY][blockX];
+  };
+
   const translate = (x: number, y: number) => {
     const { px, py } = toPixelCoordinate(x, y);
     minecraftImageX += px;
@@ -179,6 +188,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     render,
     zoomIn,
     zoomOut,
+    pickBlock,
     showNaviBox,
     putBlock,
     clearNaviCanvas,

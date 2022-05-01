@@ -7,10 +7,20 @@ import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 
 const EditorBoard = () => {
-  const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, clearNaviCanvas, render } =
+  const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, clearNaviCanvas, pickBlock, render } =
     useEditorCanvasContext();
-  const { mode, inkBlockJavaId, penSize, pressing, mouseX, mouseY, setMouseX, setMouseY, setPressing } =
-    useEditorContext();
+  const {
+    mode,
+    inkBlockJavaId,
+    penSize,
+    pressing,
+    mouseX,
+    mouseY,
+    setMouseX,
+    setMouseY,
+    setPressing,
+    setInkBlockJavaId,
+  } = useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
@@ -73,6 +83,10 @@ const EditorBoard = () => {
     const { x, y } = getCoordiante(event);
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
     if (mode == "pen") putBlock(x, y, penSize, inkBlockJavaId);
+    if (mode == "picker") {
+      setInkBlockJavaId(pickBlock(x, y));
+    }
+    /* common processign when mouse click */
     setPressing(true);
     setMouseX(x);
     setMouseY(y);
@@ -90,6 +104,7 @@ const EditorBoard = () => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
     if (mode == "pen") canvasContainer.current.style.cursor = "crosshair";
     if (mode == "bucket") canvasContainer.current.style.cursor = "cell";
+    if (mode == "picker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
   };

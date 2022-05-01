@@ -14,4 +14,4 @@ interface BlockImageData {
   B: number;
 }
 
-type Mode = "pen" | "bucket" | "dropper" | "hand" | "zoomIn" | "zoomOut";
+type Mode = "pen" | "bucket" | "picker" | "hand" | "zoomIn" | "zoomOut";
