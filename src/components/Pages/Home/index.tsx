@@ -40,13 +40,13 @@ const HomeComponent = () => {
 
   /* src image load */
   useEffect(() => {
-    const ctxIn = getContext(canvasInRef.current, 256, 256);
+    const ctxIn = getContext(canvasInRef.current, srcImageWidth, srcImageHeight);
     ctxIn.imageSmoothingEnabled = false;
     (async () => {
       console.log("src iamge load start");
       const image = await loadImage("/assets/sample1_256.png");
       ctxIn.drawImage(image, 0, 0);
-      setSrc(ctxIn.getImageData(0, 0, 256, 256));
+      setSrc(ctxIn.getImageData(0, 0, srcImageWidth, srcImageHeight));
     })();
   }, []);
 

@@ -1,26 +1,23 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
 import { useBlockImageContext } from "src/store/useBlockImage";
 import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
-
-type Mode = "translate" | "pen";
+import ToolButton from "src/components/Atoms/toolButton";
+import { useEditorContext } from "src/store/useEditor";
+import SideToolBar from "src/components/Organisms/SideToolBar";
 
 const EditorComponent = () => {
-  // 入力画像用のキャンバス
   const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, render } = useEditorCanvasContext();
+  const { mode, inkBlockJavaId, penSize, setMode } = useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
   const { blueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockImageContext();
   const { getBlockBasic } = useBlockDBContext();
-  /* tool */
-  const [mode, setMode] = useState<Mode>("pen");
-  const [inkBlockJavaId, setInkBlockJavaId] = useState("minecraft:white_wool");
-  const [penSize, setPenSize] = useState(3);
   /* translate prameter */
   /* can't use useState() for these parameters */
   let pressing = false;
@@ -64,7 +61,7 @@ const EditorComponent = () => {
   const handleMouseMove = (event: React.MouseEvent) => {
     const { x, y } = getCoordiante(event);
     /* translate by drag */
-    if (mode == "translate" && pressing) {
+    if (mode == "hand" && pressing) {
       translate(x - mouseX, y - mouseY);
     }
     /* pen by drag */
@@ -94,26 +91,8 @@ const EditorComponent = () => {
   return (
     <>
       <div className="text-xl text-center">Editor</div>
-      img <img src={getBlockBasic(inkBlockJavaId).imagePath}></img>
-      mode: {mode}
-      <label>
-        <input
-          type="radio"
-          value="pen"
-          onChange={(e) => setMode(e.target.value as Mode)}
-          checked={mode === "pen"}
-        />
-        pen
-      </label>
-      <label>
-        <input
-          type="radio"
-          value="translate"
-          onChange={(e) => setMode(e.target.value as Mode)}
-          checked={mode === "translate"}
-        />
-        move
-      </label>
+      {/* editor side tool */}
+      <SideToolBar />
       <div className="flex justify-center">
         <div
           ref={canvasContainer}
