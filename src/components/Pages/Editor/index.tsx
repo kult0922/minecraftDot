@@ -11,18 +11,14 @@ import SideToolBar from "src/components/Organisms/SideToolBar";
 
 const EditorComponent = () => {
   const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, render } = useEditorCanvasContext();
-  const { mode, inkBlockJavaId, penSize, setMode, pressing, setPressing } = useEditorContext();
+  const { mode, inkBlockJavaId, penSize, pressing, mouseX, mouseY, setMouseX, setMouseY, setPressing } =
+    useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
   const { blueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockImageContext();
   const { getBlockBasic } = useBlockDBContext();
-  /* translate prameter */
-  /* can't use useState() for these parameters */
-  // let pressing = false;
-  let mouseX = 0;
-  let mouseY = 0;
 
   useEffect(() => {
     /* generate image from blueprint and set to canvas */
@@ -62,8 +58,6 @@ const EditorComponent = () => {
     const { x, y } = getCoordiante(event);
     /* translate by drag */
     if (mode == "hand" && pressing) {
-      console.log("mouse: ", mouseX, mouseY);
-      console.log("x ,y: ", x, y);
       translate(x - mouseX, y - mouseY);
     }
     /* pen by drag */
@@ -74,8 +68,8 @@ const EditorComponent = () => {
     if (mode == "pen") {
       showNaviBox(x, y, penSize);
     }
-    mouseX = x;
-    mouseY = y;
+    setMouseX(x);
+    setMouseY(y);
   };
   const handleMouseDown = (event: React.MouseEvent) => {
     const { x, y } = getCoordiante(event);
@@ -83,13 +77,10 @@ const EditorComponent = () => {
       putBlock(x, y, penSize, inkBlockJavaId);
     }
     setPressing(true);
-    mouseX = x;
-    mouseY = y;
-    console.log("mouseDown", mouseX, mouseY);
-    // pressing = true;
+    setMouseX(x);
+    setMouseY(y);
   };
   const handleMouseUp = (event: React.MouseEvent) => {
-    // pressing = false;
     setPressing(false);
   };
 
