@@ -7,7 +7,8 @@ import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 
 const EditorBoard = () => {
-  const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, render } = useEditorCanvasContext();
+  const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, clearNaviCanvas, render } =
+    useEditorCanvasContext();
   const { mode, inkBlockJavaId, penSize, pressing, mouseX, mouseY, setMouseX, setMouseY, setPressing } =
     useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
@@ -80,6 +81,11 @@ const EditorBoard = () => {
     setPressing(false);
   };
 
+  const handleMouseLeave = (event: React.MouseEvent) => {
+    clearNaviCanvas();
+    setPressing(false);
+  };
+
   return (
     <>
       <div className="flex justify-center">
@@ -89,7 +95,9 @@ const EditorBoard = () => {
           onMouseDown={(e) => handleMouseDown(e)}
           onMouseUp={(e) => handleMouseUp(e)}
           onWheel={(e) => handleWheel(e)}
-          className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2"
+          onMouseLeave={(e) => handleMouseLeave(e)}
+          className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2 
+          bg-[url('/assets/canvasBack24.png')]"
         >
           <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
           <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>

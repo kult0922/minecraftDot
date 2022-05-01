@@ -16,6 +16,7 @@ const EditorCanvasContext = createContext(
     zoomOut: (x: number, y: number) => void;
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
+    clearNaviCanvas: () => void;
     render: () => void;
   }
 );
@@ -89,8 +90,12 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     return { blockX, blockY, blockSize };
   };
 
-  const showNaviBox = (x: number, y: number, size: number) => {
+  const clearNaviCanvas = () => {
     naviCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
+  };
+
+  const showNaviBox = (x: number, y: number, size: number) => {
+    clearNaviCanvas();
     const { blockX, blockY, blockSize } = getBlockCoordinate(x, y);
 
     const beginBlockX = blockX - Math.floor(size / 2);
@@ -176,6 +181,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     zoomOut,
     showNaviBox,
     putBlock,
+    clearNaviCanvas,
   };
 
   return <EditorCanvasContext.Provider value={value}>{children}</EditorCanvasContext.Provider>;
