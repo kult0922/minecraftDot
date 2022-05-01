@@ -11,7 +11,7 @@ import SideToolBar from "src/components/Organisms/SideToolBar";
 
 const EditorComponent = () => {
   const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, render } = useEditorCanvasContext();
-  const { mode, inkBlockJavaId, penSize, setMode } = useEditorContext();
+  const { mode, inkBlockJavaId, penSize, setMode, pressing, setPressing } = useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
@@ -20,7 +20,7 @@ const EditorComponent = () => {
   const { getBlockBasic } = useBlockDBContext();
   /* translate prameter */
   /* can't use useState() for these parameters */
-  let pressing = false;
+  // let pressing = false;
   let mouseX = 0;
   let mouseY = 0;
 
@@ -62,6 +62,8 @@ const EditorComponent = () => {
     const { x, y } = getCoordiante(event);
     /* translate by drag */
     if (mode == "hand" && pressing) {
+      console.log("mouse: ", mouseX, mouseY);
+      console.log("x ,y: ", x, y);
       translate(x - mouseX, y - mouseY);
     }
     /* pen by drag */
@@ -80,12 +82,15 @@ const EditorComponent = () => {
     if (mode == "pen") {
       putBlock(x, y, penSize, inkBlockJavaId);
     }
+    setPressing(true);
     mouseX = x;
     mouseY = y;
-    pressing = true;
+    console.log("mouseDown", mouseX, mouseY);
+    // pressing = true;
   };
   const handleMouseUp = (event: React.MouseEvent) => {
-    pressing = false;
+    // pressing = false;
+    setPressing(false);
   };
 
   return (
