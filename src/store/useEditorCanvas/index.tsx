@@ -14,8 +14,8 @@ const EditorCanvasContext = createContext(
       heightBlockNumber_: number
     ) => void;
     translate: (x: number, y: number) => void;
-    zoomIn: (x: number, y: number) => void;
-    zoomOut: (x: number, y: number) => void;
+    zoomIn: (x: number, y: number, isWheel: boolean) => void;
+    zoomOut: (x: number, y: number, isWheel: boolean) => void;
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
     pickBlock: (x: number, y: number) => string;
@@ -30,7 +30,8 @@ export function useEditorCanvasContext() {
 
 export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   const canvasSize = 1000;
-  const zoomStep = 0.5;
+  const zoomStepByWheel = 0.5;
+  const zoomStepByButton = 1.5;
   let minecraftImageX = 0;
   let minecraftImageY = 0;
   let minecraftImageWidth = 0;
@@ -123,7 +124,10 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
 
     for (let i = beginX; i <= endX; i++) {
       for (let j = beginY; j <= endY; j++) {
+        /* change canvas data */
         minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, i * 16, j * 16);
+        /* change blueprint */
+        blueprint[j][i] = javaId;
       }
     }
 
@@ -132,6 +136,8 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
 
   const pickBlock = (x: number, y: number): string => {
     const { blockX, blockY } = getBlockCoordinate(x, y);
+    if (blockX < 0 || blueprint[0].length <= blockX) return "not_found";
+    if (blockY < 0 || blueprint.length <= blockY) return "not_found";
     return blueprint[blockY][blockX];
   };
 
@@ -142,31 +148,34 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     render();
   };
 
-  const zoom = (px: number, py: number, isZoomOut: boolean) => {
-    let zoomStep_ = zoomStep;
-    if (isZoomOut) zoomStep_ *= -1;
+  const zoom = (px: number, py: number, zoomStep: number, isZoomOut: boolean) => {
+    if (isZoomOut) zoomStep *= -1;
 
     const minecraftImageTopLeftX = px - minecraftImageX;
     const minecraftImageTopLeftY = py - minecraftImageY;
-    const deltaScale = (magnification + zoomStep_) / magnification;
+    const deltaScale = (magnification + zoomStep) / magnification;
     const deltaX = (deltaScale - 1) * minecraftImageTopLeftX;
     const deltaY = (deltaScale - 1) * minecraftImageTopLeftY;
     minecraftImageX -= deltaX;
     minecraftImageY -= deltaY;
-    magnification += zoomStep_;
+    magnification += zoomStep;
     render();
   };
   /* zoom in around (x, y) */
-  const zoomIn = (x: number, y: number) => {
+  const zoomIn = (x: number, y: number, isWheel: boolean) => {
     if (magnification >= 16) return;
+    let zoomStep = zoomStepByButton;
+    if (isWheel) zoomStep = zoomStepByWheel;
     const { px, py } = toPixelCoordinate(x, y);
-    zoom(px, py, false);
+    zoom(px, py, zoomStep, false);
   };
   /* zoom out around (x, y) */
-  const zoomOut = (x: number, y: number) => {
+  const zoomOut = (x: number, y: number, isWheel: boolean) => {
     if (magnification <= 0.5) return;
+    let zoomStep = zoomStepByButton;
+    if (isWheel) zoomStep = zoomStepByWheel;
     const { px, py } = toPixelCoordinate(x, y);
-    zoom(px, py, true);
+    zoom(px, py, zoomStep, true);
   };
 
   const render = () => {

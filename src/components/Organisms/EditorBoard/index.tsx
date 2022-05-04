@@ -5,6 +5,7 @@ import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
+import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
 
 const EditorBoard = () => {
   const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, clearNaviCanvas, pickBlock, render } =
@@ -12,20 +13,27 @@ const EditorBoard = () => {
   const {
     mode,
     inkBlockJavaId,
+    hoverBlockJavaId,
     pressing,
+    insideCanvas,
     mouseX,
     mouseY,
     updateMouseX,
     updateMouseY,
     setPressing,
+    setInsideCanvas,
     setInkBlockJavaId,
+    setHoverBlockJavaId,
     getPenSize,
   } = useEditorContext();
+  const { blueprint } = useBlueprintContext();
+  const { blockImageDataDict } = useBlockImageContext();
+  const { getBlockBasic } = useBlockDBContext();
+
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
-  const { blueprint } = useBlueprintContext();
-  const { blockImageDataDict } = useBlockImageContext();
+  const blockNameLabel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     /* generate image from blueprint and set to canvas */
@@ -55,9 +63,9 @@ const EditorBoard = () => {
   const handleWheel = (event: React.WheelEvent) => {
     const { x, y } = getCoordiante(event);
     if (event.deltaY > 0) {
-      zoomOut(x, y);
+      zoomOut(x, y, true);
     } else {
-      zoomIn(x, y);
+      zoomIn(x, y, true);
     }
   };
 
@@ -76,6 +84,17 @@ const EditorBoard = () => {
     if (mode == "pen") {
       showNaviBox(x, y, getPenSize());
     }
+    /* show picker preview */
+    if (mode == "picker") {
+      showNaviBox(x, y, 1);
+      setHoverBlockJavaId(pickBlock(x, y));
+
+      if (blockNameLabel.current != null) {
+        const rect = mainCanvas.current.getBoundingClientRect();
+        blockNameLabel.current.style.left = String(event.clientX - rect.left) + "px";
+        blockNameLabel.current.style.top = String(event.clientY - rect.top) + "px";
+      }
+    }
     updateMouseX(x);
     updateMouseY(y);
   };
@@ -84,9 +103,9 @@ const EditorBoard = () => {
     const { x, y } = getCoordiante(event);
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
     if (mode == "pen") putBlock(x, y, getPenSize(), inkBlockJavaId);
-    if (mode == "picker") {
-      setInkBlockJavaId(pickBlock(x, y));
-    }
+    if (mode == "picker") setInkBlockJavaId(pickBlock(x, y));
+    if (mode == "zoomIn") zoomIn(x, y, false);
+    if (mode == "zoomOut") zoomOut(x, y, false);
     /* common processign when mouse click */
     setPressing(true);
     updateMouseX(x);
@@ -100,6 +119,7 @@ const EditorBoard = () => {
   const handleMouseLeave = (event: React.MouseEvent) => {
     clearNaviCanvas();
     setPressing(false);
+    setInsideCanvas(false);
   };
   const handleMouseEnter = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
@@ -108,6 +128,7 @@ const EditorBoard = () => {
     if (mode == "picker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
+    setInsideCanvas(true);
   };
 
   return (
@@ -126,6 +147,13 @@ const EditorBoard = () => {
         >
           <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
           <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>
+
+          {/* picker preview */}
+          {mode === "picker" && insideCanvas && (
+            <div ref={blockNameLabel} className="z-[100] absolute">
+              <BlockNameLabel blockBasic={getBlockBasic(hoverBlockJavaId)}></BlockNameLabel>
+            </div>
+          )}
         </div>
       </div>
     </>
