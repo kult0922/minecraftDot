@@ -1,9 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import ToolButton from "src/components/Atoms/toolButton";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
+import PenSizeChange from "../PenSIzeChange";
 
 const SideToolBar = () => {
-  const { mode, inkBlockJavaId, penSize, setMode } = useEditorContext();
+  const { mode, inkBlockJavaId, setMode } = useEditorContext();
   const { getBlockBasic } = useBlockDBContext();
 
   return (
@@ -12,6 +14,7 @@ const SideToolBar = () => {
         <div className="mb-2">
           <img
             src={getBlockBasic(inkBlockJavaId).imagePath}
+            alt="inkBlock"
             width="32"
             className="border-4 border-lime-500 rendering-pixelated"
           ></img>
@@ -34,6 +37,9 @@ const SideToolBar = () => {
         <ToolButton id="zoomOut" onChange={() => setMode("zoomOut")} selected={mode == "zoomOut"}>
           <span className="material-icons text-2xl">zoom_out</span>
         </ToolButton>
+        <div className="mt-2">
+          <PenSizeChange />
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
 import { useBlockImageContext } from "src/store/useBlockImage";
 import { useBlueprintContext } from "src/store/useBlueprint";
@@ -12,14 +12,14 @@ const EditorBoard = () => {
   const {
     mode,
     inkBlockJavaId,
-    penSize,
     pressing,
     mouseX,
     mouseY,
-    setMouseX,
-    setMouseY,
+    updateMouseX,
+    updateMouseY,
     setPressing,
     setInkBlockJavaId,
+    getPenSize,
   } = useEditorContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
@@ -70,26 +70,27 @@ const EditorBoard = () => {
     }
     /* pen by drag */
     if (mode == "pen" && pressing) {
-      putBlock(x, y, penSize, inkBlockJavaId);
+      putBlock(x, y, getPenSize(), inkBlockJavaId);
     }
     /* show navi box by hover & drag */
     if (mode == "pen") {
-      showNaviBox(x, y, penSize);
+      showNaviBox(x, y, getPenSize());
     }
-    setMouseX(x);
-    setMouseY(y);
+    updateMouseX(x);
+    updateMouseY(y);
   };
+
   const handleMouseDown = (event: React.MouseEvent) => {
     const { x, y } = getCoordiante(event);
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
-    if (mode == "pen") putBlock(x, y, penSize, inkBlockJavaId);
+    if (mode == "pen") putBlock(x, y, getPenSize(), inkBlockJavaId);
     if (mode == "picker") {
       setInkBlockJavaId(pickBlock(x, y));
     }
     /* common processign when mouse click */
     setPressing(true);
-    setMouseX(x);
-    setMouseY(y);
+    updateMouseX(x);
+    updateMouseY(y);
   };
   const handleMouseUp = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
