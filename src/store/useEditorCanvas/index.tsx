@@ -1,3 +1,4 @@
+import { Console } from "console";
 import { createContext, useState, useContext, ReactNode } from "react";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
@@ -166,14 +167,19 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (magnification >= 16) return;
     let zoomStep = zoomStepByButton;
     if (isWheel) zoomStep = zoomStepByWheel;
+    if (magnification <= 1) zoomStep = 0.04;
     const { px, py } = toPixelCoordinate(x, y);
     zoom(px, py, zoomStep, false);
   };
   /* zoom out around (x, y) */
   const zoomOut = (x: number, y: number, isWheel: boolean) => {
-    if (magnification <= 0.5) return;
     let zoomStep = zoomStepByButton;
     if (isWheel) zoomStep = zoomStepByWheel;
+    /* change zoom step when magnification is small */
+    if (magnification <= 1) zoomStep = 0.04;
+    /* stop zoom out when image size is half of canvas */
+    if ((magnification - zoomStep) * minecraftImage.width < canvasSize / 2) return;
+
     const { px, py } = toPixelCoordinate(x, y);
     zoom(px, py, zoomStep, true);
   };
