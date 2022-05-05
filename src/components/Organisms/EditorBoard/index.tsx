@@ -8,8 +8,18 @@ import { useEditorContext } from "src/store/useEditor";
 import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
 
 const EditorBoard = () => {
-  const { init, translate, zoomIn, zoomOut, showNaviBox, putBlock, clearNaviCanvas, pickBlock, render } =
-    useEditorCanvasContext();
+  const {
+    init,
+    translate,
+    bucket,
+    zoomIn,
+    zoomOut,
+    showNaviBox,
+    putBlock,
+    clearNaviCanvas,
+    pickBlock,
+    render,
+  } = useEditorCanvasContext();
   const {
     mode,
     inkBlockJavaId,
@@ -106,6 +116,7 @@ const EditorBoard = () => {
     if (mode == "picker") setInkBlockJavaId(pickBlock(x, y));
     if (mode == "zoomIn") zoomIn(x, y, false);
     if (mode == "zoomOut") zoomOut(x, y, false);
+    if (mode == "bucket") bucket(x, y, inkBlockJavaId);
     /* common processign when mouse click */
     setPressing(true);
     updateMouseX(x);

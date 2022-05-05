@@ -14,4 +14,9 @@ interface BlockImageData {
   B: number;
 }
 
+interface Coordinate {
+  x: number;
+  y: number;
+}
+
 type Mode = "pen" | "bucket" | "picker" | "hand" | "zoomIn" | "zoomOut";

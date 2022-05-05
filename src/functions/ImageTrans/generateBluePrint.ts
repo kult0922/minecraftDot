@@ -1,17 +1,10 @@
 import blockData from "src/loader/blockLoader";
+import get2DArray from "../utils/get2DArray";
 
 const t = (x: number, y: number, c: number) => {
   const w = 256;
   const h = 256;
   return 4 * (y * w + x) + c;
-};
-
-const get2DArray = (h: number, w: number) => {
-  let array = new Array(h);
-  for (let i = 0; i < h; i++) {
-    array[i] = new Array<string>(w);
-  }
-  return array;
 };
 
 const getMostSimilarBlockId = (

@@ -1,5 +1,6 @@
 import { Console } from "console";
 import { createContext, useState, useContext, ReactNode } from "react";
+import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordinates";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
 import { useBlockImageContext } from "../useBlockImage";
@@ -19,6 +20,7 @@ const EditorCanvasContext = createContext(
     zoomOut: (x: number, y: number, isWheel: boolean) => void;
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
+    bucket: (x: number, y: number, javaId: string) => void;
     pickBlock: (x: number, y: number) => string;
     clearNaviCanvas: () => void;
     render: () => void;
@@ -149,6 +151,27 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     render();
   };
 
+  const bucket = (x: number, y: number, javaId: string) => {
+    const { blockX, blockY } = getBlockCoordinate(x, y);
+    if (blockX < 0 || blueprint[0].length <= blockX) return;
+    if (blockY < 0 || blueprint.length <= blockY) return;
+    const coordinates = getSameBlockCoordinates(blockX, blockY, blueprint);
+    console.log(coordinates);
+    // ここをあとで実装
+    for (const coordinate of coordinates) {
+      /* change canvas data */
+      minecraftImageContext.putImageData(
+        blockImageDataDict.get(javaId)?.imageData!,
+        coordinate.x * 16,
+        coordinate.y * 16
+      );
+      /* change blueprint */
+      blueprint[coordinate.y][coordinate.x] = javaId;
+    }
+
+    render();
+  };
+
   const zoom = (px: number, py: number, zoomStep: number, isZoomOut: boolean) => {
     if (isZoomOut) zoomStep *= -1;
 
@@ -200,6 +223,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   const value = {
     init,
     translate,
+    bucket,
     render,
     zoomIn,
     zoomOut,
