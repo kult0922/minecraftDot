@@ -1,0 +1,130 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:netherrack",
+      "bedrockId": "netherrack",
+      "jname": "ネザーラック",
+      "imagePath": "/blocks/netherrack.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:nether_bricks",
+      "bedrockId": "nether_brick",
+      "jname": "ネザーレンガ",
+      "imagePath": "/blocks/nether_brick.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:clay",
+      "bedrockId": "clay",
+      "jname": "粘土",
+      "imagePath": "/blocks/clay.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:cut_sandstone",
+      "bedrockId": "sandstone 2",
+      "jname": "磨かれた砂岩",
+      "imagePath": "/blocks/sandstone_smooth.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:sandstone",
+      "bedrockId": "sandstone",
+      "jname": "砂岩",
+      "imagePath": "/blocks/sandstone_normal.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:sand",
+      "bedrockId": "sand",
+      "jname": "砂",
+      "imagePath": "/blocks/sand.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:mossy_cobblestone",
+      "bedrockId": "mossy_cobblestone",
+      "jname": "苔むした丸石",
+      "imagePath": "/blocks/cobblestone_mossy.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:cobblestone",
+      "bedrockId": "cobblestone",
+      "jname": "丸石",
+      "imagePath": "/blocks/cobblestone.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:stone",
+      "bedrockId": "stone",
+      "jname": "石",
+      "imagePath": "/blocks/stone.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:chiseled_stone_bricks",
+      "bedrockId": "stonebrick 3",
+      "jname": "模様入り石レンガ",
+      "imagePath": "/blocks/stonebrick_carved.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:mossy_stone_bricks",
+      "bedrockId": "stonebrick 1",
+      "jname": "苔むした石レンガ",
+      "imagePath": "/blocks/stonebrick_mossy.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:stone_bricks",
+      "bedrockId": "stonebrick",
+      "jname": "石レンガ",
+      "imagePath": "/blocks/stonebrick.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:diorite",
+      "bedrockId": "stone 3",
+      "jname": "閃緑岩",
+      "imagePath": "/blocks/stone_diorite.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:polished_diorite",
+      "bedrockId": "stone 4",
+      "jname": "磨かれた閃緑岩",
+      "imagePath": "/blocks/stone_diorite_smooth.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:andesite",
+      "bedrockId": "stone 5",
+      "jname": "安山岩",
+      "imagePath": "/blocks/stone_andesite.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:polished_andesite",
+      "bedrockId": "stone 6",
+      "jname": "磨かれた安山岩",
+      "imagePath": "/blocks/stone_andesite_smooth.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:granite",
+      "bedrockId": "stone 1",
+      "jname": "花崗岩",
+      "imagePath": "/blocks/stone_granite.png",
+      "blockGroup": "stone"
+    },
+    {
+      "javaId": "minecraft:polished_granite",
+      "bedrockId": "stone 2",
+      "jname": "磨かれた花崗岩",
+      "imagePath": "/blocks/stone_granite_smooth.png",
+      "blockGroup": "stone"
+    }
+  ]
+}

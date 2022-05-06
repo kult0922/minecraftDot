@@ -1,0 +1,109 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:nether_quartz_ore",
+      "bedrockId": "quartz_ore",
+      "jname": "ネザークォーツ鉱石",
+      "imagePath": "/blocks/quartz_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:coal_ore",
+      "bedrockId": "coal_ore",
+      "jname": "石炭鉱石",
+      "imagePath": "/blocks/coal_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:iron_ore",
+      "bedrockId": "iron_ore",
+      "jname": "鉄鉱石",
+      "imagePath": "/blocks/iron_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:redstone_ore",
+      "bedrockId": "redstone_ore",
+      "jname": "レッドストーン鉱石",
+      "imagePath": "/blocks/redstone_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:lapis_ore",
+      "bedrockId": "lapis_ore",
+      "jname": "ラピスラズリ鉱石",
+      "imagePath": "/blocks/lapis_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:gold_ore",
+      "bedrockId": "gold_ore",
+      "jname": "金鉱石",
+      "imagePath": "/blocks/gold_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:emerald_ore",
+      "bedrockId": "emerald_ore",
+      "jname": "エメラルド鉱石",
+      "imagePath": "/blocks/emerald_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:diamond_ore",
+      "bedrockId": "diamond_ore",
+      "jname": "ダイヤモンド鉱石",
+      "imagePath": "/blocks/diamond_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_coal_ore",
+      "bedrockId": "deepslate_coal_ore",
+      "jname": "深層石炭鉱石",
+      "imagePath": "/blocks/deepslate_coal_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_iron_ore",
+      "bedrockId": "deepslate_iron_ore",
+      "jname": "深層鉄鉱石",
+      "imagePath": "/blocks/deepslate_iron_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_redstone_ore",
+      "bedrockId": "deepslate_redstone_ore",
+      "jname": "深層レッドストーン鉱石",
+      "imagePath": "/blocks/deepslate_redstone_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_lapis_ore",
+      "bedrockId": "deepslate_lapis_ore",
+      "jname": "深層ラピスラズリ鉱石",
+      "imagePath": "/blocks/deepslate_lapis_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_gold_ore",
+      "bedrockId": "deepslate_gold_ore",
+      "jname": "深層金鉱石",
+      "imagePath": "/blocks/deepslate_gold_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_emerald_ore",
+      "bedrockId": "deepslate_emerald_ore",
+      "jname": "深層エメラルド鉱石",
+      "imagePath": "/blocks/deepslate_emerald_ore.png",
+      "blockGroup": "ore"
+    },
+    {
+      "javaId": "minecraft:deepslate_diamond_ore",
+      "bedrockId": "deepslate_diamond_ore",
+      "jname": "深層ダイヤモンド鉱石",
+      "imagePath": "/blocks/deepslate_diamond_ore.png",
+      "blockGroup": "ore"
+    }
+  ]
+}

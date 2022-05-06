@@ -1,9 +1,14 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import loadImage from "src/functions/utils/loadImage";
 import { t } from "src/functions/utils/t";
+
 /* block data import */
-import wool from "src/json/wool.json" assert { type: "json" };
-import terracotta from "src/json/terracotta.json" assert { type: "json" };
+import wool from "src/json/wool.json";
+import terracotta from "src/json/terracotta.json";
+import glazedTerracotta from "src/json/glazedTerracotta.json";
+import ore from "src/json/ore.json";
+import concrete from "src/json/concrete.json";
+import stone from "src/json/stone.json";
 
 const BlockDBContext = createContext(
   {} as {
@@ -21,7 +26,14 @@ export function useBlockDBContext() {
 
 export function BlockDBProvider({ children }: { children?: ReactNode }) {
   const javaId2index: Map<string, number> = new Map();
-  const blockDB: Array<BlockBasic> = wool.blocks.concat(terracotta.blocks);
+  const blockDB: Array<BlockBasic> = wool.blocks.concat(
+    terracotta.blocks,
+    concrete.blocks,
+    terracotta.blocks,
+    glazedTerracotta.blocks,
+    ore.blocks,
+    stone.blocks
+  );
 
   for (let index = 0; index < blockDB.length; index++) {
     javaId2index.set(blockDB[index].javaId, index);

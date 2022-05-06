@@ -1,0 +1,116 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:white_concrete",
+      "bedrockId": "concrete",
+      "jname": "白色のコンクリート",
+      "imagePath": "/blocks/white_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:light_gray_concrete",
+      "bedrockId": "concrete 8",
+      "jname": "薄灰色のコンクリート",
+      "imagePath": "/blocks/light_gray_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:gray_concrete",
+      "bedrockId": "concrete 7",
+      "jname": "灰色のコンクリート",
+      "imagePath": "/blocks/gray_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:black_concrete",
+      "bedrockId": "concrete 15",
+      "jname": "黒色のコンクリート",
+      "imagePath": "/blocks/black_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:brown_concrete",
+      "bedrockId": "concrete 12",
+      "jname": "茶色のコンクリート",
+      "imagePath": "/blocks/brown_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:red_concrete",
+      "bedrockId": "concrete 14",
+      "jname": "赤色のコンクリート",
+      "imagePath": "/blocks/red_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:orange_concrete",
+      "bedrockId": "concrete 1",
+      "jname": "橙色のコンクリート",
+      "imagePath": "/blocks/orange_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:yellow_concrete",
+      "bedrockId": "concrete 4",
+      "jname": "黄色のコンクリート",
+      "imagePath": "/blocks/yellow_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:lime_concrete",
+      "bedrockId": "concrete 5",
+      "jname": "黄緑色のコンクリート",
+      "imagePath": "/blocks/lime_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:green_concrete",
+      "bedrockId": "concrete 13",
+      "jname": "緑色のコンクリート",
+      "imagePath": "/blocks/green_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:cyan_concrete",
+      "bedrockId": "concrete 9",
+      "jname": "青緑色のコンクリート",
+      "imagePath": "/blocks/cyan_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:light_blue_concrete",
+      "bedrockId": "concrete 3",
+      "jname": "空色のコンクリート",
+      "imagePath": "/blocks/light_blue_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:blue_concrete",
+      "bedrockId": "concrete 11",
+      "jname": "青色のコンクリート",
+      "imagePath": "/blocks/blue_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:purple_concrete",
+      "bedrockId": "concrete 10",
+      "jname": "紫色のコンクリート",
+      "imagePath": "/blocks/purple_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:magenta_concrete",
+      "bedrockId": "concrete 2",
+      "jname": "赤紫色のコンクリート",
+      "imagePath": "/blocks/magenta_concrete.png",
+      "blockGroup": "concrete"
+    },
+    {
+      "javaId": "minecraft:pink_concrete",
+      "bedrockId": "concrete 6",
+      "jname": "桃色のコンクリート",
+      "imagePath": "/blocks/pink_concrete.png",
+      "blockGroup": "concrete"
+    }
+  ]
+}

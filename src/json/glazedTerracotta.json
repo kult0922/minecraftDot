@@ -1,0 +1,116 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:white_glazed_terracotta",
+      "bedrockId": "white_glazed_terracotta",
+      "jname": "白色の彩釉テラコッタ",
+      "imagePath": "/blocks/white_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:light_gray_glazed_terracotta",
+      "bedrockId": "silver_glazed_terracotta",
+      "jname": "薄灰色の彩釉テラコッタ",
+      "imagePath": "/blocks/light_gray_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:gray_glazed_terracotta",
+      "bedrockId": "gray_glazed_terracotta",
+      "jname": "灰色の彩釉テラコッタ",
+      "imagePath": "/blocks/gray_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:black_glazed_terracotta",
+      "bedrockId": "black_glazed_terracotta",
+      "jname": "黒色の彩釉テラコッタ",
+      "imagePath": "/blocks/black_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:brown_glazed_terracotta",
+      "bedrockId": "brown_glazed_terracotta",
+      "jname": "茶色の彩釉テラコッタ",
+      "imagePath": "/blocks/brown_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:red_glazed_terracotta",
+      "bedrockId": "red_glazed_terracotta",
+      "jname": "赤色の彩釉テラコッタ",
+      "imagePath": "/blocks/red_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:orange_glazed_terracotta",
+      "bedrockId": "orange_glazed_terracotta",
+      "jname": "橙色の彩釉テラコッタ",
+      "imagePath": "/blocks/orange_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:yellow_glazed_terracotta",
+      "bedrockId": "yellow_glazed_terracotta",
+      "jname": "黄色の彩釉テラコッタ",
+      "imagePath": "/blocks/yellow_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:lime_glazed_terracotta",
+      "bedrockId": "lime_glazed_terracotta",
+      "jname": "黄緑色の彩釉テラコッタ",
+      "imagePath": "/blocks/lime_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:green_glazed_terracotta",
+      "bedrockId": "green_glazed_terracotta",
+      "jname": "緑色の彩釉テラコッタ",
+      "imagePath": "/blocks/green_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:cyan_glazed_terracotta",
+      "bedrockId": "cyan_glazed_terracotta",
+      "jname": "青緑色の彩釉テラコッタ",
+      "imagePath": "/blocks/cyan_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:light_blue_glazed_terracotta",
+      "bedrockId": "light_blue_glazed_terracotta",
+      "jname": "空色の彩釉テラコッタ",
+      "imagePath": "/blocks/light_blue_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:blue_glazed_terracotta",
+      "bedrockId": "blue_glazed_terracotta",
+      "jname": "青色の彩釉テラコッタ",
+      "imagePath": "/blocks/blue_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:purple_glazed_terracotta",
+      "bedrockId": "purple_glazed_terracotta",
+      "jname": "紫色の彩釉テラコッタ",
+      "imagePath": "/blocks/purple_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:magenta_glazed_terracotta",
+      "bedrockId": "magenta_glazed_terracotta",
+      "jname": "赤紫色の彩釉テラコッタ",
+      "imagePath": "/blocks/magenta_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    },
+    {
+      "javaId": "minecraft:pink_glazed_terracotta",
+      "bedrockId": "pink_glazed_terracotta",
+      "jname": "桃色の彩釉テラコッタ",
+      "imagePath": "/blocks/pink_glazed_terracotta.png",
+      "blockGroup": "glazed"
+    }
+  ]
+}
