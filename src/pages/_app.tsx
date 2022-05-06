@@ -5,10 +5,9 @@ import React, { useEffect } from "react";
 import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
 import { BlueprintProvider } from "src/store/useBlueprint";
 import { BlockDBProvider, useBlockDBContext } from "src/store/useBlockDB";
-import { BlockImageProvider, useBlockImageContext } from "src/store/useBlockImage";
 
 function AppInit() {
-  const { initBlockImageDataDict } = useBlockImageContext();
+  const { initBlockImageDataDict } = useBlockDBContext();
 
   useEffect(() => {
     initBlockImageDataDict();
@@ -20,12 +19,10 @@ function AppInit() {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <BlockDBProvider>
-      <BlockImageProvider>
-        <BlueprintProvider>
-          <Component {...pageProps} />
-          <AppInit />
-        </BlueprintProvider>
-      </BlockImageProvider>
+      <BlueprintProvider>
+        <Component {...pageProps} />
+        <AppInit />
+      </BlueprintProvider>
     </BlockDBProvider>
   );
 }

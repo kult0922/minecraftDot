@@ -3,7 +3,6 @@ import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
 import loadImage from "src/functions/utils/loadImage";
 import { useBlockDBContext } from "src/store/useBlockDB";
-import { useBlockImageContext } from "src/store/useBlockImage";
 import Modal from "react-modal";
 import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
@@ -29,7 +28,7 @@ const HomeComponent = () => {
   const mainCanvas = useRef(null);
   const [srcImage, setSrc] = useState<ImageData>();
   // let src: ImageData;
-  const { blockImageDataDict } = useBlockImageContext();
+  const { blockImageDataDict } = useBlockDBContext();
   const { setBlueprint } = useBlueprintContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [outSize, setOutSize] = useState(16);
@@ -43,7 +42,6 @@ const HomeComponent = () => {
     const ctxIn = getContext(canvasInRef.current, srcImageWidth, srcImageHeight);
     ctxIn.imageSmoothingEnabled = false;
     (async () => {
-      console.log("src iamge load start");
       const image = await loadImage("/assets/sample1_256.png");
       ctxIn.drawImage(image, 0, 0);
       setSrc(ctxIn.getImageData(0, 0, srcImageWidth, srcImageHeight));

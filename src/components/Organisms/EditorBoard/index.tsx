@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
-import { useBlockImageContext } from "src/store/useBlockImage";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
@@ -37,8 +36,7 @@ const EditorBoard = () => {
     getPenSize,
   } = useEditorContext();
   const { blueprint } = useBlueprintContext();
-  const { blockImageDataDict } = useBlockImageContext();
-  const { getBlockBasic } = useBlockDBContext();
+  const { getBlockBasic, blockImageDataDict } = useBlockDBContext();
 
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);

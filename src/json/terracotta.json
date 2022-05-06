@@ -1,0 +1,123 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:white_terracotta",
+      "bedrockId": "stained_hardened_clay",
+      "jname": "白色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_white.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:light_gray_terracotta",
+      "bedrockId": "stained_hardened_clay 8",
+      "jname": "薄灰色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_silver.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:gray_terracotta",
+      "bedrockId": "stained_hardened_clay 7",
+      "jname": "灰色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_gray.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:black_terracotta",
+      "bedrockId": "stained_hardened_clay 15",
+      "jname": "黒色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_black.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:brown_terracotta",
+      "bedrockId": "stained_hardened_clay 12",
+      "jname": "茶色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_brown.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:red_terracotta",
+      "bedrockId": "stained_hardened_clay 14",
+      "jname": "赤色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_red.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:orange_terracotta",
+      "bedrockId": "stained_hardened_clay 1",
+      "jname": "橙色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_orange.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:yellow_terracotta",
+      "bedrockId": "stained_hardened_clay 4",
+      "jname": "黄色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_yellow.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:lime_terracotta",
+      "bedrockId": "stained_hardened_clay 5",
+      "jname": "黄緑色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_lime.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:green_terracotta",
+      "bedrockId": "stained_hardened_clay 13",
+      "jname": "緑色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_green.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:cyan_terracotta",
+      "bedrockId": "stained_hardened_clay 9",
+      "jname": "青緑色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_cyan.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:light_blue_terracotta",
+      "bedrockId": "stained_hardened_clay 3",
+      "jname": "空色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_light_blue.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:blue_terracotta",
+      "bedrockId": "stained_hardened_clay 11",
+      "jname": "青色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_blue.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:purple_terracotta",
+      "bedrockId": "stained_hardened_clay 10",
+      "jname": "紫色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_purple.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:magenta_terracotta",
+      "bedrockId": "stained_hardened_clay 2",
+      "jname": "赤紫色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_magenta.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:pink_terracotta",
+      "bedrockId": "stained_hardened_clay 6",
+      "jname": "桃色のテラコッタ",
+      "imagePath": "/blocks/hardened_clay_stained_pink.png",
+      "blockGroup": "terracotta"
+    },
+    {
+      "javaId": "minecraft:terracotta",
+      "bedrockId": "hardened_clay",
+      "jname": "テラコッタ",
+      "imagePath": "/blocks/hardened_clay.png",
+      "blockGroup": "terracotta"
+    }
+  ]
+}

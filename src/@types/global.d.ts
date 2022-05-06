@@ -1,9 +1,8 @@
 interface BlockBasic {
-  imagePath: string;
   javaId: string;
   bedrockId: string;
   jname: string;
-  colorGroup: string;
+  imagePath: string;
   blockGroup: string;
 }
 

@@ -23,10 +23,6 @@ const PenSizeChange = () => {
     updateSquareSize();
   }, [penSizeIndex]);
 
-  useEffect(() => {
-    console.log("change size comp render");
-  }, []);
-
   return (
     <div className="flex flex-col justify-start bg-slate-300">
       <div className="flex justify-center items-center w-8 h-8">

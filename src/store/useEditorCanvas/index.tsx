@@ -3,7 +3,6 @@ import { createContext, useState, useContext, ReactNode } from "react";
 import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordinates";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
-import { useBlockImageContext } from "../useBlockImage";
 import { useBlueprintContext } from "../useBlueprint";
 
 const EditorCanvasContext = createContext(
@@ -48,8 +47,8 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let naviCanvasContext: CanvasRenderingContext2D;
   let minecraftImage: HTMLCanvasElement;
   let minecraftImageContext: CanvasRenderingContext2D;
-  const { blockImageDataDict } = useBlockImageContext();
   const { blueprint } = useBlueprintContext();
+  const { blockImageDataDict } = useBlockDBContext();
 
   const init = (
     mainCanvas_: HTMLCanvasElement,
@@ -156,7 +155,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (blockX < 0 || blueprint[0].length <= blockX) return;
     if (blockY < 0 || blueprint.length <= blockY) return;
     const coordinates = getSameBlockCoordinates(blockX, blockY, blueprint);
-    console.log(coordinates);
     // ここをあとで実装
     for (const coordinate of coordinates) {
       /* change canvas data */

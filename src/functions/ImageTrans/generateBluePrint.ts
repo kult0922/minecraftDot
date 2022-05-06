@@ -1,4 +1,3 @@
-import blockData from "src/loader/blockLoader";
 import get2DArray from "../utils/get2DArray";
 
 const t = (x: number, y: number, c: number) => {

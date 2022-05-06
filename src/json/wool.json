@@ -5,7 +5,6 @@
       "javaId": "minecraft:white_wool",
       "bedrockId": "wool",
       "jname": "白色の羊毛",
-      "colorGroup": "white",
       "blockGroup": "wool"
     },
     {
@@ -13,7 +12,6 @@
       "javaId": "minecraft:light_gray_wool",
       "bedrockId": "wool 8",
       "jname": "薄灰色の羊毛",
-      "colorGroup": "gray",
       "blockGroup": "wool"
     },
     {
@@ -21,7 +19,6 @@
       "javaId": "minecraft:gray_wool",
       "bedrockId": "wool 7",
       "jname": "灰色の羊毛",
-      "colorGroup": "gray",
       "blockGroup": "wool"
     },
     {
@@ -29,7 +26,6 @@
       "javaId": "minecraft:black_wool",
       "bedrockId": "wool 15",
       "jname": "黒色の羊毛",
-      "colorGroup": "black",
       "blockGroup": "wool"
     },
     {
@@ -37,7 +33,6 @@
       "javaId": "minecraft:brown_wool",
       "bedrockId": "wool 12",
       "jname": "茶色の羊毛",
-      "colorGroup": "brown",
       "blockGroup": "wool"
     },
     {
@@ -45,7 +40,6 @@
       "javaId": "minecraft:red_wool",
       "bedrockId": "wool 14",
       "jname": "赤色の羊毛",
-      "colorGroup": "red",
       "blockGroup": "wool"
     },
     {
@@ -53,7 +47,6 @@
       "javaId": "minecraft:orange_wool",
       "bedrockId": "wool 1",
       "jname": "橙色の羊毛",
-      "colorGroup": "red",
       "blockGroup": "wool"
     },
     {
@@ -61,7 +54,6 @@
       "javaId": "minecraft:yellow_wool",
       "bedrockId": "wool 4",
       "jname": "黄色の羊毛",
-      "colorGroup": "yellow",
       "blockGroup": "wool"
     },
     {
@@ -69,7 +61,6 @@
       "javaId": "minecraft:lime_wool",
       "bedrockId": "wool 5",
       "jname": "黄緑色の羊毛",
-      "colorGroup": "green",
       "blockGroup": "wool"
     },
     {
@@ -77,7 +68,6 @@
       "javaId": "minecraft:green_wool",
       "bedrockId": "wool 13",
       "jname": "緑色の羊毛",
-      "colorGroup": "green",
       "blockGroup": "wool"
     },
     {
@@ -85,7 +75,6 @@
       "javaId": "minecraft:cyan_wool",
       "bedrockId": "wool 9",
       "jname": "青緑色の羊毛",
-      "colorGroup": "blue",
       "blockGroup": "wool"
     },
     {
@@ -93,7 +82,6 @@
       "javaId": "minecraft:light_blue_wool",
       "bedrockId": "wool 3",
       "jname": "空色の羊毛",
-      "colorGroup": "blue",
       "blockGroup": "wool"
     },
     {
@@ -101,7 +89,6 @@
       "javaId": "minecraft:blue_wool",
       "bedrockId": "wool 11",
       "jname": "青色の羊毛",
-      "colorGroup": "blue",
       "blockGroup": "wool"
     },
     {
@@ -109,7 +96,6 @@
       "javaId": "minecraft:purple_wool",
       "bedrockId": "wool 10",
       "jname": "紫色の羊毛",
-      "colorGroup": "blue",
       "blockGroup": "wool"
     },
     {
@@ -117,7 +103,6 @@
       "javaId": "minecraft:magenta_wool",
       "bedrockId": "wool 2",
       "jname": "赤紫色の羊毛",
-      "colorGroup": "red",
       "blockGroup": "wool"
     },
     {
@@ -125,7 +110,6 @@
       "javaId": "minecraft:pink_wool",
       "bedrockId": "wool 6",
       "jname": "桃色の羊毛",
-      "colorGroup": "red",
       "blockGroup": "wool"
     }
   ]
