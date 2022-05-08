@@ -11,6 +11,9 @@ interface BlockImageData {
   R: number;
   G: number;
   B: number;
+  H: number;
+  S: number;
+  V: number;
 }
 
 interface Coordinate {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SideToolBar from "src/components/Organisms/SideToolBar";
 import EditorBoard from "src/components/Organisms/EditorBoard";
+import BlockPalette from "src/components/Organisms/BlockPalette";
 
 const EditorPageComponent = () => {
   return (
@@ -11,6 +12,9 @@ const EditorPageComponent = () => {
           <SideToolBar />
         </div>
         <EditorBoard />
+        <div className="ml-1">
+          <BlockPalette />
+        </div>
       </div>
 
       <div className="flex justify-center mt-4">
