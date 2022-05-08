@@ -18,4 +18,14 @@ const config: Config.InitialOptions = {
   // transformIgnorePatterns: ["<rootDir>/node_modules/"],
 };
 
+interface CustomMatchers<R = unknown> {
+  closeTo(delta: number, value: number): R;
+}
+
+declare global {
+  namespace jest {
+    interface Expect extends CustomMatchers {}
+  }
+}
+
 export default config;
