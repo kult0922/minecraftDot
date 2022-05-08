@@ -1,0 +1,11 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:air",
+      "bedrockId": "air",
+      "jname": "空気",
+      "imagePath": "/blocks/air.png",
+      "blockGroup": "air"
+    }
+  ]
+}
