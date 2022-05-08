@@ -12,7 +12,7 @@ const EditorPageComponent = () => {
           <SideToolBar />
         </div>
         <EditorBoard />
-        <div className="ml-1">
+        <div className="ml-2">
           <BlockPalette />
         </div>
       </div>
