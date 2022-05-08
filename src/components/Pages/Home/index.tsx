@@ -48,10 +48,6 @@ const HomeComponent = () => {
     })();
   }, []);
 
-  const handleOutSizeChange = () => {
-    setIsModalOpen(true);
-  };
-
   const handleTrans = () => {
     setIsModalOpen(true);
   };
@@ -96,7 +92,13 @@ const HomeComponent = () => {
       </div>
       <div className="p-40 mt-4 border text-center">ブロック選択 view</div>
 
-      <Modal isOpen={isModalOpen} ariaHideApp={false} onAfterOpen={afterOpenModal} style={modalStyles}>
+      <Modal
+        isOpen={isModalOpen}
+        ariaHideApp={false}
+        onRequestClose={closeModal}
+        onAfterOpen={afterOpenModal}
+        style={modalStyles}
+      >
         <div className="flex justify-end mb-3">
           <button onClick={closeModal}>
             <span className="inline-block align-middle text-gray-800 bg-gray-800 leading-4 w-5 h-0.5 rounded-sm relative rotate-45 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:rounded-sm before:bg-gray-800 before:rotate-90"></span>
