@@ -30,6 +30,8 @@ const EditorBoard = () => {
     updateMouseX,
     updateMouseY,
     setPressing,
+    setReplaceFromJavaId,
+    setReplaceToJavaId,
     setInsideCanvas,
     setInkBlockJavaId,
     setHoverBlockJavaId,
@@ -93,7 +95,7 @@ const EditorBoard = () => {
       showNaviBox(x, y, getPenSize());
     }
     /* show picker preview */
-    if (mode == "picker") {
+    if (mode == "picker" || mode == "replaceFromPicker" || mode == "replaceToPicker") {
       showNaviBox(x, y, 1);
       setHoverBlockJavaId(pickBlock(x, y));
 
@@ -112,6 +114,8 @@ const EditorBoard = () => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
     if (mode == "pen") putBlock(x, y, getPenSize(), inkBlockJavaId);
     if (mode == "picker") setInkBlockJavaId(pickBlock(x, y));
+    if (mode == "replaceFromPicker") setReplaceFromJavaId(pickBlock(x, y));
+    if (mode == "replaceToPicker") setReplaceToJavaId(pickBlock(x, y));
     if (mode == "zoomIn") zoomIn(x, y, false);
     if (mode == "zoomOut") zoomOut(x, y, false);
     if (mode == "bucket") bucket(x, y, inkBlockJavaId);
@@ -135,6 +139,8 @@ const EditorBoard = () => {
     if (mode == "pen") canvasContainer.current.style.cursor = "crosshair";
     if (mode == "bucket") canvasContainer.current.style.cursor = "cell";
     if (mode == "picker") canvasContainer.current.style.cursor = "nw-resize";
+    if (mode == "replaceFromPicker") canvasContainer.current.style.cursor = "nw-resize";
+    if (mode == "replaceToPicker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
     setInsideCanvas(true);
@@ -158,7 +164,7 @@ const EditorBoard = () => {
           <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>
 
           {/* picker preview */}
-          {mode === "picker" && insideCanvas && (
+          {(mode === "picker" || mode == "replaceFromPicker" || mode == "replaceToPicker") && insideCanvas && (
             <div ref={blockNameLabel} className="z-[100] absolute">
               <BlockNameLabel blockBasic={getBlockBasic(hoverBlockJavaId)}></BlockNameLabel>
             </div>

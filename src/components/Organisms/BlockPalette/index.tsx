@@ -5,21 +5,23 @@ import { useEditorContext } from "src/store/useEditor";
 
 const BlockPalette = () => {
   const { blockDB, blockImageDataDict } = useBlockDBContext();
-  console.log(blockImageDataDict);
   const blockPalette: Array<Array<BlockBasic>> = [[], [], [], [], [], [], [], [], [], []];
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
-  const { setInkBlockJavaId } = useEditorContext();
-  /*
-  for (const blockbasic of blockDB) {
-    const idx = Math.floor((blockImageDataDict.get(blockbasic.javaId)?.H! / 360) * blockPalette.length);
-    blockPalette[idx].push(blockbasic);
-  }
-  for (const row of blockPalette) {
-    row.sort(
-      (elm1, elm2) => blockImageDataDict.get(elm1.javaId)?.V! - blockImageDataDict.get(elm2.javaId)?.V!
-    );
-  }
-  */
+  const { setInkBlockJavaId, setReplaceFromJavaId, setReplaceToJavaId, mode } = useEditorContext();
+
+  const handleClick = (javaId: string) => {
+    if (mode == "replaceFromPicker") {
+      setReplaceFromJavaId(javaId);
+      return;
+    }
+    if (mode == "replaceToPicker") {
+      setReplaceToJavaId(javaId);
+      return;
+    }
+
+    setInkBlockJavaId(javaId);
+  };
+
   for (const blockBasic of blockDB) {
     const array = blockGroupMap.get(blockBasic.blockGroup);
     if (array == undefined) {
@@ -28,8 +30,6 @@ const BlockPalette = () => {
       array.push(blockBasic);
     }
   }
-
-  console.log(Array.from(blockGroupMap));
 
   return (
     <>
@@ -43,7 +43,7 @@ const BlockPalette = () => {
                 src={column.imagePath}
                 alt="paletteBlock"
                 key={column.javaId}
-                onClick={() => setInkBlockJavaId(column.javaId)}
+                onClick={() => handleClick(column.javaId)}
               ></img>
             ))}
           </div>

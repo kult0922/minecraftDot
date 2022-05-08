@@ -1,6 +1,7 @@
 import { Console } from "console";
 import { createContext, useState, useContext, ReactNode } from "react";
 import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordinates";
+import getTargetCoordinates from "src/functions/ImageTrans/getTargetCoordinates";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
 import { useBlueprintContext } from "../useBlueprint";
@@ -20,6 +21,7 @@ const EditorCanvasContext = createContext(
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
     bucket: (x: number, y: number, javaId: string) => void;
+    replace: (from: string, to: string) => void;
     pickBlock: (x: number, y: number) => string;
     clearNaviCanvas: () => void;
     render: () => void;
@@ -155,7 +157,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (blockX < 0 || blueprint[0].length <= blockX) return;
     if (blockY < 0 || blueprint.length <= blockY) return;
     const coordinates = getSameBlockCoordinates(blockX, blockY, blueprint);
-    // ここをあとで実装
     for (const coordinate of coordinates) {
       /* change canvas data */
       minecraftImageContext.putImageData(
@@ -167,6 +168,24 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
       blueprint[coordinate.y][coordinate.x] = javaId;
     }
 
+    render();
+  };
+
+  const replace = (from: string, to: string) => {
+    console.log(from, to);
+    const coordinates = getTargetCoordinates(from, blueprint);
+    console.log(coordinates);
+
+    for (const coordinate of coordinates) {
+      /* change canvas data */
+      minecraftImageContext.putImageData(
+        blockImageDataDict.get(to)?.imageData!,
+        coordinate.x * 16,
+        coordinate.y * 16
+      );
+      /* change blueprint */
+      blueprint[coordinate.y][coordinate.x] = to;
+    }
     render();
   };
 
@@ -222,6 +241,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     init,
     translate,
     bucket,
+    replace,
     render,
     zoomIn,
     zoomOut,

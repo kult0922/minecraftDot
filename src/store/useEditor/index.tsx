@@ -4,6 +4,8 @@ const EditorContext = createContext(
   {} as {
     mode: Mode;
     inkBlockJavaId: string;
+    replaceFromJavaId: string;
+    replaceToJavaId: string;
     hoverBlockJavaId: string;
     pressing: boolean;
     insideCanvas: boolean;
@@ -12,6 +14,8 @@ const EditorContext = createContext(
     penSizeIndex: number;
     setMode: React.Dispatch<React.SetStateAction<Mode>>;
     setInkBlockJavaId: React.Dispatch<React.SetStateAction<string>>;
+    setReplaceFromJavaId: React.Dispatch<React.SetStateAction<string>>;
+    setReplaceToJavaId: React.Dispatch<React.SetStateAction<string>>;
     setHoverBlockJavaId: React.Dispatch<React.SetStateAction<string>>;
     setPressing: React.Dispatch<React.SetStateAction<boolean>>;
     setInsideCanvas: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,6 +34,8 @@ export function useEditorContext() {
 export function EditorProvider({ children }: { children?: ReactNode }) {
   const [mode, setMode] = useState<Mode>("pen");
   const [inkBlockJavaId, setInkBlockJavaId] = useState("minecraft:white_wool");
+  const [replaceFromJavaId, setReplaceFromJavaId] = useState("minecraft:white_wool");
+  const [replaceToJavaId, setReplaceToJavaId] = useState("minecraft:white_wool");
   const [hoverBlockJavaId, setHoverBlockJavaId] = useState("minecraft:white_wool");
   const [penSizeIndex, setPenSizeIndex] = useState(1);
   const [pressing, setPressing] = useState(false);
@@ -64,8 +70,12 @@ export function EditorProvider({ children }: { children?: ReactNode }) {
     mouseY,
     penSizeIndex,
     hoverBlockJavaId,
+    replaceFromJavaId,
+    replaceToJavaId,
     setMode,
     setInkBlockJavaId,
+    setReplaceFromJavaId,
+    setReplaceToJavaId,
     setHoverBlockJavaId,
     setPressing,
     setInsideCanvas,
