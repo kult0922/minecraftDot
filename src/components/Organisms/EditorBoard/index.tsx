@@ -5,9 +5,14 @@ import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
+import { useHistoryContext } from "src/store/useHistory";
+import { useRouter } from "next/router";
 
 const EditorBoard = () => {
   const {
+    blueprint,
+    test,
+    getBlueprint,
     init,
     translate,
     bucket,
@@ -37,19 +42,31 @@ const EditorBoard = () => {
     setHoverBlockJavaId,
     getPenSize,
   } = useEditorContext();
-  const { blueprint } = useBlueprintContext();
   const { getBlockBasic, blockImageDataDict } = useBlockDBContext();
+  const { backward, forward, addHistory } = useHistoryContext();
+  const { initBlueprint } = useBlueprintContext();
 
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
   const blockNameLabel = useRef<HTMLDivElement>(null);
+  // console.log("EditorBoard render");
 
   useEffect(() => {
     /* generate image from blueprint and set to canvas */
-    const minecraftImage = geenrateImageFromBlueprint(blueprint, blockImageDataDict);
+    const minecraftImage = geenrateImageFromBlueprint(initBlueprint, blockImageDataDict);
     /* setup canvas */
-    init(mainCanvas.current, naviCanvas.current, minecraftImage, blueprint[0].length, blueprint.length);
+    init(
+      mainCanvas.current,
+      naviCanvas.current,
+      minecraftImage,
+      initBlueprint[0].length,
+      initBlueprint.length,
+      initBlueprint
+    );
+    /* take snapshot */
+    addHistory(initBlueprint);
+    // setBlueprint(initBlueprint);
     render();
 
     /* prevent zoon and scroll when zoom canvas */
@@ -126,6 +143,9 @@ const EditorBoard = () => {
   };
   const handleMouseUp = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
+
+    /* take snaphost */
+    if (mode == "pen" || mode === "bucket") addHistory(getBlueprint());
     setPressing(false);
   };
 

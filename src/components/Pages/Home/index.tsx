@@ -29,7 +29,7 @@ const HomeComponent = () => {
   const [srcImage, setSrc] = useState<ImageData>();
   // let src: ImageData;
   const { blockImageDataDict } = useBlockDBContext();
-  const { setBlueprint } = useBlueprintContext();
+  const { setInitBlueprint } = useBlueprintContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [outSize, setOutSize] = useState(16);
   const srcImageWidth = 256;
@@ -67,7 +67,7 @@ const HomeComponent = () => {
     /* output image */
     const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
     mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
-    setBlueprint(blueprint);
+    setInitBlueprint(blueprint);
   };
 
   return (

@@ -8,7 +8,7 @@ const TopToolBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { replaceFromJavaId, replaceToJavaId, setMode } = useEditorContext();
   const { blockDB, getBlockBasic } = useBlockDBContext();
-  const { replace } = useEditorCanvasContext();
+  const { replace, undo, redo } = useEditorCanvasContext();
   const handleReplace = () => {
     replace(replaceFromJavaId, replaceToJavaId);
   };
@@ -20,15 +20,24 @@ const TopToolBar = () => {
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
+  const handleUndo = () => {
+    undo();
+  };
+  const handleRedo = () => {
+    redo();
+  };
 
   return (
     <>
-      <button onClick={handleModalOpen}>replace</button>
+      <button onClick={handleModalOpen}>ブロック置換</button>
 
       {/* replace modal */}
       <div className="relative">
         {isModalOpen && (
           <div className="bg-white w-32 border-2 absolute top-0 left-0 block z-[100]">
+            <div className="flex justify-end">
+              <button onClick={closeModal}>x</button>
+            </div>
             <div className="flex justify-center items-center">
               <div className="cursor-pointer" onClick={() => setMode("replaceFromPicker")}>
                 <img
@@ -50,12 +59,13 @@ const TopToolBar = () => {
                 />
               </div>
             </div>
-            <div>
-              <button onClick={handleReplace}>replace</button>
+            <div className="flex justify-center mt-2">
+              <button onClick={handleReplace}>置き換え</button>
             </div>
-            <button onClick={closeModal}>x</button>
           </div>
         )}
+        <button onClick={handleUndo}>undo</button>
+        <button onClick={handleRedo}>redo</button>
       </div>
     </>
   );
