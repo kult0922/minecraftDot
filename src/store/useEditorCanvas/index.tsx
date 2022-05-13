@@ -4,7 +4,6 @@ import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordi
 import getTargetCoordinates from "src/functions/ImageTrans/getTargetCoordinates";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
-import { useBlueprintContext } from "../useBlueprint";
 import { useHistoryContext } from "../useHistory";
 
 const EditorCanvasContext = createContext(
@@ -17,7 +16,6 @@ const EditorCanvasContext = createContext(
       heightBlockNumber_: number,
       blueprint_: string[][]
     ) => void;
-    test: number;
     blueprint: Array<Array<string>>;
     getBlueprint: () => string[][];
     translate: (x: number, y: number) => void;
@@ -39,9 +37,6 @@ export function useEditorCanvasContext() {
   return useContext(EditorCanvasContext);
 }
 
-// blueprintをこの中に入れてしまう
-// or
-// このなかの要素をすべてuseEffectで管理する
 export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   const canvasSize = 1000;
   const zoomStepByWheel = 0.5;
@@ -62,7 +57,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   const { blockImageDataDict } = useBlockDBContext();
   const { backward, forward, addHistory } = useHistoryContext();
   let blueprint: Array<Array<string>> = [];
-  let test = 0;
 
   console.log("EditorCanvasProvider render");
 
@@ -142,8 +136,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     const endX = blockX + Math.floor(size / 2);
     const beginY = blockY - Math.floor(size / 2);
     const endY = blockY + Math.floor(size / 2);
-
-    test = 10;
 
     for (let i = beginX; i <= endX; i++) {
       for (let j = beginY; j <= endY; j++) {
@@ -242,8 +234,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     zoom(px, py, zoomStep, true);
   };
 
-  // ここにgetBlueprintみたいな関数をつくる？
-
   const getBlueprint = () => {
     return blueprint;
   };
@@ -253,7 +243,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (b === undefined) return;
     const image = geenrateImageFromBlueprint(b, blockImageDataDict);
     minecraftImageContext.putImageData(image, 0, 0);
-    // setBlueprint(blueprint);
     blueprint = b;
     render();
   };
@@ -263,7 +252,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (b === undefined) return;
     const image = geenrateImageFromBlueprint(b, blockImageDataDict);
     minecraftImageContext.putImageData(image, 0, 0);
-    // setBlueprint(blueprint);
     blueprint = b;
     render();
   };
@@ -283,7 +271,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
 
   const value = {
     blueprint,
-    test,
     getBlueprint,
     init,
     translate,

@@ -6,12 +6,9 @@ import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
 import { useHistoryContext } from "src/store/useHistory";
-import { useRouter } from "next/router";
 
 const EditorBoard = () => {
   const {
-    blueprint,
-    test,
     getBlueprint,
     init,
     translate,
@@ -28,29 +25,27 @@ const EditorBoard = () => {
     mode,
     inkBlockJavaId,
     hoverBlockJavaId,
-    pressing,
-    insideCanvas,
-    mouseX,
-    mouseY,
-    updateMouseX,
-    updateMouseY,
-    setPressing,
     setReplaceFromJavaId,
     setReplaceToJavaId,
-    setInsideCanvas,
     setInkBlockJavaId,
     setHoverBlockJavaId,
     getPenSize,
   } = useEditorContext();
   const { getBlockBasic, blockImageDataDict } = useBlockDBContext();
-  const { backward, forward, addHistory } = useHistoryContext();
+  const { addHistory } = useHistoryContext();
   const { initBlueprint } = useBlueprintContext();
 
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
   const blockNameLabel = useRef<HTMLDivElement>(null);
-  // console.log("EditorBoard render");
+
+  /* mouse parameters */
+  let mouseX: number;
+  let mouseY: number;
+  let pressing = false;
+  let insideCanvas = false;
+  console.log("EditorBoard render");
 
   useEffect(() => {
     /* generate image from blueprint and set to canvas */
@@ -122,8 +117,8 @@ const EditorBoard = () => {
         blockNameLabel.current.style.top = String(event.clientY - rect.top) + "px";
       }
     }
-    updateMouseX(x);
-    updateMouseY(y);
+    mouseX = x;
+    mouseY = y;
   };
 
   const handleMouseDown = (event: React.MouseEvent) => {
@@ -137,22 +132,22 @@ const EditorBoard = () => {
     if (mode == "zoomOut") zoomOut(x, y, false);
     if (mode == "bucket") bucket(x, y, inkBlockJavaId);
     /* common processign when mouse click */
-    setPressing(true);
-    updateMouseX(x);
-    updateMouseY(y);
+    pressing = true;
+    mouseX = x;
+    mouseY = y;
   };
   const handleMouseUp = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
 
     /* take snaphost */
     if (mode == "pen" || mode === "bucket") addHistory(getBlueprint());
-    setPressing(false);
+    pressing = false;
   };
 
   const handleMouseLeave = (event: React.MouseEvent) => {
     clearNaviCanvas();
-    setPressing(false);
-    setInsideCanvas(false);
+    pressing = false;
+    insideCanvas = false;
   };
   const handleMouseEnter = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
@@ -163,7 +158,7 @@ const EditorBoard = () => {
     if (mode == "replaceToPicker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
-    setInsideCanvas(true);
+    insideCanvas = true;
   };
 
   return (
