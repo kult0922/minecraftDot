@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
+import { useHistoryContext } from "src/store/useHistory";
 
 const TopToolBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { replaceFromJavaId, replaceToJavaId, setMode } = useEditorContext();
   const { blockDB, getBlockBasic } = useBlockDBContext();
-  const { replace, undo, redo } = useEditorCanvasContext();
+  const { replace, undo, redo, getBlueprint } = useEditorCanvasContext();
+  const { addHistory } = useHistoryContext();
   const handleReplace = () => {
     replace(replaceFromJavaId, replaceToJavaId);
   };
@@ -16,6 +18,7 @@ const TopToolBar = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setMode("neutral");
+    addHistory(getBlueprint());
   };
   const handleModalOpen = () => {
     setIsModalOpen(true);
