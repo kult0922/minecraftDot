@@ -32,7 +32,17 @@ const TopToolBar = () => {
 
   return (
     <>
-      <button onClick={handleModalOpen}>ブロック置換</button>
+      <div className="flex items-center">
+        <button onClick={handleUndo}>
+          <span className="material-symbols-outlined flex items-center">undo</span>
+        </button>
+        <button onClick={handleRedo}>
+          <span className="material-symbols-outlined flex items-center">redo</span>
+        </button>
+        <button onClick={handleModalOpen}>
+          <span className="flex items-center border-2 rounded bg-slate-200">置き換え</span>
+        </button>
+      </div>
 
       {/* replace modal */}
       <div className="relative">
@@ -67,8 +77,6 @@ const TopToolBar = () => {
             </div>
           </div>
         )}
-        <button onClick={handleUndo}>undo</button>
-        <button onClick={handleRedo}>redo</button>
       </div>
     </>
   );

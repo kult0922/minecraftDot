@@ -172,7 +172,7 @@ const EditorBoard = () => {
           onWheel={(e) => handleWheel(e)}
           onMouseLeave={(e) => handleMouseLeave(e)}
           onMouseEnter={(e) => handleMouseEnter(e)}
-          className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2 
+          className="w-[60vw] h-[60vw] flex justify-center items-center relative border-2 
           bg-[url('/assets/canvasBack24.png')]"
         >
           <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
