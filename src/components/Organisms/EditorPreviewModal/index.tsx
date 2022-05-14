@@ -1,7 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
-import loadImage from "src/functions/utils/loadImage";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import Modal from "react-modal";
 import Link from "next/link";
@@ -29,7 +27,7 @@ const modalStyles = {
   },
 };
 
-const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef(null);
@@ -66,21 +64,12 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <CrossButton />
           </button>
         </div>
-        <div className="w-[50vw] flex justify-center">
+        <div className="w-[90vw] flex justify-center">
           <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-2"></canvas>
-        </div>
-
-        <div className="flex justify-around mt-4">
-          <button> 画像ダウンロード </button>
-          <button> CSVダウンロード</button>
-          <button> コマンド生成</button>
-          <Link href="/editor">
-            <a>編集する</a>
-          </Link>
         </div>
       </Modal>
     </>
   );
 };
 
-export default PreviewModal;
+export default EditorPreviewModal;
