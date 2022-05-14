@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import ToolButton from "src/components/Atoms/toolButton";
+import ToolButton from "src/components/Atoms/ToolButton";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import PenSizeChange from "../PenSIzeChange";

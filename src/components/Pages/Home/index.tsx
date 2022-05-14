@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
 import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
@@ -9,6 +8,8 @@ import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/utils/getContext";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import PreviewModal from "src/components/Organisms/PreviewModal";
+import BlockButton from "src/components/Atoms/BlockButton";
+import { group } from "console";
 
 const modalStyles = {
   content: {
@@ -38,6 +39,16 @@ const HomeComponent = () => {
     }
     return blockUseFlag;
   };
+
+  const initGroupButtonFlag = () => {
+    const groupButtonFlag = new Map<string, Boolean>();
+    for (const blockBasic of blockDB) {
+      if (blockBasic.blockGroup == "air") continue;
+      groupButtonFlag.set(blockBasic.blockGroup, true);
+    }
+    return groupButtonFlag;
+  };
+
   const srcImageWidth = 256;
   const srcImageHeight = 256;
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
@@ -50,6 +61,7 @@ const HomeComponent = () => {
   const [outSize, setOutSize] = useState(16);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
   const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag());
+  const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag);
 
   /* src image load */
   useEffect(() => {
@@ -76,7 +88,18 @@ const HomeComponent = () => {
   const handleBlockClick = (javaId: string) => {
     const beforeState = blockUseFlag.get(javaId);
     setBlockUseFlag((map) => new Map(map.set(javaId, !beforeState)));
-    blockUseFlag.set(javaId, false);
+  };
+
+  const changeUseFlagByGroup = (group: string, state: boolean) => {
+    for (const blockBasic of blockGroupMap.get(group)!) {
+      setBlockUseFlag((map) => new Map(map.set(blockBasic.javaId, state)));
+    }
+  };
+
+  const handleGroupButtonClick = (group: string) => {
+    const beforeState = groupButtonFlag.get(group);
+    changeUseFlagByGroup(group, !beforeState);
+    setGroupButtonFlag((map) => new Map(map.set(group, !beforeState)));
   };
 
   return (
@@ -99,32 +122,33 @@ const HomeComponent = () => {
           <canvas id="canvas-in" ref={canvasInRef}></canvas>
         </div>
       </div>
-
-      {Array.from(blockGroupMap).map((row) => (
-        <div key={"palatte-row-" + row[0]}>
-          {row[1].map((column) => (
-            <label htmlFor={column.javaId} className="" key={column.javaId + "label"}>
-              <input
-                type="radio"
-                id={column.javaId}
-                onChange={() => {}}
-                checked={(blockUseFlag.get(column.javaId) as boolean) || false}
-                className="hidden peer"
-              />
-
-              <img
-                className="inline cursor-pointer rendering-pixelated m-[2px] p-[0px] border-[4px] border-transparent peer-checked:border-slate-400"
-                src={column.imagePath}
-                alt="paletteBlock"
-                width={32}
-                key={column.javaId}
-                onClick={() => handleBlockClick(column.javaId)}
-              ></img>
-            </label>
+      <div className="flex justify-center m-2">ブロックを選択</div>
+      <div className="flex justify-center">
+        <div className="">
+          {Array.from(blockGroupMap).map((blockGroup) => (
+            <div className="flex justify-start items-center" key={"select-block-row-" + blockGroup[0]}>
+              <label htmlFor={blockGroup[0]} className="">
+                <input
+                  type="checkbox"
+                  id={blockGroup[0]}
+                  onChange={() => handleGroupButtonClick(blockGroup[0])}
+                  checked={(groupButtonFlag.get(blockGroup[0]) as boolean) || false}
+                  // className="hidden peer"
+                  className="peer"
+                />
+              </label>
+              {blockGroup[1].map((blockBasic) => (
+                <BlockButton
+                  key={"select-block-button-" + blockBasic.javaId}
+                  checked={(blockUseFlag.get(blockBasic.javaId) as boolean) || false}
+                  handleBlockClick={handleBlockClick}
+                  blockBasic={blockBasic}
+                />
+              ))}
+            </div>
           ))}
         </div>
-      ))}
-
+      </div>
       <PreviewModal blueprint={blueprint} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   );
