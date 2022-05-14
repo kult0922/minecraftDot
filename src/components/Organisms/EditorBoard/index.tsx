@@ -5,9 +5,11 @@ import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
+import { useHistoryContext } from "src/store/useHistory";
 
 const EditorBoard = () => {
   const {
+    getBlueprint,
     init,
     translate,
     bucket,
@@ -23,31 +25,43 @@ const EditorBoard = () => {
     mode,
     inkBlockJavaId,
     hoverBlockJavaId,
-    pressing,
-    insideCanvas,
-    mouseX,
-    mouseY,
-    updateMouseX,
-    updateMouseY,
-    setPressing,
-    setInsideCanvas,
+    setReplaceFromJavaId,
+    setReplaceToJavaId,
     setInkBlockJavaId,
     setHoverBlockJavaId,
     getPenSize,
   } = useEditorContext();
-  const { blueprint } = useBlueprintContext();
   const { getBlockBasic, blockImageDataDict } = useBlockDBContext();
+  const { addHistory } = useHistoryContext();
+  const { initBlueprint } = useBlueprintContext();
 
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
   const blockNameLabel = useRef<HTMLDivElement>(null);
 
+  /* mouse parameters */
+  let mouseX: number;
+  let mouseY: number;
+  let pressing = false;
+  let insideCanvas = false;
+  console.log("EditorBoard render");
+
   useEffect(() => {
     /* generate image from blueprint and set to canvas */
-    const minecraftImage = geenrateImageFromBlueprint(blueprint, blockImageDataDict);
+    const minecraftImage = geenrateImageFromBlueprint(initBlueprint, blockImageDataDict);
     /* setup canvas */
-    init(mainCanvas.current, naviCanvas.current, minecraftImage, blueprint[0].length, blueprint.length);
+    init(
+      mainCanvas.current,
+      naviCanvas.current,
+      minecraftImage,
+      initBlueprint[0].length,
+      initBlueprint.length,
+      initBlueprint
+    );
+    /* take snapshot */
+    addHistory(initBlueprint);
+    // setBlueprint(initBlueprint);
     render();
 
     /* prevent zoon and scroll when zoom canvas */
@@ -93,7 +107,7 @@ const EditorBoard = () => {
       showNaviBox(x, y, getPenSize());
     }
     /* show picker preview */
-    if (mode == "picker") {
+    if (mode == "picker" || mode == "replaceFromPicker" || mode == "replaceToPicker") {
       showNaviBox(x, y, 1);
       setHoverBlockJavaId(pickBlock(x, y));
 
@@ -103,8 +117,8 @@ const EditorBoard = () => {
         blockNameLabel.current.style.top = String(event.clientY - rect.top) + "px";
       }
     }
-    updateMouseX(x);
-    updateMouseY(y);
+    mouseX = x;
+    mouseY = y;
   };
 
   const handleMouseDown = (event: React.MouseEvent) => {
@@ -112,32 +126,39 @@ const EditorBoard = () => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
     if (mode == "pen") putBlock(x, y, getPenSize(), inkBlockJavaId);
     if (mode == "picker") setInkBlockJavaId(pickBlock(x, y));
+    if (mode == "replaceFromPicker") setReplaceFromJavaId(pickBlock(x, y));
+    if (mode == "replaceToPicker") setReplaceToJavaId(pickBlock(x, y));
     if (mode == "zoomIn") zoomIn(x, y, false);
     if (mode == "zoomOut") zoomOut(x, y, false);
     if (mode == "bucket") bucket(x, y, inkBlockJavaId);
     /* common processign when mouse click */
-    setPressing(true);
-    updateMouseX(x);
-    updateMouseY(y);
+    pressing = true;
+    mouseX = x;
+    mouseY = y;
   };
   const handleMouseUp = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
-    setPressing(false);
+
+    /* take snaphost */
+    if (mode == "pen" || mode === "bucket") addHistory(getBlueprint());
+    pressing = false;
   };
 
   const handleMouseLeave = (event: React.MouseEvent) => {
     clearNaviCanvas();
-    setPressing(false);
-    setInsideCanvas(false);
+    pressing = false;
+    insideCanvas = false;
   };
   const handleMouseEnter = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
     if (mode == "pen") canvasContainer.current.style.cursor = "crosshair";
     if (mode == "bucket") canvasContainer.current.style.cursor = "cell";
     if (mode == "picker") canvasContainer.current.style.cursor = "nw-resize";
+    if (mode == "replaceFromPicker") canvasContainer.current.style.cursor = "nw-resize";
+    if (mode == "replaceToPicker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
-    setInsideCanvas(true);
+    insideCanvas = true;
   };
 
   return (
@@ -151,14 +172,14 @@ const EditorBoard = () => {
           onWheel={(e) => handleWheel(e)}
           onMouseLeave={(e) => handleMouseLeave(e)}
           onMouseEnter={(e) => handleMouseEnter(e)}
-          className="w-[70vw] h-[70vw] flex justify-center items-center relative border-2 
+          className="w-[80vw] h-[80vw] sm:w-[60vw] sm:h-[60vw] flex justify-center items-center relative border-2 
           bg-[url('/assets/canvasBack24.png')]"
         >
           <canvas id="main-canvas" ref={mainCanvas} className="w-[100%] absolute"></canvas>
           <canvas id="navi-canvas" ref={naviCanvas} className="w-[100%] absolute"></canvas>
 
           {/* picker preview */}
-          {mode === "picker" && insideCanvas && (
+          {(mode === "picker" || mode == "replaceFromPicker" || mode == "replaceToPicker") && insideCanvas && (
             <div ref={blockNameLabel} className="z-[100] absolute">
               <BlockNameLabel blockBasic={getBlockBasic(hoverBlockJavaId)}></BlockNameLabel>
             </div>

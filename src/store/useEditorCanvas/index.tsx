@@ -1,9 +1,10 @@
-import { Console } from "console";
 import { createContext, useState, useContext, ReactNode } from "react";
+import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
 import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordinates";
+import getTargetCoordinates from "src/functions/ImageTrans/getTargetCoordinates";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
-import { useBlueprintContext } from "../useBlueprint";
+import { useHistoryContext } from "../useHistory";
 
 const EditorCanvasContext = createContext(
   {} as {
@@ -12,15 +13,21 @@ const EditorCanvasContext = createContext(
       naviCanvas_: HTMLCanvasElement,
       canvas: ImageData,
       widthBlockNumber_: number,
-      heightBlockNumber_: number
+      heightBlockNumber_: number,
+      blueprint_: string[][]
     ) => void;
+    blueprint: Array<Array<string>>;
+    getBlueprint: () => string[][];
     translate: (x: number, y: number) => void;
     zoomIn: (x: number, y: number, isWheel: boolean) => void;
     zoomOut: (x: number, y: number, isWheel: boolean) => void;
     showNaviBox: (x: number, y: number, size: number) => void;
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
     bucket: (x: number, y: number, javaId: string) => void;
+    replace: (from: string, to: string) => void;
     pickBlock: (x: number, y: number) => string;
+    undo: () => void;
+    redo: () => void;
     clearNaviCanvas: () => void;
     render: () => void;
   }
@@ -47,16 +54,22 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let naviCanvasContext: CanvasRenderingContext2D;
   let minecraftImage: HTMLCanvasElement;
   let minecraftImageContext: CanvasRenderingContext2D;
-  const { blueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
+  const { backward, forward, addHistory } = useHistoryContext();
+  let blueprint: Array<Array<string>> = [];
+
+  console.log("EditorCanvasProvider render");
 
   const init = (
     mainCanvas_: HTMLCanvasElement,
     naviCanvas_: HTMLCanvasElement,
     image: ImageData,
     widthBlockNumber_: number,
-    heightBlockNumber_: number
+    heightBlockNumber_: number,
+    blueprint_: Array<Array<string>>
   ) => {
+    console.log("EditorCanvasProvider init");
+    blueprint = blueprint_;
     mainCanvas = mainCanvas_;
     naviCanvas = naviCanvas_;
 
@@ -155,7 +168,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     if (blockX < 0 || blueprint[0].length <= blockX) return;
     if (blockY < 0 || blueprint.length <= blockY) return;
     const coordinates = getSameBlockCoordinates(blockX, blockY, blueprint);
-    // ここをあとで実装
     for (const coordinate of coordinates) {
       /* change canvas data */
       minecraftImageContext.putImageData(
@@ -167,6 +179,23 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
       blueprint[coordinate.y][coordinate.x] = javaId;
     }
 
+    render();
+  };
+
+  const replace = (from: string, to: string) => {
+    console.log(from, to);
+    const coordinates = getTargetCoordinates(from, blueprint);
+
+    for (const coordinate of coordinates) {
+      /* change canvas data */
+      minecraftImageContext.putImageData(
+        blockImageDataDict.get(to)?.imageData!,
+        coordinate.x * 16,
+        coordinate.y * 16
+      );
+      /* change blueprint */
+      blueprint[coordinate.y][coordinate.x] = to;
+    }
     render();
   };
 
@@ -205,6 +234,28 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     zoom(px, py, zoomStep, true);
   };
 
+  const getBlueprint = () => {
+    return blueprint;
+  };
+
+  const undo = () => {
+    const b = backward();
+    if (b === undefined) return;
+    const image = geenrateImageFromBlueprint(b, blockImageDataDict);
+    minecraftImageContext.putImageData(image, 0, 0);
+    blueprint = b;
+    render();
+  };
+
+  const redo = () => {
+    const b = forward();
+    if (b === undefined) return;
+    const image = geenrateImageFromBlueprint(b, blockImageDataDict);
+    minecraftImageContext.putImageData(image, 0, 0);
+    blueprint = b;
+    render();
+  };
+
   const render = () => {
     mainCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
     minecraftImageWidth = minecraftImage.width * magnification;
@@ -219,9 +270,12 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   };
 
   const value = {
+    blueprint,
+    getBlueprint,
     init,
     translate,
     bucket,
+    replace,
     render,
     zoomIn,
     zoomOut,
@@ -229,6 +283,8 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     showNaviBox,
     putBlock,
     clearNaviCanvas,
+    undo,
+    redo,
   };
 
   return <EditorCanvasContext.Provider value={value}>{children}</EditorCanvasContext.Provider>;

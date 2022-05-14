@@ -2,19 +2,20 @@ import Link from "next/link";
 import SideToolBar from "src/components/Organisms/SideToolBar";
 import EditorBoard from "src/components/Organisms/EditorBoard";
 import BlockPalette from "src/components/Organisms/BlockPalette";
+import TopToolBar from "src/components/Organisms/TopToolBar";
 
 const EditorPageComponent = () => {
   return (
     <>
-      <div className="text-xl text-center">Editor</div>
       <div className="flex justify-center">
-        <div className="mr-1">
+        <TopToolBar />
+      </div>
+      <div className="flex flex-wrap justify-center">
+        <div className="mr-2">
           <SideToolBar />
         </div>
         <EditorBoard />
-        <div className="ml-2">
-          <BlockPalette />
-        </div>
+        <BlockPalette />
       </div>
 
       <div className="flex justify-center mt-4">

@@ -21,4 +21,13 @@ interface Coordinate {
   y: number;
 }
 
-type Mode = "pen" | "bucket" | "picker" | "hand" | "zoomIn" | "zoomOut";
+type Mode =
+  | "neutral"
+  | "pen"
+  | "bucket"
+  | "picker"
+  | "hand"
+  | "zoomIn"
+  | "zoomOut"
+  | "replaceFromPicker"
+  | "replaceToPicker";

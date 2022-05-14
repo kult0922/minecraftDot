@@ -9,6 +9,7 @@ import glazedTerracotta from "src/json/glazedTerracotta.json";
 import ore from "src/json/ore.json";
 import concrete from "src/json/concrete.json";
 import stone from "src/json/stone.json";
+import air from "src/json/air.json";
 import rgb2hsv from "src/functions/ImageTrans/rgb2hsv";
 
 const BlockDBContext = createContext(
@@ -27,7 +28,8 @@ export function useBlockDBContext() {
 
 export function BlockDBProvider({ children }: { children?: ReactNode }) {
   const javaId2index: Map<string, number> = new Map();
-  const blockDB: Array<BlockBasic> = wool.blocks.concat(
+  const blockDB: Array<BlockBasic> = air.blocks.concat(
+    wool.blocks,
     concrete.blocks,
     terracotta.blocks,
     glazedTerracotta.blocks,

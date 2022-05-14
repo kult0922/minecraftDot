@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 
-const BlockPalette = () => {
+const BlockSelect = () => {
   const { blockDB, blockImageDataDict } = useBlockDBContext();
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
   const { setInkBlockJavaId, setReplaceFromJavaId, setReplaceToJavaId, mode } = useEditorContext();
@@ -39,17 +39,15 @@ const BlockPalette = () => {
           className="cursor-pointer"
           src={"/blocks/air_palette.png"}
           alt="paletteBlock"
-          width={20}
           onClick={() => handleClick("minecraft:air")}
         ></img>
         {Array.from(blockGroupMap).map((row) => (
           <div key={"palatte-row-" + row[0]}>
             {row[1].map((column) => (
               <img
-                className="inline cursor-pointer rendering-pixelated"
+                className="inline cursor-pointer"
                 src={column.imagePath}
                 alt="paletteBlock"
-                width={20}
                 key={column.javaId}
                 onClick={() => handleClick(column.javaId)}
               ></img>
@@ -61,4 +59,4 @@ const BlockPalette = () => {
   );
 };
 
-export default BlockPalette;
+export default BlockSelect;

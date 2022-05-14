@@ -14,8 +14,8 @@ const getMostSimilarBlockId = (
 ) => {
   let javaId = "";
   let minDiff = 100000;
-  // for (const blockImageData of blockImageDatas) {
-  blockImageDataDict.forEach((blockImageData, index) => {
+  for (const [index, blockImageData] of blockImageDataDict.entries()) {
+    if (index == "minecraft:air") continue;
     // ここで差異を計算
     const diff =
       Math.abs(R - blockImageData.R) + Math.abs(G - blockImageData.G) + Math.abs(B - blockImageData.B);
@@ -23,7 +23,7 @@ const getMostSimilarBlockId = (
       minDiff = diff;
       javaId = index;
     }
-  });
+  }
 
   return javaId;
 };
