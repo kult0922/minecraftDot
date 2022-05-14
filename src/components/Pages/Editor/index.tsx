@@ -7,32 +7,16 @@ import TopToolBar from "src/components/Organisms/TopToolBar";
 const EditorPageComponent = () => {
   return (
     <>
-      <div className="text-xl text-center">MinecraftDot Editor</div>
-      <table>
-        <thead>
-          <tr></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td>
-              <TopToolBar />
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td className="align-top">
-              <SideToolBar />
-            </td>
-            <td className="align-top">
-              <EditorBoard />
-            </td>
-            <td className="align-top">
-              <BlockPalette />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="flex justify-center">
+        <TopToolBar />
+      </div>
+      <div className="flex flex-wrap justify-center">
+        <div className="mr-2">
+          <SideToolBar />
+        </div>
+        <EditorBoard />
+        <BlockPalette />
+      </div>
 
       <div className="flex justify-center mt-4">
         <Link href="/">

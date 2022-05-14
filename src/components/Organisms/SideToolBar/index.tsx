@@ -37,7 +37,7 @@ const SideToolBar = () => {
         <ToolButton id="zoomOut" onChange={() => setMode("zoomOut")} selected={mode == "zoomOut"}>
           <span className="material-icons text-2xl">zoom_out</span>
         </ToolButton>
-        <div className="mt-2">
+        <div className="mt-2 w-8">
           <PenSizeChange />
         </div>
       </div>

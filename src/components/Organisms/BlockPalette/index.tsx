@@ -39,15 +39,17 @@ const BlockPalette = () => {
           className="cursor-pointer"
           src={"/blocks/air_palette.png"}
           alt="paletteBlock"
+          width={20}
           onClick={() => handleClick("minecraft:air")}
         ></img>
         {Array.from(blockGroupMap).map((row) => (
           <div key={"palatte-row-" + row[0]}>
             {row[1].map((column) => (
               <img
-                className="inline cursor-pointer"
+                className="inline cursor-pointer rendering-pixelated"
                 src={column.imagePath}
                 alt="paletteBlock"
+                width={20}
                 key={column.javaId}
                 onClick={() => handleClick(column.javaId)}
               ></img>
