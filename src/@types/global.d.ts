@@ -21,6 +21,12 @@ interface Coordinate {
   y: number;
 }
 
+interface Coordinate3D {
+  x: number;
+  y: number;
+  z: number;
+}
+
 type Mode =
   | "neutral"
   | "pen"
@@ -31,3 +37,5 @@ type Mode =
   | "zoomOut"
   | "replaceFromPicker"
   | "replaceToPicker";
+
+type Axios = "x" | "y" | "z";
