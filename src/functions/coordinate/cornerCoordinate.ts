@@ -124,4 +124,4 @@ function getNormalAxis(c1: Coordinate3D, c2: Coordinate3D) {
   }
 }
 
-export { validInput, calcRBCoordinate, getNormalAxis };
+export { validInput, calcRBCoordinate, getNormalAxis, getAxis };

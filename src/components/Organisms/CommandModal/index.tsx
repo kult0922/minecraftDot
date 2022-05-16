@@ -8,6 +8,7 @@ import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import CrossButton from "src/components/Atoms/CrossButton.tsx";
 import { CoreTransformationContext } from "typescript";
 import { calcRBCoordinate, validInput } from "src/functions/coordinate/cornerCoordinate";
+import generateCommand from "src/functions/command/generateCommand";
 
 interface Props {
   blueprint: string[][];
@@ -94,6 +95,13 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
     mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
     setInitBlueprint(blueprint);
+  };
+
+  const handleGenerateCommand = () => {
+    const LT = { x: cornerCoordinates.ltx, y: cornerCoordinates.lty, z: cornerCoordinates.ltz };
+    const RT = { x: cornerCoordinates.rtx, y: cornerCoordinates.rty, z: cornerCoordinates.rtz };
+    const LB = { x: cornerCoordinates.lbx, y: cornerCoordinates.lby, z: cornerCoordinates.lbz };
+    console.log(generateCommand(blueprint, LT, RT, LB));
   };
 
   if (blueprint === undefined || blueprint.length === 0) return <></>;
@@ -197,6 +205,9 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
               />
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <button onClick={handleGenerateCommand}>コマンド生成</button>
         </div>
       </Modal>
     </>
