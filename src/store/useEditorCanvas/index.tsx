@@ -25,7 +25,7 @@ const EditorCanvasContext = createContext(
     putBlock: (x: number, y: number, size: number, javaId: string) => void;
     bucket: (x: number, y: number, javaId: string) => void;
     replace: (from: string, to: string) => void;
-    pickBlock: (x: number, y: number) => string;
+    pickBlock: (x: number, y: number) => string | undefined;
     undo: () => void;
     redo: () => void;
     clearNaviCanvas: () => void;
@@ -110,6 +110,13 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     return { blockX, blockY, blockSize };
   };
 
+  const insideBlueprint = (i: number, j: number, blueprint: string[][]) => {
+    if (i < 0 || i >= blueprint.length) return false;
+    if (j < 0 || j >= blueprint[0].length) return false;
+
+    return true;
+  };
+
   const clearNaviCanvas = () => {
     naviCanvasContext.clearRect(0, 0, canvasSize, canvasSize);
   };
@@ -139,20 +146,21 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
 
     for (let i = beginX; i <= endX; i++) {
       for (let j = beginY; j <= endY; j++) {
-        /* change canvas data */
-        minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, i * 16, j * 16);
-        /* change blueprint */
-        blueprint[j][i] = javaId;
+        if (insideBlueprint(i, j, blueprint)) {
+          /* change canvas data */
+          minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, i * 16, j * 16);
+          /* change blueprint */
+          blueprint[j][i] = javaId;
+        }
       }
     }
 
     render();
   };
 
-  const pickBlock = (x: number, y: number): string => {
+  const pickBlock = (x: number, y: number): string | undefined => {
     const { blockX, blockY } = getBlockCoordinate(x, y);
-    if (blockX < 0 || blueprint[0].length <= blockX) return "not_found";
-    if (blockY < 0 || blueprint.length <= blockY) return "not_found";
+    if (!insideBlueprint(blockY, blockX, blueprint)) return;
     return blueprint[blockY][blockX];
   };
 
@@ -165,8 +173,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
 
   const bucket = (x: number, y: number, javaId: string) => {
     const { blockX, blockY } = getBlockCoordinate(x, y);
-    if (blockX < 0 || blueprint[0].length <= blockX) return;
-    if (blockY < 0 || blueprint.length <= blockY) return;
+    if (!insideBlueprint(blockY, blockX, blueprint)) return;
     const coordinates = getSameBlockCoordinates(blockX, blockY, blueprint);
     for (const coordinate of coordinates) {
       /* change canvas data */
@@ -183,7 +190,6 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   };
 
   const replace = (from: string, to: string) => {
-    console.log(from, to);
     const coordinates = getTargetCoordinates(from, blueprint);
 
     for (const coordinate of coordinates) {

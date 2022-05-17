@@ -35,6 +35,8 @@ const EditorBoard = () => {
   const { addHistory } = useHistoryContext();
   const { initBlueprint } = useBlueprintContext();
 
+  const [insideCanvas, setInsideCanvas] = useState(false);
+
   const mainCanvas = useRef<HTMLCanvasElement>(null!);
   const naviCanvas = useRef<HTMLCanvasElement>(null!);
   const canvasContainer = useRef<HTMLDivElement>(null!);
@@ -44,7 +46,7 @@ const EditorBoard = () => {
   let mouseX: number;
   let mouseY: number;
   let pressing = false;
-  let insideCanvas = false;
+  // let insideCanvas = false;
   console.log("EditorBoard render");
 
   useEffect(() => {
@@ -109,7 +111,8 @@ const EditorBoard = () => {
     /* show picker preview */
     if (mode == "picker" || mode == "replaceFromPicker" || mode == "replaceToPicker") {
       showNaviBox(x, y, 1);
-      setHoverBlockJavaId(pickBlock(x, y));
+      const javaId = pickBlock(x, y);
+      if (javaId !== undefined) setHoverBlockJavaId(javaId);
 
       if (blockNameLabel.current != null) {
         const rect = mainCanvas.current.getBoundingClientRect();
@@ -125,9 +128,18 @@ const EditorBoard = () => {
     const { x, y } = getCoordiante(event);
     if (mode == "hand") canvasContainer.current.style.cursor = "grabbing";
     if (mode == "pen") putBlock(x, y, getPenSize(), inkBlockJavaId);
-    if (mode == "picker") setInkBlockJavaId(pickBlock(x, y));
-    if (mode == "replaceFromPicker") setReplaceFromJavaId(pickBlock(x, y));
-    if (mode == "replaceToPicker") setReplaceToJavaId(pickBlock(x, y));
+    if (mode == "picker") {
+      const javaId = pickBlock(x, y);
+      if (javaId !== undefined) setInkBlockJavaId(javaId);
+    }
+    if (mode == "replaceFromPicker") {
+      const javaId = pickBlock(x, y);
+      if (javaId !== undefined) setReplaceFromJavaId(javaId);
+    }
+    if (mode == "replaceToPicker") {
+      const javaId = pickBlock(x, y);
+      if (javaId !== undefined) setReplaceToJavaId(javaId);
+    }
     if (mode == "zoomIn") zoomIn(x, y, false);
     if (mode == "zoomOut") zoomOut(x, y, false);
     if (mode == "bucket") bucket(x, y, inkBlockJavaId);
@@ -147,7 +159,8 @@ const EditorBoard = () => {
   const handleMouseLeave = (event: React.MouseEvent) => {
     clearNaviCanvas();
     pressing = false;
-    insideCanvas = false;
+    // insideCanvas = false;
+    setInsideCanvas(false);
   };
   const handleMouseEnter = (event: React.MouseEvent) => {
     if (mode == "hand") canvasContainer.current.style.cursor = "grab";
@@ -158,7 +171,8 @@ const EditorBoard = () => {
     if (mode == "replaceToPicker") canvasContainer.current.style.cursor = "nw-resize";
     if (mode == "zoomIn") canvasContainer.current.style.cursor = "zoom-in";
     if (mode == "zoomOut") canvasContainer.current.style.cursor = "zoom-out";
-    insideCanvas = true;
+    // insideCanvas = true;
+    setInsideCanvas(true);
   };
 
   return (

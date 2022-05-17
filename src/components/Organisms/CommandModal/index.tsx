@@ -76,7 +76,6 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   };
 
   const handleChangeCoordinate = (key: string, value: number) => {
-    console.log(key, value);
     setCornerCoordinates({ ...cornerCoordinates, [key]: value });
   };
 
