@@ -16,6 +16,7 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-modal": "^3.14.4",
+    "resize-image-data": "^0.3.1",
     "ts-node": "^10.7.0"
   },
   "devDependencies": {

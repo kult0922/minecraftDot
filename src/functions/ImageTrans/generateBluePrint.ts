@@ -1,10 +1,13 @@
 import get2DArray from "../utils/get2DArray";
+import { t } from "../utils/t";
 
+/*
 const t = (x: number, y: number, c: number) => {
   const w = 256;
   const h = 256;
   return 4 * (y * w + x) + c;
 };
+*/
 
 const getMostSimilarBlockId = (
   R: number,
@@ -38,7 +41,8 @@ const generateBlueprint = (
   const height = image.height;
   const srcImage = image.data;
 
-  const ws = width / wPix;
+  // const ws = Math.round(width / wPix);
+  const ws = 1;
 
   const blueprint: Array<Array<string>> = get2DArray(hPix, wPix);
 
@@ -54,9 +58,9 @@ const generateBlueprint = (
 
       for (let k = 0; k < ws; k++) {
         for (let l = 0; l < ws; l++) {
-          R += srcImage[t(jj + k, ii + l, 0)];
-          G += srcImage[t(jj + k, ii + l, 1)];
-          B += srcImage[t(jj + k, ii + l, 2)];
+          R += srcImage[t(jj + k, ii + l, 0, width)];
+          G += srcImage[t(jj + k, ii + l, 1, width)];
+          B += srcImage[t(jj + k, ii + l, 2, width)];
         }
       }
 
@@ -68,6 +72,8 @@ const generateBlueprint = (
       blueprint[i][j] = mostSimilarBlockId;
     }
   }
+
+  console.log(blueprint);
 
   return blueprint;
 };

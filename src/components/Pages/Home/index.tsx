@@ -10,6 +10,8 @@ import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import PreviewModal from "src/components/Organisms/PreviewModal";
 import BlockButton from "src/components/Atoms/BlockButton";
 import { group } from "console";
+// import resizeImageData from "src/functions/ImageTrans/resizeImageData";
+import resizeImageData from "resize-image-data";
 
 const modalStyles = {
   content: {
@@ -58,7 +60,7 @@ const HomeComponent = () => {
 
   const [srcImage, setSrc] = useState<ImageData>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [outSize, setOutSize] = useState(16);
+  const [outSize, setOutSize] = useState(64);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
   const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag());
   const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag);
@@ -74,14 +76,20 @@ const HomeComponent = () => {
     })();
   }, []);
 
-  const handleTransform = () => {
+  const handleTransform = async () => {
     if (srcImage === undefined) return;
     const useBlockImageDataDict = new Map<string, BlockImageData>();
     for (let [jabaId, blockImageData] of blockImageDataDict) {
       if (blockUseFlag.get(jabaId)) useBlockImageDataDict.set(jabaId, blockImageData);
     }
 
-    setBlueprint(generateBlueprint(srcImage, outSize, outSize, useBlockImageDataDict));
+    // need to refactor
+    const height = Math.floor(srcImage.height * (outSize / srcImage.width));
+    const resizedImage = resizeImageData(srcImage, outSize, outSize, "nearest-neighbor");
+    console.log(outSize, height);
+    console.log(resizedImage);
+
+    setBlueprint(generateBlueprint(resizedImage!, outSize, outSize, useBlockImageDataDict));
     setIsModalOpen(true);
   };
 
@@ -113,7 +121,8 @@ const HomeComponent = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setOutSize(Number(event.target.value));
           }}
-          type="text"
+          defaultValue={64}
+          type="number"
           className="border-2"
         />
       </div>
