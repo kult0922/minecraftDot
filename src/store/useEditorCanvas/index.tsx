@@ -45,7 +45,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let minecraftImageY = 0;
   let minecraftImageWidth = 0;
   let minecraftImageHeight = 0;
-  let magnification = 4;
+  let magnification = 0.5;
   let widthBlockNumber = 0;
   let heightBlockNumber = 0;
   let mainCanvas: HTMLCanvasElement;
