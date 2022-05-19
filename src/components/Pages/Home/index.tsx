@@ -111,18 +111,22 @@ const HomeComponent = () => {
   return (
     <>
       <div className="flex justify-center m-4">
-        <button onClick={handleTransform}>transform</button>
+        <button onClick={handleTransform} className="bg-slate-200 border-2 pr-4 pl-4 rounded">
+          変換
+        </button>
       </div>
-      <div className="flex justify-center m-4">
-        size:
-        <input
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setOutSize(Number(event.target.value));
-          }}
-          defaultValue={64}
-          type="number"
-          className="border-2"
-        />
+      <div className=" m-4">
+        <div className="text-center">
+          <span className="m-2">size:</span>
+          <input
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setOutSize(Number(event.target.value));
+            }}
+            defaultValue={64}
+            type="number"
+            className="border-2 text-center w-24"
+          />
+        </div>
       </div>
       <div className="flex justify-center">
         <div className="border-2">
