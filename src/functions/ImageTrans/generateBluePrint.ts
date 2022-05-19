@@ -73,8 +73,6 @@ const generateBlueprint = (
     }
   }
 
-  console.log(blueprint);
-
   return blueprint;
 };
 

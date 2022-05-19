@@ -33,8 +33,6 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef(null);
-  const mainCanvasWidth = 1000;
-  const mainCanvasHeight = 1000;
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -47,8 +45,8 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const bufferCanvas = getBufferCanvas(minecraftImage, minecraftImage.width, minecraftImage.height);
 
     /* output image */
-    const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
-    mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
+    const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
+    mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
     setInitBlueprint(blueprint);
   };
 

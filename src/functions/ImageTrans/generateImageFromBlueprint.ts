@@ -9,7 +9,7 @@ const geenrateImageFromBlueprint = (
   const rows = blueprint.length;
   const width = blueprint[0].length * 16;
   const height = blueprint.length * 16;
-  const imageData = new ImageData(height, width);
+  const imageData = new ImageData(width, height);
   const image = imageData.data;
 
   for (let i = 0; i < rows; i++) {

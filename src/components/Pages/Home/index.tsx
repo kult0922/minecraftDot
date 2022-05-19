@@ -52,7 +52,7 @@ const HomeComponent = () => {
   };
 
   const srcImageWidth = 256;
-  const srcImageHeight = 256;
+  const srcImageHeight = 366;
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
   const canvasInRef = useRef(null);
   const { blockDB } = useBlockDBContext();
@@ -70,7 +70,7 @@ const HomeComponent = () => {
     const ctxIn = getContext(canvasInRef.current, srcImageWidth, srcImageHeight);
     ctxIn.imageSmoothingEnabled = false;
     (async () => {
-      const image = await loadImage("/assets/mokuro_256.png");
+      const image = await loadImage("/assets/shinju_256.jpeg");
       ctxIn.drawImage(image, 0, 0);
       setSrc(ctxIn.getImageData(0, 0, srcImageWidth, srcImageHeight));
     })();
@@ -85,11 +85,9 @@ const HomeComponent = () => {
 
     // need to refactor
     const height = Math.floor(srcImage.height * (outSize / srcImage.width));
-    const resizedImage = resizeImageData(srcImage, outSize, outSize, "nearest-neighbor");
-    console.log(outSize, height);
-    console.log(resizedImage);
+    const resizedImage = resizeImageData(srcImage, outSize, height, "nearest-neighbor");
 
-    setBlueprint(generateBlueprint(resizedImage!, outSize, outSize, useBlockImageDataDict));
+    setBlueprint(generateBlueprint(resizedImage!, outSize, height, useBlockImageDataDict));
     setIsModalOpen(true);
   };
 
