@@ -40,6 +40,7 @@ const HomeComponent = () => {
 
   const [srcImage, setSrc] = useState<ImageData>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImageUpload, setIsImageUpload] = useState(false);
   const [outSize, setOutSize] = useState(64);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
   const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag());
@@ -48,10 +49,12 @@ const HomeComponent = () => {
   /* src image load */
   useEffect(() => {
     (async () => {
-      const image = await loadImage("/assets/shinju_256.jpeg");
-      const ctxIn = getContext(canvasInRef.current, image.width, image.height);
-      ctxIn.drawImage(image, 0, 0);
-      setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
+      // canvasInRef.current!.width = 0;
+      // canvasInRef.current!.width = 0;
+      // const image = await loadImage("/assets/shinju_256.jpeg");
+      //const ctxIn = getContext(canvasInRef.current, image.width, image.height);
+      // ctxIn.drawImage(image, 0, 0);
+      // setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
     })();
   }, []);
 
@@ -94,16 +97,45 @@ const HomeComponent = () => {
     const ctxIn = getContext(canvasInRef.current, image.width, image.height);
     ctxIn.drawImage(image, 0, 0);
     setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
+    setIsImageUpload(true);
   };
 
   return (
     <>
-      <div className="flex justify-center m-4">
-        <button onClick={handleTransform} className="bg-slate-200 border-2 pr-4 pl-4 rounded">
-          変換
-        </button>
-        <input type="file" onChange={handleImageUpload}></input>
+      <div className="flex justify-center">
+        <div className="w-[30vw] h-[30vw] relative">
+          <canvas
+            id="canvas-in"
+            className="h-full absolute border-dashed border-2 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2"
+            ref={canvasInRef}
+          ></canvas>
+          {!isImageUpload && (
+            <div className="absolute w-full top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
+              画像を選択してください
+            </div>
+          )}
+        </div>
       </div>
+      <div className="flex justify-center mt-1">
+        <label className="block">
+          <span className="sr-only">Choose File</span>
+          <input
+            type="file"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            onChange={handleImageUpload}
+          />
+        </label>
+      </div>
+
+      <div className="flex justify-center mt-2">
+        <button onClick={handleTransform} className="bg-slate-200 border-2 p-2 pr-4 pl-4 rounded">
+          <div className="flex items-center">
+            変換する
+            <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
+          </div>
+        </button>
+      </div>
+
       <div className=" m-4">
         <div className="text-center">
           <span className="m-2">size:</span>
@@ -117,12 +149,6 @@ const HomeComponent = () => {
           />
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="border-2">
-          <canvas id="canvas-in" className="w-[30vh]" ref={canvasInRef}></canvas>
-        </div>
-      </div>
-      <div className="flex justify-center m-2">ブロックを選択</div>
       <div className="flex justify-center">
         <div className="">
           {Array.from(blockGroupMap).map((blockGroup) => (
