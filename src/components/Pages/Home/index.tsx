@@ -1,30 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
-import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
 import loadImage from "src/functions/utils/loadImage";
 import { useBlockDBContext } from "src/store/useBlockDB";
-import Link from "next/link";
-import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/utils/getContext";
-import getBufferCanvas from "src/functions/utils/getBufferCanvas";
 import PreviewModal from "src/components/Organisms/PreviewModal";
 import BlockButton from "src/components/Atoms/BlockButton";
-import { group } from "console";
-// import resizeImageData from "src/functions/ImageTrans/resizeImageData";
 import resizeImageData from "resize-image-data";
-
-const modalStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    padding: "7px",
-    marginRight: "-50%",
-    borderRadius: "8px",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import loadImageFromFile from "src/functions/utils/loadImageFromFile";
 
 const HomeComponent = () => {
   const initBlockUseFlag = () => {
@@ -51,10 +33,8 @@ const HomeComponent = () => {
     return groupButtonFlag;
   };
 
-  const srcImageWidth = 256;
-  const srcImageHeight = 366;
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
-  const canvasInRef = useRef(null);
+  const canvasInRef = useRef<HTMLCanvasElement>(null);
   const { blockDB } = useBlockDBContext();
   const { blockImageDataDict } = useBlockDBContext();
 
@@ -67,12 +47,11 @@ const HomeComponent = () => {
 
   /* src image load */
   useEffect(() => {
-    const ctxIn = getContext(canvasInRef.current, srcImageWidth, srcImageHeight);
-    ctxIn.imageSmoothingEnabled = false;
     (async () => {
       const image = await loadImage("/assets/shinju_256.jpeg");
+      const ctxIn = getContext(canvasInRef.current, image.width, image.height);
       ctxIn.drawImage(image, 0, 0);
-      setSrc(ctxIn.getImageData(0, 0, srcImageWidth, srcImageHeight));
+      setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
     })();
   }, []);
 
@@ -108,12 +87,22 @@ const HomeComponent = () => {
     setGroupButtonFlag((map) => new Map(map.set(group, !beforeState)));
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const imageFile = (target.files as FileList)[0];
+    const image = await loadImageFromFile(imageFile);
+    const ctxIn = getContext(canvasInRef.current, image.width, image.height);
+    ctxIn.drawImage(image, 0, 0);
+    setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
+  };
+
   return (
     <>
       <div className="flex justify-center m-4">
         <button onClick={handleTransform} className="bg-slate-200 border-2 pr-4 pl-4 rounded">
           変換
         </button>
+        <input type="file" onChange={handleImageUpload}></input>
       </div>
       <div className=" m-4">
         <div className="text-center">
@@ -130,7 +119,7 @@ const HomeComponent = () => {
       </div>
       <div className="flex justify-center">
         <div className="border-2">
-          <canvas id="canvas-in" ref={canvasInRef}></canvas>
+          <canvas id="canvas-in" className="w-[30vh]" ref={canvasInRef}></canvas>
         </div>
       </div>
       <div className="flex justify-center m-2">ブロックを選択</div>
