@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/utils/getContext";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
-import CrossButton from "src/components/Atoms/CrossButton.tsx";
+import CrossButton from "src/components/Common/CrossButton.tsx";
 import { CoreTransformationContext } from "typescript";
 import { calcRBCoordinate, validInput } from "src/functions/coordinate/cornerCoordinate";
 import generateCommand from "src/functions/command/generateCommand";

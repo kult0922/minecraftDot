@@ -1,8 +1,8 @@
 import Link from "next/link";
-import SideToolBar from "src/components/Organisms/SideToolBar";
-import EditorBoard from "src/components/Organisms/EditorBoard";
-import BlockPalette from "src/components/Organisms/BlockPalette";
-import TopToolBar from "src/components/Organisms/TopToolBar";
+import SideToolBar from "src/components/Pages/Editor/SideToolBar";
+import EditorBoard from "src/components/Pages/Editor/EditorBoard";
+import BlockPalette from "src/components/Pages/Editor/BlockPalette";
+import TopToolBar from "src/components/Pages/Editor/TopToolBar";
 
 const EditorPageComponent = () => {
   return (

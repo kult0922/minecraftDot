@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/utils/getContext";
 import getBufferCanvas from "src/functions/utils/getBufferCanvas";
-import CrossButton from "src/components/Atoms/CrossButton.tsx";
+import CrossButton from "src/components/Common/CrossButton.tsx";
 
 interface Props {
   blueprint: string[][];

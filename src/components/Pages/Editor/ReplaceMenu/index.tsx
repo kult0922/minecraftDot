@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import CrossButton from "src/components/Atoms/CrossButton.tsx";
+import CrossButton from "src/components/Common/CrossButton.tsx";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";

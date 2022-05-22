@@ -4,7 +4,7 @@ import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
-import BlockNameLabel from "src/components/Atoms/BlockNameLabel";
+import BlockNameLabel from "src/components/Common/BlockNameLabel";
 import { useHistoryContext } from "src/store/useHistory";
 
 const EditorBoard = () => {
