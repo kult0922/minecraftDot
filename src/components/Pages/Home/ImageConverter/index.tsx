@@ -103,37 +103,30 @@ const ImageConverter = () => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="w-[30vw] h-[30vw] relative">
-          <canvas
-            id="canvas-in"
-            className="h-full absolute border-dashed border-2 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2"
-            ref={canvasInRef}
-          ></canvas>
-          {!isImageUpload && (
-            <div className="absolute w-full top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-center">
-              画像を選択してください
-            </div>
-          )}
+        <canvas
+          id="canvas-in"
+          className={isImageUpload ? "sm:w-[30vw] w-[60vw] border-dashed border-2" : "hidden"}
+          ref={canvasInRef}
+        ></canvas>
+        <div
+          className={
+            isImageUpload
+              ? "hidden"
+              : "sm:w-[40vw] w-[80vw] sm:h-[30vw] h-[70vw] border-dashed border-2 flex items-center justify-center"
+          }
+        >
+          画像を選択してください
         </div>
       </div>
-      <div className="flex justify-center mt-1">
+      <div className="flex justify-center mt-3">
         <label className="block">
           <span className="sr-only">Choose File</span>
           <input
             type="file"
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             onChange={handleImageUpload}
           />
         </label>
-      </div>
-
-      <div className="flex justify-center mt-2">
-        <button onClick={handleTransform} className="bg-slate-200 border-2 p-2 pr-4 pl-4 rounded">
-          <div className="flex items-center">
-            変換する
-            <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
-          </div>
-        </button>
       </div>
 
       <div className=" m-4">
@@ -152,28 +145,41 @@ const ImageConverter = () => {
       <div className="flex justify-center">
         <div className="">
           {Array.from(blockGroupMap).map((blockGroup) => (
-            <div className="flex justify-start items-center" key={"select-block-row-" + blockGroup[0]}>
-              <label htmlFor={blockGroup[0]} className="">
-                <input
-                  type="checkbox"
-                  id={blockGroup[0]}
-                  onChange={() => handleGroupButtonClick(blockGroup[0])}
-                  checked={(groupButtonFlag.get(blockGroup[0]) as boolean) || false}
-                  // className="hidden peer"
-                  className="peer"
-                />
-              </label>
-              {blockGroup[1].map((blockBasic) => (
-                <BlockButton
-                  key={"select-block-button-" + blockBasic.javaId}
-                  checked={(blockUseFlag.get(blockBasic.javaId) as boolean) || false}
-                  handleBlockClick={handleBlockClick}
-                  blockBasic={blockBasic}
-                />
-              ))}
+            <div key={"select-block-row-" + blockGroup[0]}>
+              <div>
+                <label htmlFor={blockGroup[0]} className="">
+                  <input
+                    type="checkbox"
+                    id={blockGroup[0]}
+                    onChange={() => handleGroupButtonClick(blockGroup[0])}
+                    checked={(groupButtonFlag.get(blockGroup[0]) as boolean) || false}
+                    className="peer"
+                  />
+                </label>
+              </div>
+
+              <div className="flex justify-start flex-wrap items-center">
+                {blockGroup[1].map((blockBasic) => (
+                  <BlockButton
+                    key={"select-block-button-" + blockBasic.javaId}
+                    checked={(blockUseFlag.get(blockBasic.javaId) as boolean) || false}
+                    handleBlockClick={handleBlockClick}
+                    blockBasic={blockBasic}
+                  />
+                ))}
+              </div>
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="flex justify-center mt-12">
+        <button onClick={handleTransform} className="bg-slate-200 border-2 p-2 pr-4 pl-4 rounded">
+          <div className="flex items-center">
+            変換する
+            <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
+          </div>
+        </button>
       </div>
       <PreviewModal blueprint={blueprint} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>

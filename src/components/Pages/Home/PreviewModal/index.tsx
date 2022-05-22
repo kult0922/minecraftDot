@@ -64,17 +64,25 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <CrossButton />
           </button>
         </div>
-        <div className="w-[50vw] flex justify-center">
+        <div className="sm:w-[50vw] w-[100vw] flex justify-center">
           <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-2"></canvas>
         </div>
 
-        <div className="flex justify-around mt-4">
-          <button> 画像ダウンロード </button>
-          <button> CSVダウンロード</button>
-          <button> コマンド生成</button>
-          <Link href="/editor">
-            <a>編集する</a>
-          </Link>
+        <div className="flex flex-wrap mt-4 justify-around">
+          <div className="m-2">
+            <button> 画像ダウンロード </button>
+          </div>
+          <div className="m-2">
+            <button> CSVダウンロード</button>
+          </div>
+          <div className="m-2">
+            <button> コマンド生成</button>
+          </div>
+          <div className="m-2">
+            <Link href="/editor">
+              <a>編集する</a>
+            </Link>
+          </div>
         </div>
       </Modal>
     </>
