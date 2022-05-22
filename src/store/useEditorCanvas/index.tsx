@@ -144,13 +144,13 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     const beginY = blockY - Math.floor(size / 2);
     const endY = blockY + Math.floor(size / 2);
 
-    for (let i = beginX; i <= endX; i++) {
-      for (let j = beginY; j <= endY; j++) {
+    for (let i = beginY; i <= endY; i++) {
+      for (let j = beginX; j <= endX; j++) {
         if (insideBlueprint(i, j, blueprint)) {
           /* change canvas data */
-          minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, i * 16, j * 16);
+          minecraftImageContext.putImageData(blockImageDataDict.get(javaId)?.imageData!, j * 16, i * 16);
           /* change blueprint */
-          blueprint[j][i] = javaId;
+          blueprint[i][j] = javaId;
         }
       }
     }
