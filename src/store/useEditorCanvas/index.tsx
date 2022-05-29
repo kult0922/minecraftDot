@@ -16,8 +16,8 @@ const EditorCanvasContext = createContext(
       heightBlockNumber_: number,
       blueprint_: string[][]
     ) => void;
-    blueprint: Array<Array<string>>;
     getBlueprint: () => string[][];
+    getMinecraftImage: () => HTMLCanvasElement;
     translate: (x: number, y: number) => void;
     zoomIn: (x: number, y: number, isWheel: boolean) => void;
     zoomOut: (x: number, y: number, isWheel: boolean) => void;
@@ -244,6 +244,10 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     return blueprint;
   };
 
+  const getMinecraftImage = () => {
+    return minecraftImage;
+  };
+
   const undo = () => {
     const b = backward();
     if (b === undefined) return;
@@ -276,7 +280,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   };
 
   const value = {
-    blueprint,
+    getMinecraftImage,
     getBlueprint,
     init,
     translate,

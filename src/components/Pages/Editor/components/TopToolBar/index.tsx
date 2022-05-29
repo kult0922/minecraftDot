@@ -11,7 +11,7 @@ const TopToolBar = () => {
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
-  const { undo, redo, getBlueprint } = useEditorCanvasContext();
+  const { undo, redo, getBlueprint, getMinecraftImage } = useEditorCanvasContext();
   const { blockDB, javaId2index } = useBlockDBContext();
 
   /* modal managiment functions */
@@ -30,6 +30,14 @@ const TopToolBar = () => {
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
     link.download = "minecraftDot.csv";
+    link.click();
+  };
+
+  const handleImageDownload = () => {
+    const link = document.createElement("a");
+    const image = getMinecraftImage();
+    link.href = image.toDataURL("image/png");
+    link.download = "minecraftDot.png";
     link.click();
   };
 
@@ -57,6 +65,7 @@ const TopToolBar = () => {
             <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
           </div>
         </div>
+        <ToolButton onClick={handleImageDownload} text="画像ダウンロード" />
         <ToolButton onClick={handleCSVDownload} text="CSVダウンロード" />
         <ToolButton onClick={handleCommandModalOpen} text="コマンド生成" />
         <ToolButton onClick={handlePreviewModalOpen} text="プレビュー" />
