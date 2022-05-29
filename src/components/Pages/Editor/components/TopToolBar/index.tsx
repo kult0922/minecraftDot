@@ -3,6 +3,7 @@ import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import CommandModal from "../CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
 import ReplaceModal from "../ReplaceMenu";
+import ToolButton from "./ToolButton.tsx";
 
 const TopToolBar = () => {
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
@@ -39,20 +40,15 @@ const TopToolBar = () => {
         <button onClick={handleRedo}>
           <span className="material-symbols-outlined flex items-center">redo</span>
         </button>
+
         <div className="relative">
-          <button onClick={handleReplaceMenuOpen}>
-            <span className="flex items-center border-2 rounded bg-slate-200">置き換え</span>
-          </button>
+          <ToolButton onClick={handleReplaceMenuOpen} text="置き換え" />
           <div className="absolute top-7 left-0">
             <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
           </div>
         </div>
-        <button onClick={handleCommandModalOpen}>
-          <span className="flex items-center border-2 rounded bg-slate-200">コマンド生成</span>
-        </button>
-        <button onClick={handlePreviewModalOpen}>
-          <span className="flex items-center border-2 rounded bg-slate-200">プレビュー</span>
-        </button>
+        <ToolButton onClick={handleCommandModalOpen} text="コマンド生成" />
+        <ToolButton onClick={handlePreviewModalOpen} text="プレビュー" />
 
         <EditorPreviewModal
           isModalOpen={isPreviewModalOpen}

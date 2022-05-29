@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import ToolButton from "src/components/Common/ToolButton";
+import ToolButton from "src/components/Pages/Editor/components/SideToolBar/ToolButton";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import PenSizeChange from "../PenSIzeChange";
