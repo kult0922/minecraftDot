@@ -1,4 +1,6 @@
 import { useState } from "react";
+import createCsv from "src/functions/createCsv";
+import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import CommandModal from "../CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
@@ -9,8 +11,8 @@ const TopToolBar = () => {
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
-  const { undo, redo } = useEditorCanvasContext();
-  const { getBlueprint } = useEditorCanvasContext();
+  const { undo, redo, getBlueprint } = useEditorCanvasContext();
+  const { blockDB, javaId2index } = useBlockDBContext();
 
   /* modal managiment functions */
   const handleReplaceMenuOpen = () => {
@@ -21,6 +23,14 @@ const TopToolBar = () => {
   };
   const handleCommandModalOpen = () => {
     setIsCommandModalOpen(true);
+  };
+  const handleCSVDownload = () => {
+    const csv = createCsv(getBlueprint(), blockDB, javaId2index);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "minecraftDot.csv";
+    link.click();
   };
 
   /* hidtory managiment functions */
@@ -47,6 +57,7 @@ const TopToolBar = () => {
             <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
           </div>
         </div>
+        <ToolButton onClick={handleCSVDownload} text="CSVダウンロード" />
         <ToolButton onClick={handleCommandModalOpen} text="コマンド生成" />
         <ToolButton onClick={handlePreviewModalOpen} text="プレビュー" />
 
