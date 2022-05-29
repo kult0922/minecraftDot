@@ -1,5 +1,5 @@
-import { getAxis } from "../coordinate/cornerCoordinate";
-import get2DArray from "../utils/get2DArray";
+import { getAxis } from "./cornerCoordinate";
+import get2DArray from "../../../../functions/get2DArray";
 
 const generateFillCommand = (blockId: string, coordinate1: Coordinate3D, coordinate2: Coordinate3D) => {
   const fullCommand =

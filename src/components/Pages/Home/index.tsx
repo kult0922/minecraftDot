@@ -1,4 +1,4 @@
-import ImageConverter from "./ImageConverter";
+import ImageConverter from "./components/ImageConverter";
 
 const HomeComponent = () => {
   return (

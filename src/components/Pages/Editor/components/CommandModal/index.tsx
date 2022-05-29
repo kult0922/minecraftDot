@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
+import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import Modal from "react-modal";
 import { useBlueprintContext } from "src/store/useBlueprint";
-import getContext from "src/functions/utils/getContext";
-import getBufferCanvas from "src/functions/utils/getBufferCanvas";
+import getContext from "src/functions/getContext";
+import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
-import { CoreTransformationContext } from "typescript";
-import { calcRBCoordinate, validInput } from "src/functions/coordinate/cornerCoordinate";
-import generateCommand from "src/functions/command/generateCommand";
+import { calcRBCoordinate, validInput } from "src/components/Pages/Editor/functions/cornerCoordinate";
+import generateCommand from "src/components/Pages/Editor/functions/generateCommand";
+import generatePackZip from "../../functions/generatePackZip";
+import { saveAs } from "file-saver";
 
 interface Props {
   blueprint: string[][];
@@ -101,6 +102,19 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const RT = { x: cornerCoordinates.rtx, y: cornerCoordinates.rty, z: cornerCoordinates.rtz };
     const LB = { x: cornerCoordinates.lbx, y: cornerCoordinates.lby, z: cornerCoordinates.lbz };
     console.log(generateCommand(blueprint, LT, RT, LB));
+
+    const packZip = generatePackZip([generateCommand(blueprint, LT, RT, LB)], "java");
+
+    // zip download
+    packZip.generateAsync({ type: "blob" }).then(
+      function (blob) {
+        // 1) generate the
+        saveAs(blob, "minecraftDot.zip");
+      },
+      function (err) {
+        console.log("zip download error", err);
+      }
+    );
   };
 
   if (blueprint === undefined || blueprint.length === 0) return <></>;

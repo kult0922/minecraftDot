@@ -1,5 +1,5 @@
-import get2DArray from "../utils/get2DArray";
-import { t } from "../utils/t";
+import get2DArray from "src/functions/get2DArray";
+import { t } from "src/functions/t";
 
 /*
 const t = (x: number, y: number, c: number) => {

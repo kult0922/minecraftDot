@@ -1,4 +1,4 @@
-import { t } from "../utils/t";
+import { t } from "../../../../functions/t";
 
 const geenrateImageFromBlueprint = (
   blueprint: Array<Array<string>>,

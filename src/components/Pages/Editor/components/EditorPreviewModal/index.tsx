@@ -1,13 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
-import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
-import loadImage from "src/functions/utils/loadImage";
+import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import Modal from "react-modal";
 import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
-import getContext from "src/functions/utils/getContext";
-import getBufferCanvas from "src/functions/utils/getBufferCanvas";
+import getContext from "src/functions/getContext";
+import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
 
 interface Props {
@@ -29,10 +27,12 @@ const modalStyles = {
   },
 };
 
-const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef(null);
+  const mainCanvasWidth = 1000;
+  const mainCanvasHeight = 1000;
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -45,8 +45,8 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const bufferCanvas = getBufferCanvas(minecraftImage, minecraftImage.width, minecraftImage.height);
 
     /* output image */
-    const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
-    mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
+    const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
+    mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
     setInitBlueprint(blueprint);
   };
 
@@ -64,29 +64,12 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <CrossButton />
           </button>
         </div>
-        <div className="sm:w-[50vw] w-[100vw] flex justify-center">
+        <div className="w-[90vw] flex justify-center">
           <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-2"></canvas>
-        </div>
-
-        <div className="flex flex-wrap mt-4 justify-around">
-          <div className="m-2">
-            <button> 画像ダウンロード </button>
-          </div>
-          <div className="m-2">
-            <button> CSVダウンロード</button>
-          </div>
-          <div className="m-2">
-            <button> コマンド生成</button>
-          </div>
-          <div className="m-2">
-            <Link href="/editor">
-              <a>編集する</a>
-            </Link>
-          </div>
         </div>
       </Modal>
     </>
   );
 };
 
-export default PreviewModal;
+export default EditorPreviewModal;

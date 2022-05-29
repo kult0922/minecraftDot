@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import generateBlueprint from "src/functions/ImageTrans/generateBluePrint";
-import loadImage from "src/functions/utils/loadImage";
+import generateBlueprint from "src/components/Pages/Home/functions/generateBluePrint";
 import { useBlockDBContext } from "src/store/useBlockDB";
-import getContext from "src/functions/utils/getContext";
-import PreviewModal from "src/components/Pages/Home/PreviewModal";
+import getContext from "src/functions/getContext";
+import PreviewModal from "src/components/Pages/Home/components/PreviewModal";
 import BlockButton from "src/components/Common/BlockButton";
 import resizeImageData from "resize-image-data";
-import loadImageFromFile from "src/functions/utils/loadImageFromFile";
+import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
 
 const ImageConverter = () => {
   const initBlockUseFlag = () => {

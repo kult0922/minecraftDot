@@ -1,8 +1,8 @@
-import { createContext, useState, useContext, ReactNode } from "react";
-import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
-import getSameBlockCoordinates from "src/functions/ImageTrans/getSameBlockCoordinates";
-import getTargetCoordinates from "src/functions/ImageTrans/getTargetCoordinates";
-import getBufferCanvas from "src/functions/utils/getBufferCanvas";
+import { createContext, useContext, ReactNode } from "react";
+import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
+import getSameBlockCoordinates from "src/store/useEditorCanvas/functions/getSameBlockCoordinates";
+import getTargetCoordinates from "src/store/useEditorCanvas/functions/getTargetCoordinates";
+import getBufferCanvas from "src/functions/getBufferCanvas";
 import { useBlockDBContext } from "../useBlockDB";
 import { useHistoryContext } from "../useHistory";
 

@@ -1,4 +1,4 @@
-import rgb2hsv from "src/functions/ImageTrans/rgb2hsv";
+import rgb2hsv from "src/functions/rgb2hsv";
 
 test("rgb2hsv unit test", () => {
   const { H, S, V } = rgb2hsv(189, 69, 179);

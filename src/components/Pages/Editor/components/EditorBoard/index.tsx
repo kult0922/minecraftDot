@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import geenrateImageFromBlueprint from "src/functions/ImageTrans/generateImageFromBlueprint";
+import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import { useBlockDBContext } from "src/store/useBlockDB";

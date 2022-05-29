@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, ReactNode } from "react";
-import loadImage from "src/functions/utils/loadImage";
-import { t } from "src/functions/utils/t";
+import loadImage from "src/functions/loadImage";
+import { t } from "src/functions/t";
 
 /* block data import */
 import wool from "src/json/wool.json";
@@ -10,7 +10,7 @@ import ore from "src/json/ore.json";
 import concrete from "src/json/concrete.json";
 import stone from "src/json/stone.json";
 import air from "src/json/air.json";
-import rgb2hsv from "src/functions/ImageTrans/rgb2hsv";
+import rgb2hsv from "src/functions/rgb2hsv";
 
 const BlockDBContext = createContext(
   {} as {

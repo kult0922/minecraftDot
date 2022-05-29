@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode, useCallback } from "react";
-import copy2DArray from "src/functions/utils/copy2DArray";
+import copy2DArray from "src/functions/copy2DArray";
 
 const HistoryContext = createContext(
   {} as {
