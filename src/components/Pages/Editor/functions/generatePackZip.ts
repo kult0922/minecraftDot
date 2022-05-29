@@ -1,3 +1,5 @@
+import JSZip from "jszip";
+
 const generateMcMeta = () => {
   const mcmeta = {
     pack: {
@@ -48,7 +50,7 @@ const generateUuid = (): string => {
 };
 const generatePackZip = (commandScripts: string[], edition: string) => {
   // zip化のためのライブラリ
-  const JSZip = require("jszip");
+  // const JSZip = require("jszip");
   const zip = new JSZip();
   // functionのフォルダパス
   let functionsPath = "";
@@ -61,16 +63,16 @@ const generatePackZip = (commandScripts: string[], edition: string) => {
     // manifest.jsonの作成
     const manifest = generateManifest("dot_pack", "discription", uuid1, uuid2);
     // フォルダの作成
-    zip.folder("dot_pack").file("manifest.json", manifest);
-    zip.folder("dot_pack").folder("functions");
+    zip.folder("dot_pack")?.file("manifest.json", manifest);
+    zip.folder("dot_pack")?.folder("functions");
     functionsPath = "dot_pack/functions/";
   } else {
     // Japa Edition
     // pack.mcmetaの作成
     const mcmeta = generateMcMeta();
     // フォルダの作成
-    zip.folder("dot").file("pack.mcmeta", mcmeta);
-    zip.folder("dot").folder("data").folder("dot_pack").folder("functions");
+    zip.folder("dot")?.file("pack.mcmeta", mcmeta);
+    zip.folder("dot")?.folder("data")?.folder("dot_pack")?.folder("functions");
     functionsPath = "dot/data/dot_pack/functions/";
   }
   // functionsの作成

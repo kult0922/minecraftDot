@@ -107,11 +107,10 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
 
     // zip download
     packZip.generateAsync({ type: "blob" }).then(
-      function (blob) {
-        // 1) generate the
+      function (blob: Blob) {
         saveAs(blob, "minecraftDot.zip");
       },
-      function (err) {
+      function (err: any) {
         console.log("zip download error", err);
       }
     );
