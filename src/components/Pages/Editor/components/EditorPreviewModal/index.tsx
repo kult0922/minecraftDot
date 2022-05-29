@@ -1,8 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import Modal from "react-modal";
-import Link from "next/link";
 import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
@@ -64,7 +63,7 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
             <CrossButton />
           </button>
         </div>
-        <div className="w-[90vw] flex justify-center">
+        <div className="w-[50vw] flex justify-center">
           <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-2"></canvas>
         </div>
       </Modal>
