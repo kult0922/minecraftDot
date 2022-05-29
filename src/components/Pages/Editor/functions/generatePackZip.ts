@@ -34,7 +34,7 @@ const generateManifest = (name: string, discription: string, uuid1: string, uuid
 };
 
 const generateUuid = (): string => {
-  // const FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+  // FORMAT: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
   const chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
   for (let i = 0, len = chars.length; i < len; i++) {
     switch (chars[i]) {
@@ -50,7 +50,6 @@ const generateUuid = (): string => {
 };
 const generatePackZip = (commandScripts: string[], edition: string) => {
   // zip化のためのライブラリ
-  // const JSZip = require("jszip");
   const zip = new JSZip();
   // functionのフォルダパス
   let functionsPath = "";

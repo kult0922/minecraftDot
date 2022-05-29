@@ -42,6 +42,7 @@ const modalStyles = {
 };
 
 const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+  const [isCommandReady, setIsCommandReady] = useState(false);
   const [RBCoordinate, setRBCoordinate] = useState<Coordinate3D>({ x: 0, y: 0, z: 0 });
   const [cornerCoordinates, setCornerCoordinates] = useState<CornerCoordinate>({
     ltx: 0,
@@ -62,6 +63,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const mainCanvasHeight = 1000;
 
   const tryComplement = (coordinate: CornerCoordinate, expectedWidth: number, expectedHeight: number) => {
+    setIsCommandReady(false);
     const c1: Coordinate3D = { x: coordinate.ltx, y: coordinate.lty, z: coordinate.ltz };
     const c2: Coordinate3D = { x: coordinate.rtx, y: coordinate.rty, z: coordinate.rtz };
     const c3: Coordinate3D = { x: coordinate.lbx, y: coordinate.lby, z: coordinate.lbz };
@@ -69,6 +71,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     if (validInput(c1, c2, c3, expectedWidth, expectedHeight)) {
       /* if coordinate is valid, show RB coordinate */
       setRBCoordinate(calcRBCoordinate(c1, c2, c3));
+      setIsCommandReady(true);
     }
   };
 
@@ -173,7 +176,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             </div>
           </div>
 
-          <div className="w-[50vw] flex justify-center">
+          <div className="w-[35vw] flex justify-center">
             <canvas id="canvas-out" ref={mainCanvas} className="w-[100%] border-2"></canvas>
           </div>
 
@@ -218,8 +221,14 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
-          <button onClick={handleGenerateCommand}>コマンド生成</button>
+        <div className="flex justify-center mt-2">
+          <button
+            onClick={handleGenerateCommand}
+            className="p-1 rounded-md disabled:bg-slate-200 disabled:text-slate-300 bg-slate-600 text-white"
+            disabled={!isCommandReady}
+          >
+            コマンド生成
+          </button>
         </div>
       </Modal>
     </>
