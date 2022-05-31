@@ -39,3 +39,5 @@ type Mode =
   | "replaceToPicker";
 
 type Axios = "x" | "y" | "z";
+
+type Edition = "java" | "bedrock";

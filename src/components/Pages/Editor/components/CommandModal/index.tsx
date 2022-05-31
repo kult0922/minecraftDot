@@ -43,6 +43,7 @@ const modalStyles = {
 
 const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const [isCommandReady, setIsCommandReady] = useState(false);
+  const [editon, setEdition] = useState<Edition>("java");
   const [RBCoordinate, setRBCoordinate] = useState<Coordinate3D>({ x: 0, y: 0, z: 0 });
   const [cornerCoordinates, setCornerCoordinates] = useState<CornerCoordinate>({
     ltx: 0,
@@ -57,7 +58,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   });
   // const [coodinateIsOk, setCoordinateIsOk] = useState(false);
   const { setInitBlueprint } = useBlueprintContext();
-  const { blockImageDataDict } = useBlockDBContext();
+  const { blockImageDataDict, javaId2index, blockDB } = useBlockDBContext();
   const mainCanvas = useRef(null);
   const mainCanvasWidth = 1000;
   const mainCanvasHeight = 1000;
@@ -104,9 +105,11 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const LT = { x: cornerCoordinates.ltx, y: cornerCoordinates.lty, z: cornerCoordinates.ltz };
     const RT = { x: cornerCoordinates.rtx, y: cornerCoordinates.rty, z: cornerCoordinates.rtz };
     const LB = { x: cornerCoordinates.lbx, y: cornerCoordinates.lby, z: cornerCoordinates.lbz };
-    console.log(generateCommand(blueprint, LT, RT, LB));
 
-    const packZip = generatePackZip([generateCommand(blueprint, LT, RT, LB)], "java");
+    const packZip = generatePackZip(
+      generateCommand(blueprint, javaId2index, blockDB, editon, LT, RT, LB),
+      editon
+    );
 
     // zip download
     packZip.generateAsync({ type: "blob" }).then(
@@ -134,6 +137,25 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <CrossButton />
           </button>
         </div>
+
+        <label>
+          <input
+            type="radio"
+            value="java"
+            onChange={(e) => setEdition(e.target.value as Edition)}
+            checked={editon === "java"}
+          />
+          java
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="bedrock"
+            onChange={(e) => setEdition(e.target.value as Edition)}
+            checked={editon === "bedrock"}
+          />
+          bedrock
+        </label>
 
         <div className="flex justify-center">{blueprint.length}</div>
 

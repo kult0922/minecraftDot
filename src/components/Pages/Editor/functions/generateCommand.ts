@@ -42,11 +42,22 @@ const fillVisit = (start: Coordinate, end: Coordinate, visit: Array<Array<boolea
   }
 };
 
-const generateCommand = (blueprint: string[][], LT: Coordinate3D, RT: Coordinate3D, LB: Coordinate3D) => {
+const generateCommand = (
+  blueprint: string[][],
+  javaId2Index: Map<string, number>,
+  blockDB: BlockBasic[],
+  edition: Edition,
+  LT: Coordinate3D,
+  RT: Coordinate3D,
+  LB: Coordinate3D
+): string[] => {
+  const bedrockCommandLimit = 10000;
   const h = blueprint.length;
   const w = blueprint[0].length;
   const visit: boolean[][] = get2DArray(h, w);
+  const commandScripts: string[] = [];
   let commandScript = "";
+  let commandLineNumber = 0;
 
   const minecraftAxiosOfX = getAxis(LT, RT);
   const minecraftAxiosOfY = getAxis(LT, LB);
@@ -55,23 +66,25 @@ const generateCommand = (blueprint: string[][], LT: Coordinate3D, RT: Coordinate
     for (let j = 0; j < w; j++) {
       if (visit[i][j]) continue;
       const javaId = blueprint[i][j];
+      const blockId = edition === "java" ? javaId : blockDB[javaId2Index.get(javaId)!].bedrockId;
+
       let horizonBlockNumber = 0;
       let verticalBlockNumber = 0;
       let rectBlockNumber = 0;
       /* horizon */
       for (let k = j; k < w; k++) {
-        if (javaId === blueprint[i][k]) horizonBlockNumber++;
+        if (blockId === blueprint[i][k]) horizonBlockNumber++;
       }
       /* vertical */
       for (let k = i; k < h; k++) {
-        if (javaId === blueprint[k][j]) verticalBlockNumber++;
+        if (blockId === blueprint[k][j]) verticalBlockNumber++;
       }
       /* rect */
       const edgeLength = Math.min(horizonBlockNumber, verticalBlockNumber);
       let isValidRect = true;
       for (let k = j; k < edgeLength; k++) {
         for (let l = j; l < edgeLength; l++) {
-          if (javaId === blueprint[i + k][j + l]) {
+          if (blockId === blueprint[i + k][j + l]) {
             rectBlockNumber++;
           } else {
             isValidRect = false;
@@ -95,10 +108,17 @@ const generateCommand = (blueprint: string[][], LT: Coordinate3D, RT: Coordinate
       const start = toMinecraftCoordinate(startBlueprint, LT, minecraftAxiosOfX!, minecraftAxiosOfY!);
       const end = toMinecraftCoordinate(endBlueprint, LT, minecraftAxiosOfX!, minecraftAxiosOfY!);
       fillVisit(startBlueprint, endBlueprint, visit);
-      commandScript += generateFillCommand(javaId, start, end);
+      commandScript += generateFillCommand(blockId, start, end);
+      commandLineNumber++;
+      if (commandLineNumber === bedrockCommandLimit) {
+        commandScripts.push(commandScript);
+        commandLineNumber = 0;
+      }
     }
   }
-  return commandScript;
+
+  commandScripts.push(commandScript);
+  return commandScripts;
 };
 
 export default generateCommand;

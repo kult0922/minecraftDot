@@ -48,7 +48,7 @@ const generateUuid = (): string => {
   }
   return chars.join("");
 };
-const generatePackZip = (commandScripts: string[], edition: string) => {
+const generatePackZip = (commandScripts: string[], edition: Edition) => {
   // zip化のためのライブラリ
   const zip = new JSZip();
   // functionのフォルダパス
