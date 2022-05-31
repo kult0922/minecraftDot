@@ -11,6 +11,9 @@ import generateCommand from "src/components/Pages/Editor/functions/generateComma
 import generatePackZip from "../../functions/generatePackZip";
 import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
+import { useRouter } from "next/router";
+import en from "src/i18n/locales/en";
+import ja from "src/i18n/locales/ja";
 
 interface Props {
   blueprint: string[][];
@@ -43,6 +46,8 @@ const modalStyles = {
 };
 
 const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+  const { locale } = useRouter();
+  const t = locale === "en" ? en : ja;
   const [isCommandReady, setIsCommandReady] = useState(false);
   const [editon, setEdition] = useState<Edition>("java");
   const [RBCoordinate, setRBCoordinate] = useState<Coordinate3D>({ x: 0, y: 0, z: 0 });
@@ -143,7 +148,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
           <div className="w-fit border-2 rounded-md flex justify-center">
             <div className="">
               <EditionButton id="javaButton" selected={editon === "java"} onChange={() => setEdition("java")}>
-                Java
+                {t.JAVA_EDITION}
               </EditionButton>
             </div>
             <div className="">
@@ -152,7 +157,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
                 selected={editon === "bedrock"}
                 onChange={() => setEdition("bedrock")}
               >
-                Bedrock
+                {t.BEDROCK_EDITION}
               </EditionButton>
             </div>
           </div>
@@ -250,7 +255,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             className="p-1 rounded-md disabled:bg-slate-200 disabled:text-slate-300 bg-slate-600 text-white"
             disabled={!isCommandReady}
           >
-            コマンド生成
+            {t.COMMAND_GENERATION}
           </button>
         </div>
       </Modal>

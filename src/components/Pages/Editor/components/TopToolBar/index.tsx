@@ -6,8 +6,13 @@ import CommandModal from "../CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
 import ReplaceModal from "../ReplaceMenu";
 import ToolButton from "./ToolButton.tsx";
+import { useRouter } from "next/router";
+import ja from "src/i18n/locales/ja";
+import en from "src/i18n/locales/en";
 
 const TopToolBar = () => {
+  const { locale } = useRouter();
+  const t = locale === "en" ? en : ja;
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
@@ -25,7 +30,7 @@ const TopToolBar = () => {
     setIsCommandModalOpen(true);
   };
   const handleCSVDownload = () => {
-    const csv = createCsv(getBlueprint(), blockDB, javaId2index);
+    const csv = createCsv(getBlueprint(), blockDB, javaId2index, locale as Locale);
     const blob = new Blob([csv], { type: "text/csv" });
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
@@ -60,15 +65,15 @@ const TopToolBar = () => {
         </button>
 
         <div className="relative">
-          <ToolButton onClick={handleReplaceMenuOpen} text="置き換え" />
+          <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
           <div className="absolute top-7 left-0">
             <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
           </div>
         </div>
-        <ToolButton onClick={handleImageDownload} text="画像ダウンロード" />
-        <ToolButton onClick={handleCSVDownload} text="CSVダウンロード" />
-        <ToolButton onClick={handleCommandModalOpen} text="コマンド生成" />
-        <ToolButton onClick={handlePreviewModalOpen} text="プレビュー" />
+        <ToolButton onClick={handleImageDownload} text={t.IMAGE_DOWNLOAD} />
+        <ToolButton onClick={handleCSVDownload} text={t.CSV_DOWNLOAD} />
+        <ToolButton onClick={handleCommandModalOpen} text={t.COMMAND_GENERATION} />
+        <ToolButton onClick={handlePreviewModalOpen} text={t.PREVIEW} />
 
         <EditorPreviewModal
           isModalOpen={isPreviewModalOpen}

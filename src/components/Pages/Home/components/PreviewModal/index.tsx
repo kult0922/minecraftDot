@@ -7,6 +7,9 @@ import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
+import ja from "src/i18n/locales/ja";
+import en from "src/i18n/locales/en";
+import { useRouter } from "next/router";
 
 interface Props {
   blueprint: string[][];
@@ -28,6 +31,8 @@ const modalStyles = {
 };
 
 const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+  const { locale } = useRouter();
+  const t = locale === "en" ? en : ja;
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef(null);
@@ -68,17 +73,17 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
 
         <div className="flex flex-wrap mt-4 justify-around">
           <div className="m-2">
-            <button> 画像ダウンロード </button>
+            <button> {t.IMAGE_DOWNLOAD} </button>
           </div>
           <div className="m-2">
-            <button> CSVダウンロード</button>
+            <button> {t.CSV_DOWNLOAD} </button>
           </div>
           <div className="m-2">
-            <button> コマンド生成</button>
+            <button> {t.COMMAND_GENERATION}</button>
           </div>
           <div className="m-2">
             <Link href="/editor">
-              <a>編集する</a>
+              <a>{t.EDIT}</a>
             </Link>
           </div>
         </div>

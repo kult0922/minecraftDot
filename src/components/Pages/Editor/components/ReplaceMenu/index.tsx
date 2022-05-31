@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from "next/router";
 import CrossButton from "src/components/Common/CrossButton.tsx";
+import en from "src/i18n/locales/en";
+import ja from "src/i18n/locales/ja";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
@@ -10,6 +13,8 @@ interface Props {
 }
 
 const ReplaceMenu = ({ isOpen, setIsOpen }: Props) => {
+  const { locale } = useRouter();
+  const t = locale === "en" ? en : ja;
   const close = () => {
     setIsOpen(false);
   };
@@ -52,7 +57,7 @@ const ReplaceMenu = ({ isOpen, setIsOpen }: Props) => {
             </div>
           </div>
           <div className="flex justify-center mt-2">
-            <button onClick={handleReplace}>置き換え</button>
+            <button onClick={handleReplace}>{t.REPLACE}</button>
           </div>
         </div>
       )}

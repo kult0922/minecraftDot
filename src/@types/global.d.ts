@@ -41,3 +41,4 @@ type Mode =
 type Axios = "x" | "y" | "z";
 
 type Edition = "java" | "bedrock";
+type Locale = "en" | "ja";

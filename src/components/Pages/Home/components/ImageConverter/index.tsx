@@ -6,8 +6,14 @@ import PreviewModal from "src/components/Pages/Home/components/PreviewModal";
 import BlockButton from "src/components/Common/BlockButton";
 import resizeImageData from "resize-image-data";
 import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
+import { useRouter } from "next/router";
+import ja from "src/i18n/locales/ja";
+import en from "src/i18n/locales/en";
 
 const ImageConverter = () => {
+  const { locale } = useRouter();
+  const t = locale === "en" ? en : ja;
+
   const initBlockUseFlag = () => {
     const blockUseFlag = new Map<string, Boolean>();
     for (const blockBasic of blockDB) {
@@ -114,12 +120,12 @@ const ImageConverter = () => {
               : "sm:w-[40vw] w-[80vw] sm:h-[30vw] h-[70vw] border-dashed border-2 flex items-center justify-center"
           }
         >
-          画像を選択してください
+          {t.IMAGE_SELECT}
         </div>
       </div>
       <div className="flex justify-center mt-3">
         <label className="block">
-          <span className="sr-only">Choose File</span>
+          <span className="sr-only">{t.IMAGE_SELECT_BUTTON}</span>
           <input
             type="file"
             className="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
@@ -130,7 +136,7 @@ const ImageConverter = () => {
 
       <div className=" m-4">
         <div className="text-center">
-          <span className="m-2">size:</span>
+          <span className="m-2">{t.SIZE}:</span>
           <input
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setOutSize(Number(event.target.value));
@@ -175,7 +181,7 @@ const ImageConverter = () => {
       <div className="flex justify-center mt-12">
         <button onClick={handleTransform} className="bg-slate-200 border-2 p-2 pr-4 pl-4 rounded">
           <div className="flex items-center">
-            変換する
+            {t.CONVERT_BUTTON}
             <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
           </div>
         </button>

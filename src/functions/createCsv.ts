@@ -1,10 +1,20 @@
-const createNmaeTable = (blueprint: string[][], blockDB: BlockBasic[], javaId2index: Map<string, number>) => {
+const createNmaeTable = (
+  blueprint: string[][],
+  blockDB: BlockBasic[],
+  javaId2index: Map<string, number>,
+  locale: Locale
+) => {
   const nameTable = [];
 
   for (let y = 0; y < blueprint.length; y += 1) {
     const row = [];
     for (let x = 0; x < blueprint[0].length; x += 1) {
-      row.push(blockDB[javaId2index.get(blueprint[y][x])!].jname);
+      const blockName =
+        locale === "ja"
+          ? blockDB[javaId2index.get(blueprint[y][x])!].jname
+          : blockDB[javaId2index.get(blueprint[y][x])!].javaId;
+
+      row.push(blockName);
     }
     nameTable.push(row);
   }
@@ -28,8 +38,13 @@ const totalUpBlock = (blueprint: string[][]) => {
   return blockAmount;
 };
 
-const createCsv = (blueprint: string[][], blockData: BlockBasic[], javaId2index: Map<string, number>) => {
-  const nameTable = createNmaeTable(blueprint, blockData, javaId2index);
+const createCsv = (
+  blueprint: string[][],
+  blockData: BlockBasic[],
+  javaId2index: Map<string, number>,
+  locale: Locale
+) => {
+  const nameTable = createNmaeTable(blueprint, blockData, javaId2index, locale);
   const blockAmount = totalUpBlock(blueprint);
 
   // top row
@@ -58,7 +73,10 @@ const createCsv = (blueprint: string[][], blockData: BlockBasic[], javaId2index:
   csv += "\n";
   // block amount csv
   for (const [javaId, amount] of blockAmount.entries()) {
-    const blockName = blockData[javaId2index.get(javaId)!].jname;
+    const blockName =
+      locale === "ja"
+        ? blockData[javaId2index.get(javaId)!].jname
+        : blockData[javaId2index.get(javaId)!].javaId;
     csv += " ";
     csv += ",";
     csv += blockName;
