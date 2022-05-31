@@ -136,7 +136,7 @@ const ImageConverter = () => {
 
       <div className=" m-4">
         <div className="text-center">
-          <span className="m-2">{t.SIZE}:</span>
+          <span className="m-2">{t.WIDTH_BLOCK}:</span>
           <input
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setOutSize(Number(event.target.value));

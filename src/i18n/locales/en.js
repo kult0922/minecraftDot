@@ -2,7 +2,7 @@
 export default {
   IMAGE_SELECT: "Please choose an image",
   IMAGE_SELECT_BUTTON: "choose an image",
-  SIZE: "size",
+  WIDTH_BLOCK: "Number of horizontal blocks",
   CONVERT_BUTTON: "convert",
   IMAGE_DOWNLOAD: "Download image",
   CSV_DOWNLOAD: "Download csv",

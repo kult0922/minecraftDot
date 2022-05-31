@@ -3,7 +3,7 @@ export default {
   // Home
   IMAGE_SELECT: "画像を選択してください",
   IMAGE_SELECT_BUTTON: "画像を選択",
-  SIZE: "サイズ",
+  WIDTH_BLOCK: "横幅のブロック数",
   CONVERT_BUTTON: "変換する",
   IMAGE_DOWNLOAD: "画像ダウンロード",
   CSV_DOWNLOAD: "CSVダウンロード",
