@@ -140,7 +140,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
         </div>
 
         <div className="flex justify-center">
-          <div className="w-fit border-2 flex justify-center">
+          <div className="w-fit border-2 rounded-md flex justify-center">
             <div className="">
               <EditionButton id="javaButton" selected={editon === "java"} onChange={() => setEdition("java")}>
                 Java
