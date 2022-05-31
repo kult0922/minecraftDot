@@ -10,6 +10,7 @@ import { calcRBCoordinate, validInput } from "src/components/Pages/Editor/functi
 import generateCommand from "src/components/Pages/Editor/functions/generateCommand";
 import generatePackZip from "../../functions/generatePackZip";
 import { saveAs } from "file-saver";
+import EditionButton from "./EditionButton";
 
 interface Props {
   blueprint: string[][];
@@ -132,30 +133,30 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
         onAfterOpen={afterOpenModal}
         style={modalStyles}
       >
-        <div className="flex justify-end mb-3">
+        <div className="flex justify-end">
           <button onClick={closeModal}>
             <CrossButton />
           </button>
         </div>
 
-        <label>
-          <input
-            type="radio"
-            value="java"
-            onChange={(e) => setEdition(e.target.value as Edition)}
-            checked={editon === "java"}
-          />
-          java
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="bedrock"
-            onChange={(e) => setEdition(e.target.value as Edition)}
-            checked={editon === "bedrock"}
-          />
-          bedrock
-        </label>
+        <div className="flex justify-center">
+          <div className="w-fit border-2 flex justify-center">
+            <div className="">
+              <EditionButton id="javaButton" selected={editon === "java"} onChange={() => setEdition("java")}>
+                Java
+              </EditionButton>
+            </div>
+            <div className="">
+              <EditionButton
+                id="bedrockButton"
+                selected={editon === "bedrock"}
+                onChange={() => setEdition("bedrock")}
+              >
+                Bedrock
+              </EditionButton>
+            </div>
+          </div>
+        </div>
 
         <div className="flex justify-center">{blueprint.length}</div>
 

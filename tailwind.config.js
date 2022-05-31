@@ -2,7 +2,12 @@ module.exports = {
   mode: "jit",
   content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "m-green": "#007A3A",
+        "m-green-light": "#0FCB5B",
+      },
+    },
   },
   variants: {
     // all the following default to ['responsive']
