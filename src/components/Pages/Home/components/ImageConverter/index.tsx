@@ -9,6 +9,7 @@ import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFrom
 import { useRouter } from "next/router";
 import ja from "src/i18n/locales/ja";
 import en from "src/i18n/locales/en";
+import CommandModal from "src/components/Common/CommandModal";
 
 const ImageConverter = () => {
   const { locale } = useRouter();
@@ -45,6 +46,7 @@ const ImageConverter = () => {
 
   const [srcImage, setSrc] = useState<ImageData>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
   const [isImageUpload, setIsImageUpload] = useState(false);
   const [outSize, setOutSize] = useState(64);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
@@ -186,7 +188,17 @@ const ImageConverter = () => {
           </div>
         </button>
       </div>
-      <PreviewModal blueprint={blueprint} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <PreviewModal
+        blueprint={blueprint}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        showCommandModal={() => setIsCommandModalOpen(true)}
+      />
+      <CommandModal
+        isModalOpen={isCommandModalOpen}
+        setIsModalOpen={setIsCommandModalOpen}
+        blueprint={blueprint}
+      />
     </>
   );
 };

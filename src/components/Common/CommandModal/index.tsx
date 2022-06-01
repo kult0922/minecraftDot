@@ -8,7 +8,7 @@ import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
 import { calcRBCoordinate, validInput } from "src/components/Pages/Editor/functions/cornerCoordinate";
 import generateCommand from "src/components/Pages/Editor/functions/generateCommand";
-import generatePackZip from "../../functions/generatePackZip";
+import generatePackZip from "../../Pages/Editor/functions/generatePackZip";
 import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
 import { useRouter } from "next/router";
@@ -131,13 +131,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   if (blueprint === undefined || blueprint.length === 0) return <></>;
   return (
     <>
-      <Modal
-        isOpen={isModalOpen}
-        ariaHideApp={false}
-        onRequestClose={closeModal}
-        onAfterOpen={afterOpenModal}
-        style={modalStyles}
-      >
+      <Modal isOpen={isModalOpen} ariaHideApp={false} onAfterOpen={afterOpenModal} style={modalStyles}>
         <div className="flex justify-end">
           <button onClick={closeModal}>
             <CrossButton />

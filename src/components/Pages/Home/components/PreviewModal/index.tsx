@@ -10,11 +10,14 @@ import CrossButton from "src/components/Common/CrossButton.tsx";
 import ja from "src/i18n/locales/ja";
 import en from "src/i18n/locales/en";
 import { useRouter } from "next/router";
+import { useEditorCanvasContext } from "src/store/useEditorCanvas";
+import createCsv from "src/functions/createCsv";
 
 interface Props {
   blueprint: string[][];
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
+  showCommandModal: () => void;
 }
 
 const modalStyles = {
@@ -30,12 +33,13 @@ const modalStyles = {
   },
 };
 
-const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
+const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal }: Props) => {
   const { locale } = useRouter();
+  const { blockDB, javaId2index } = useBlockDBContext();
   const t = locale === "en" ? en : ja;
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
-  const mainCanvas = useRef(null);
+  const mainCanvas = useRef<HTMLCanvasElement>(null);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -51,6 +55,28 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
     mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
     setInitBlueprint(blueprint);
+  };
+
+  const handleImageDownload = () => {
+    const link = document.createElement("a");
+    const image = mainCanvas.current!;
+    link.href = image.toDataURL("image/png");
+    link.download = "minecraftDot.png";
+    link.click();
+  };
+
+  const handleCSVDownload = () => {
+    const csv = createCsv(blueprint, blockDB, javaId2index, locale as Locale);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "minecraftDot.csv";
+    link.click();
+  };
+
+  const handleCommandGeneration = () => {
+    showCommandModal();
+    closeModal();
   };
 
   return (
@@ -73,13 +99,13 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
 
         <div className="flex flex-wrap mt-4 justify-around">
           <div className="m-2">
-            <button> {t.IMAGE_DOWNLOAD} </button>
+            <button onClick={handleImageDownload}> {t.IMAGE_DOWNLOAD} </button>
           </div>
           <div className="m-2">
-            <button> {t.CSV_DOWNLOAD} </button>
+            <button onClick={handleCSVDownload}> {t.CSV_DOWNLOAD} </button>
           </div>
           <div className="m-2">
-            <button> {t.COMMAND_GENERATION}</button>
+            <button onClick={handleCommandGeneration}> {t.COMMAND_GENERATION}</button>
           </div>
           <div className="m-2">
             <Link href="/editor">
