@@ -53,18 +53,6 @@ const ImageConverter = () => {
   const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag());
   const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag);
 
-  /* src image load */
-  useEffect(() => {
-    (async () => {
-      // canvasInRef.current!.width = 0;
-      // canvasInRef.current!.width = 0;
-      // const image = await loadImage("/assets/shinju_256.jpeg");
-      //const ctxIn = getContext(canvasInRef.current, image.width, image.height);
-      // ctxIn.drawImage(image, 0, 0);
-      // setSrc(ctxIn.getImageData(0, 0, image.width, image.height));
-    })();
-  }, []);
-
   const handleTransform = async () => {
     if (srcImage === undefined) return;
     const useBlockImageDataDict = new Map<string, BlockImageData>();
@@ -112,14 +100,14 @@ const ImageConverter = () => {
       <div className="flex justify-center">
         <canvas
           id="canvas-in"
-          className={isImageUpload ? "sm:w-[30vw] w-[60vw] border-dashed border-2" : "hidden"}
+          className={isImageUpload ? "sm:w-[30vw] w-[60vw] border-dashed border-white border-2" : "hidden"}
           ref={canvasInRef}
         ></canvas>
         <div
           className={
             isImageUpload
               ? "hidden"
-              : "sm:w-[40vw] w-[80vw] sm:h-[30vw] h-[70vw] border-dashed border-2 flex items-center justify-center"
+              : "sm:w-[40vw] w-[80vw] sm:h-[30vw] h-[70vw] bg-neutral-900 border-dashed border-2 border-white flex items-center justify-center"
           }
         >
           {t.IMAGE_SELECT}
@@ -130,7 +118,8 @@ const ImageConverter = () => {
           <span className="sr-only">{t.IMAGE_SELECT_BUTTON}</span>
           <input
             type="file"
-            className="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="block text-sm file:mr-4 file:py-2 file:px-4 cursor-pointer
+            file:border-0 file:text-sm file:font-semibold file:bg-m-green file:text-white hover:file:bg-m-green-light"
             onChange={handleImageUpload}
           />
         </label>
@@ -145,12 +134,12 @@ const ImageConverter = () => {
             }}
             defaultValue={64}
             type="number"
-            className="border-2 text-center w-24"
+            className="text-center w-24 bg-neutral-900"
           />
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="">
+        <div className="w-fit bg-neutral-900 p-10 rounded-md">
           {Array.from(blockGroupMap).map((blockGroup) => (
             <div key={"select-block-row-" + blockGroup[0]}>
               <div>
@@ -180,8 +169,8 @@ const ImageConverter = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-12">
-        <button onClick={handleTransform} className="bg-slate-200 border-2 p-2 pr-4 pl-4 rounded">
+      <div className="flex justify-center mt-12 mb-12">
+        <button onClick={handleTransform} className="bg-m-green hover:bg-m-green-light p-2 pr-4 pl-4 rounded">
           <div className="flex items-center">
             {t.CONVERT_BUTTON}
             <span className="material-symbols-outlined">keyboard_double_arrow_right</span>

@@ -14,6 +14,7 @@ import EditionButton from "./EditionButton";
 import { useRouter } from "next/router";
 import en from "src/i18n/locales/en";
 import ja from "src/i18n/locales/ja";
+import CoordinateInput from "./CoordinateInput";
 
 interface Props {
   blueprint: string[][];
@@ -33,6 +34,9 @@ interface CornerCoordinate {
   lbz: number;
 }
 const modalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.85)",
+  },
   content: {
     top: "50%",
     left: "50%",
@@ -40,6 +44,7 @@ const modalStyles = {
     bottom: "auto",
     padding: "7px",
     marginRight: "-50%",
+    backgroundColor: "#2d2d2d",
     borderRadius: "8px",
     transform: "translate(-50%, -50%)",
   },
@@ -87,6 +92,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   };
 
   const handleChangeCoordinate = (key: string, value: number) => {
+    console.log(key, value);
     setCornerCoordinates({ ...cornerCoordinates, [key]: value });
   };
 
@@ -139,7 +145,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
         </div>
 
         <div className="flex justify-center">
-          <div className="w-fit border-2 rounded-md flex justify-center">
+          <div className="w-fit border-2 border-neutral-600 rounded-md flex justify-center">
             <div className="">
               <EditionButton id="javaButton" selected={editon === "java"} onChange={() => setEdition("java")}>
                 {t.JAVA_EDITION}
@@ -162,63 +168,49 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
         <div className="flex justify-between">
           <div className="flex flex-col justify-between items-center">
             <div className="flex flex-col">
-              <input
-                type="number"
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("ltx", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("lty", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("ltz", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
+              ></CoordinateInput>
             </div>
             <div>{blueprint[0].length}</div>
             <div className="flex flex-col">
-              <input
-                type="number"
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("lbx", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("lby", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("lbz", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
+              ></CoordinateInput>
             </div>
           </div>
 
           <div className="w-[35vw] flex justify-center">
-            <canvas id="canvas-out" ref={mainCanvas} className="w-[100%] border-2"></canvas>
+            <canvas
+              id="canvas-out"
+              ref={mainCanvas}
+              className="w-[100%] border-2 border-neutral-600"
+            ></canvas>
           </div>
 
           <div className="flex flex-col justify-between">
             <div className="flex flex-col">
-              <input
-                type="number"
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("rtx", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("rty", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
-              <input
-                type="number"
+              ></CoordinateInput>
+              <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("rtz", Number(e.target.value))}
-                className="border-2 rounded w-14"
-              />
+              ></CoordinateInput>
             </div>
             {/* these input is read only */}
             <div className="flex flex-col">
@@ -226,19 +218,19 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
                 type="number"
                 value={RBCoordinate?.x}
                 readOnly={true}
-                className="border-2 bg-slate-300 rounded w-14"
+                className="border-2 border-neutral-600 bg-neutral-500 rounded w-14"
               />
               <input
                 type="number"
                 value={RBCoordinate?.y}
                 readOnly={true}
-                className="border-2 bg-slate-300 rounded w-14"
+                className="border-2 border-neutral-600 bg-neutral-500 rounded w-14"
               />
               <input
                 type="number"
                 value={RBCoordinate?.z}
                 readOnly={true}
-                className="border-2 bg-slate-300 rounded w-14"
+                className="border-2 border-neutral-600 bg-neutral-500 rounded w-14"
               />
             </div>
           </div>
@@ -246,7 +238,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
         <div className="flex justify-center mt-2">
           <button
             onClick={handleGenerateCommand}
-            className="p-1 rounded-md disabled:bg-slate-200 disabled:text-slate-300 bg-slate-600 text-white"
+            className="p-1 rounded-md disabled:bg-neutral-900 disabled:text-neutral-600 bg-m-green-light text-white"
             disabled={!isCommandReady}
           >
             {t.COMMAND_GENERATION}
