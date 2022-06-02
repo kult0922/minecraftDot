@@ -14,12 +14,16 @@ interface Props {
 }
 
 const modalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.85)",
+  },
   content: {
     top: "50%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     padding: "7px",
+    backgroundColor: "#2d2d2d",
     marginRight: "-50%",
     borderRadius: "8px",
     transform: "translate(-50%, -50%)",
@@ -64,7 +68,7 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
           </button>
         </div>
         <div className="w-[50vw] flex justify-center">
-          <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-2"></canvas>
+          <canvas id="canvas-out" ref={mainCanvas} className="w-[95%]"></canvas>
         </div>
       </Modal>
     </>

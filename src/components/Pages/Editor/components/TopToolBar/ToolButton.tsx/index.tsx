@@ -7,7 +7,7 @@ const ToolButton = ({ onClick, text }: Props) => {
   return (
     <>
       <button onClick={onClick}>
-        <span className="flex items-center border-2 rounded bg-slate-200">{text}</span>
+        <span className="flex items-center rounded-sm hover:bg-neutral-800 px-4 py-0.5">{text}</span>
       </button>
     </>
   );

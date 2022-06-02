@@ -13,21 +13,18 @@ const EditorPageComponent = () => {
 
   return (
     <>
-      <div className="flex justify-center">
-        <TopToolBar />
-      </div>
-      <div className="flex flex-wrap justify-center">
-        <div className="mr-2">
-          <SideToolBar />
+      <div className="bg-neutral-700">
+        <div className="flex justify-start">
+          <TopToolBar />
         </div>
-        <EditorBoard />
-        <BlockPalette />
-      </div>
-
-      <div className="flex justify-center mt-4">
-        <Link href="/">
-          <a>{t.BACK_TO_HOME}</a>
-        </Link>
+        <div className="h-[2px] 1-[100wv] bg-neutral-800"></div>
+        <div className="flex flex-wrap justify-start">
+          <SideToolBar />
+          <EditorBoard />
+          <div className="mx-3 my-2">
+            <BlockPalette />
+          </div>
+        </div>
       </div>
     </>
   );

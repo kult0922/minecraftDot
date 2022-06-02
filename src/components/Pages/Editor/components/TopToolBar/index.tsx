@@ -56,19 +56,19 @@ const TopToolBar = () => {
 
   return (
     <>
-      <div className="flex items-center">
-        <button onClick={handleUndo}>
-          <span className="material-symbols-outlined flex items-center">undo</span>
-        </button>
-        <button onClick={handleRedo}>
-          <span className="material-symbols-outlined flex items-center">redo</span>
-        </button>
+      <div className="flex items-center bg-neutral-600 py-1 w-[100vw]">
+        <div className="mx-3 flex items-center">
+          <button onClick={handleUndo} className="mx-1">
+            <span className="material-symbols-outlined flex items-center">undo</span>
+          </button>
+          <button onClick={handleRedo} className="mx-1">
+            <span className="material-symbols-outlined flex items-center">redo</span>
+          </button>
+        </div>
 
-        <div className="relative">
-          <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
-          <div className="absolute top-7 left-0">
-            <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
-          </div>
+        <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
+        <div className="absolute top-7 left-0">
+          <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
         </div>
         <ToolButton onClick={handleImageDownload} text={t.IMAGE_DOWNLOAD} />
         <ToolButton onClick={handleCSVDownload} text={t.CSV_DOWNLOAD} />

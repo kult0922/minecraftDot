@@ -1,13 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect } from "react";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 
 const BlockPalette = () => {
-  const { blockDB, blockImageDataDict } = useBlockDBContext();
+  const { blockDB } = useBlockDBContext();
   const blockGroupMap = new Map<string, Array<BlockBasic>>();
   const { setInkBlockJavaId, setReplaceFromJavaId, setReplaceToJavaId, mode } = useEditorContext();
-
   const handleClick = (javaId: string) => {
     if (mode == "replaceFromPicker") {
       setReplaceFromJavaId(javaId);
@@ -33,29 +31,31 @@ const BlockPalette = () => {
 
   return (
     <>
-      <div className="bg-slate-200 border-4 p-2">
-        <span className="material-symbols-outlined text-slate-400">palette</span>
-        <img
-          className="cursor-pointer"
-          src={"/blocks/air_palette.png"}
-          alt="paletteBlock"
-          width={20}
-          onClick={() => handleClick("minecraft:air")}
-        ></img>
-        {Array.from(blockGroupMap).map((row) => (
-          <div key={"palatte-row-" + row[0]}>
-            {row[1].map((column) => (
-              <img
-                className="inline cursor-pointer rendering-pixelated"
-                src={column.imagePath}
-                alt="paletteBlock"
-                width={20}
-                key={column.javaId}
-                onClick={() => handleClick(column.javaId)}
-              ></img>
-            ))}
-          </div>
-        ))}
+      <div className="">
+        <div className="bg-neutral-800 text-sm w-fit px-2 rounded-sm">palette</div>
+        <div className="p-3 bg-neutral-600">
+          <img
+            className="cursor-pointer border-neutral-800 border-2"
+            src={"/blocks/air_palette.png"}
+            alt="paletteBlock"
+            width={24}
+            onClick={() => handleClick("minecraft:air")}
+          ></img>
+          {Array.from(blockGroupMap).map((row) => (
+            <div key={"palatte-row-" + row[0]}>
+              {row[1].map((column) => (
+                <img
+                  className="inline cursor-pointer rendering-pixelated border-2 border-neutral-800"
+                  src={column.imagePath}
+                  alt="paletteBlock"
+                  width={24}
+                  key={column.javaId}
+                  onClick={() => handleClick(column.javaId)}
+                ></img>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

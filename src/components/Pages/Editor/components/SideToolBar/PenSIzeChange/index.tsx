@@ -24,9 +24,9 @@ const PenSizeChange = () => {
   }, [penSizeIndex]);
 
   return (
-    <div className="flex flex-col justify-start bg-slate-300">
+    <div className="flex flex-col justify-start bg-neutral-600">
       <div className="flex justify-center items-center w-8 h-8">
-        <div ref={penSizeSquare} className="bg-slate-700"></div>
+        <div ref={penSizeSquare} className="bg-white"></div>
       </div>
       <div className="text-center text-xs">{getPenSize()}</div>
       <div className="flex justify-around items-start text-xl leading-none">

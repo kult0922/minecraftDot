@@ -13,9 +13,9 @@ const ToolButton: React.FC<Props> = ({ onChange, selected, id, children }) => {
       <label htmlFor={id} className="">
         <input type="radio" id={id} onChange={() => onChange()} checked={selected} className="hidden peer" />
         <div
-          className="w-8 h-8  justify-center flex items-center border 
-                    bg-slate-700 text-white cursor-pointer
-                    peer-checked:bg-slate-300 peer-checked:text-black"
+          className="w-10 h-10  justify-center flex items-center
+                    bg-neutral-600 text-white cursor-pointer
+                    peer-checked:bg-neutral-800"
         >
           {children}
         </div>
