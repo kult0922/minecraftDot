@@ -65,10 +65,11 @@ const TopToolBar = () => {
             <span className="material-symbols-outlined flex items-center">redo</span>
           </button>
         </div>
-
-        <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
-        <div className="absolute top-7 left-0">
-          <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
+        <div className="relative">
+          <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
+          <div className="absolute top-8 left-2">
+            <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
+          </div>
         </div>
         <ToolButton onClick={handleImageDownload} text={t.IMAGE_DOWNLOAD} />
         <ToolButton onClick={handleCSVDownload} text={t.CSV_DOWNLOAD} />

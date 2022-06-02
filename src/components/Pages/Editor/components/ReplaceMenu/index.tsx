@@ -29,13 +29,13 @@ const ReplaceMenu = ({ isOpen, setIsOpen }: Props) => {
   return (
     <>
       {isOpen && (
-        <div className="bg-white w-32 absolute top-0 left-0 border-2 block z-[100]">
+        <div className="bg-neutral-600 border-neutral-700 w-32 absolute top-0 left-0 border-2 block z-[100]">
           <div className="flex justify-end">
             <button onClick={close}>
               <CrossButton />
             </button>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center mt-2">
             <div className="cursor-pointer" onClick={() => setMode("replaceFromPicker")}>
               <img
                 className="rendering-pixelated"
@@ -45,7 +45,11 @@ const ReplaceMenu = ({ isOpen, setIsOpen }: Props) => {
                 alt="from"
               />
             </div>
-            <span className="material-symbols-outlined">arrow_right_alt</span>
+
+            <div className="flex items-center mx-1">
+              <span className="material-symbols-outlined">arrow_right_alt</span>
+            </div>
+
             <div className="cursor-pointer" onClick={() => setMode("replaceToPicker")}>
               <img
                 className="rendering-pixelated"
