@@ -16,7 +16,7 @@ const SideToolBar = () => {
             <img
               src={getBlockBasic(inkBlockJavaId).imagePath}
               alt="inkBlock"
-              width="32"
+              width="22"
               className="border-2 border-neutral-800 rendering-pixelated"
             ></img>
           </div>

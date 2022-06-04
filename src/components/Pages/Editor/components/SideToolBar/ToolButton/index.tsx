@@ -15,7 +15,7 @@ const ToolButton: React.FC<Props> = ({ onChange, selected, id, children }) => {
         <div
           className="w-10 h-10  justify-center flex items-center
                     bg-neutral-600 text-white cursor-pointer
-                    peer-checked:bg-neutral-800"
+                    peer-checked:bg-neutral-800 peer-checked:w-8 peer-checked:h-8 peer-checked:rounded-md"
         >
           {children}
         </div>
