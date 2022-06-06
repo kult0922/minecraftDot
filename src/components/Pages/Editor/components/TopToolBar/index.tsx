@@ -6,13 +6,10 @@ import CommandModal from "../../../../Common/CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
 import ReplaceModal from "../ReplaceMenu";
 import ToolButton from "./ToolButton.tsx";
-import { useRouter } from "next/router";
-import ja from "src/i18n/locales/ja";
-import en from "src/i18n/locales/en";
+import { useLocale } from "src/i18n/useLocale";
 
 const TopToolBar = () => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
+  const { t, locale } = useLocale();
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);

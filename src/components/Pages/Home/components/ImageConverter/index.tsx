@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import generateBlueprint from "src/components/Pages/Home/functions/generateBluePrint";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import getContext from "src/functions/getContext";
@@ -6,14 +6,11 @@ import PreviewModal from "src/components/Pages/Home/components/PreviewModal";
 import BlockButton from "src/components/Common/BlockButton";
 import resizeImageData from "resize-image-data";
 import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
-import { useRouter } from "next/router";
-import ja from "src/i18n/locales/ja";
-import en from "src/i18n/locales/en";
 import CommandModal from "src/components/Common/CommandModal";
+import { useLocale } from "src/i18n/useLocale";
 
 const ImageConverter = () => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
+  const { t } = useLocale();
 
   const initBlockUseFlag = () => {
     const blockUseFlag = new Map<string, Boolean>();

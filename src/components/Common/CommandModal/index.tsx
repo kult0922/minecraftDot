@@ -11,10 +11,8 @@ import generateCommand from "src/components/Pages/Editor/functions/generateComma
 import generatePackZip from "../../Pages/Editor/functions/generatePackZip";
 import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
-import { useRouter } from "next/router";
-import en from "src/i18n/locales/en";
-import ja from "src/i18n/locales/ja";
 import CoordinateInput from "./CoordinateInput";
+import { useLocale } from "src/i18n/useLocale";
 
 interface Props {
   blueprint: string[][];
@@ -51,8 +49,7 @@ const modalStyles = {
 };
 
 const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
+  const { t } = useLocale();
   const [isCommandReady, setIsCommandReady] = useState(false);
   const [editon, setEdition] = useState<Edition>("java");
   const [RBCoordinate, setRBCoordinate] = useState<Coordinate3D>({ x: 0, y: 0, z: 0 });

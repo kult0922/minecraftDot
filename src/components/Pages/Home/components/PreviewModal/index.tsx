@@ -7,11 +7,8 @@ import { useBlueprintContext } from "src/store/useBlueprint";
 import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
-import ja from "src/i18n/locales/ja";
-import en from "src/i18n/locales/en";
-import { useRouter } from "next/router";
-import { useEditorCanvasContext } from "src/store/useEditorCanvas";
 import createCsv from "src/functions/createCsv";
+import { useLocale } from "src/i18n/useLocale";
 
 interface Props {
   blueprint: string[][];
@@ -38,9 +35,8 @@ const modalStyles = {
 };
 
 const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal }: Props) => {
-  const { locale } = useRouter();
+  const { locale, t } = useLocale();
   const { blockDB, javaId2index } = useBlockDBContext();
-  const t = locale === "en" ? en : ja;
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null);

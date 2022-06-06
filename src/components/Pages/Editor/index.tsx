@@ -1,16 +1,9 @@
-import Link from "next/link";
 import SideToolBar from "./components/SideToolBar";
 import EditorBoard from "./components/EditorBoard";
 import BlockPalette from "./components/BlockPalette";
 import TopToolBar from "./components/TopToolBar";
-import { useRouter } from "next/router";
-import en from "src/i18n/locales/en";
-import ja from "src/i18n/locales/ja";
 
 const EditorPageComponent = () => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
-
   return (
     <>
       <div className="bg-neutral-700">

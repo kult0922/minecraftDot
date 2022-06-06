@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from "next/router";
 import CrossButton from "src/components/Common/CrossButton.tsx";
-import en from "src/i18n/locales/en";
-import ja from "src/i18n/locales/ja";
+import { useLocale } from "src/i18n/useLocale";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";
@@ -13,8 +11,7 @@ interface Props {
 }
 
 const ReplaceMenu = ({ isOpen, setIsOpen }: Props) => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
+  const { t } = useLocale();
   const close = () => {
     setIsOpen(false);
   };
