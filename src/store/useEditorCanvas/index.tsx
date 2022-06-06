@@ -88,6 +88,12 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     /* iamge set */
     minecraftImage = getBufferCanvas(image, image.width, image.height);
     minecraftImageContext = minecraftImage.getContext("2d")!;
+
+    /* minecraft image initial size and position */
+    minecraftImageX = canvasSize / 6;
+    minecraftImageY = canvasSize / 6;
+    magnification = ((canvasSize / minecraftImage.width) * 2) / 3;
+
     /* block number */
     widthBlockNumber = widthBlockNumber_;
     heightBlockNumber = heightBlockNumber_;

@@ -93,8 +93,8 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal
             <CrossButton />
           </button>
         </div>
-        <div className="sm:w-[50vw] w-[100vw] flex justify-center">
-          <canvas id="canvas-out" ref={mainCanvas} className="w-[95%] border-4 border-neutral-700"></canvas>
+        <div className="sm:h-[70vh] h-[80vh] flex justify-center">
+          <canvas id="canvas-out" ref={mainCanvas} className="h-[95%] border-4 border-neutral-700"></canvas>
         </div>
 
         <div className="flex flex-wrap mt-4 justify-around">

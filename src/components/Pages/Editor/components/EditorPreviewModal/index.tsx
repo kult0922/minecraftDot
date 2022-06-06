@@ -34,8 +34,6 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef(null);
-  const mainCanvasWidth = 1000;
-  const mainCanvasHeight = 1000;
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -48,8 +46,8 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
     const bufferCanvas = getBufferCanvas(minecraftImage, minecraftImage.width, minecraftImage.height);
 
     /* output image */
-    const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
-    mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
+    const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
+    mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
     setInitBlueprint(blueprint);
   };
 
@@ -67,8 +65,8 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
             <CrossButton />
           </button>
         </div>
-        <div className="w-[50vw] flex justify-center">
-          <canvas id="canvas-out" ref={mainCanvas} className="w-[95%]"></canvas>
+        <div className="h-[80vh] flex justify-center">
+          <canvas id="canvas-out" ref={mainCanvas} className="h-[95%]"></canvas>
         </div>
       </Modal>
     </>
