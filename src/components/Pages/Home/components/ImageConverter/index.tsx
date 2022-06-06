@@ -97,7 +97,11 @@ const ImageConverter = () => {
       <div className="flex justify-center">
         <canvas
           id="canvas-in"
-          className={isImageUpload ? "sm:w-[30vw] w-[60vw] border-dashed border-white border-2" : "hidden"}
+          className={
+            isImageUpload
+              ? "w-auto h-auto max-h-[50vh] max-w-[80vw] border-dashed border-white border-2"
+              : "hidden"
+          }
           ref={canvasInRef}
         ></canvas>
         <div
