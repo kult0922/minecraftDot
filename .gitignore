@@ -41,4 +41,4 @@ yarn-error.log*
 .vscode/
 
 # dummy data
-./dummy
+dummy/
