@@ -90,9 +90,11 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     minecraftImageContext = minecraftImage.getContext("2d")!;
 
     /* minecraft image initial size and position */
+    const longerEdge =
+      minecraftImage.width > minecraftImage.height ? minecraftImage.width : minecraftImage.height;
     minecraftImageX = canvasSize / 6;
     minecraftImageY = canvasSize / 6;
-    magnification = ((canvasSize / minecraftImage.width) * 2) / 3;
+    magnification = ((canvasSize / longerEdge) * 2) / 3;
 
     /* block number */
     widthBlockNumber = widthBlockNumber_;
