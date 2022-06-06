@@ -65,8 +65,12 @@ const EditorPreviewModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) =
             <CrossButton />
           </button>
         </div>
-        <div className="h-[80vh] flex justify-center">
-          <canvas id="canvas-out" ref={mainCanvas} className="h-[95%]"></canvas>
+        <div className="flex justify-center">
+          <canvas
+            id="canvas-out"
+            ref={mainCanvas}
+            className="h-auto w-auto max-h-[80vh] max-w-[90vw]"
+          ></canvas>
         </div>
       </Modal>
     </>

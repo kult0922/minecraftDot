@@ -68,8 +68,6 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict, javaId2index, blockDB } = useBlockDBContext();
   const mainCanvas = useRef(null);
-  const mainCanvasWidth = 1000;
-  const mainCanvasHeight = 1000;
 
   const tryComplement = (coordinate: CornerCoordinate, expectedWidth: number, expectedHeight: number) => {
     setIsCommandReady(false);
@@ -105,8 +103,8 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const bufferCanvas = getBufferCanvas(minecraftImage, minecraftImage.width, minecraftImage.height);
 
     /* output image */
-    const mainCanvasContext = getContext(mainCanvas.current, mainCanvasWidth, mainCanvasHeight);
-    mainCanvasContext.drawImage(bufferCanvas, 0, 0, mainCanvasWidth, mainCanvasHeight);
+    const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
+    mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
     setInitBlueprint(blueprint);
   };
 
@@ -189,11 +187,11 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             </div>
           </div>
 
-          <div className="w-[35vw] flex justify-center">
+          <div className="flex justify-center">
             <canvas
               id="canvas-out"
               ref={mainCanvas}
-              className="w-[100%] border-2 border-neutral-600"
+              className="h-auto w-auto max-h-[80vh] max-w-[90vw]"
             ></canvas>
           </div>
 
