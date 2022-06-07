@@ -36,13 +36,6 @@
       "blockGroup": "stone"
     },
     {
-      "javaId": "minecraft:sand",
-      "bedrockId": "sand",
-      "jname": "砂",
-      "imagePath": "/blocks/sand.png",
-      "blockGroup": "stone"
-    },
-    {
       "javaId": "minecraft:mossy_cobblestone",
       "bedrockId": "mossy_cobblestone",
       "jname": "苔むした丸石",
