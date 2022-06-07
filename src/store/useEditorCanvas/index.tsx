@@ -45,6 +45,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let minecraftImageY = 0;
   let minecraftImageWidth = 0;
   let minecraftImageHeight = 0;
+  let longerEdge = 0;
   let magnification = 0.5;
   let widthBlockNumber = 0;
   let heightBlockNumber = 0;
@@ -90,8 +91,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     minecraftImageContext = minecraftImage.getContext("2d")!;
 
     /* minecraft image initial size and position */
-    const longerEdge =
-      minecraftImage.width > minecraftImage.height ? minecraftImage.width : minecraftImage.height;
+    longerEdge = minecraftImage.width > minecraftImage.height ? minecraftImage.width : minecraftImage.height;
     minecraftImageX = canvasSize / 6;
     minecraftImageY = canvasSize / 6;
     magnification = ((canvasSize / longerEdge) * 2) / 3;
@@ -242,7 +242,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     /* change zoom step when magnification is small */
     if (magnification <= 1) zoomStep = 0.04;
     /* stop zoom out when image size is half of canvas */
-    if ((magnification - zoomStep) * minecraftImage.width < canvasSize / 2) return;
+    if ((magnification - zoomStep) * longerEdge < canvasSize / 2) return;
 
     const { px, py } = toPixelCoordinate(x, y);
     zoom(px, py, zoomStep, true);
