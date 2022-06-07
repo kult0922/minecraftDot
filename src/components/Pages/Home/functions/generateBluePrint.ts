@@ -13,10 +13,15 @@ const getMostSimilarBlockId = (
   R: number,
   G: number,
   B: number,
+  A: number,
   blockImageDataDict: Map<string, BlockImageData>
 ) => {
   let javaId = "";
   let minDiff = 100000;
+
+  /* if alpha = 0, return air block */
+  if (A === 0) return "minecraft:air";
+
   for (const [index, blockImageData] of blockImageDataDict.entries()) {
     if (index == "minecraft:air") continue;
     // ここで差異を計算
@@ -51,6 +56,7 @@ const generateBlueprint = (
       let R = 0;
       let G = 0;
       let B = 0;
+      let A = 0;
 
       // srcImageのindex
       const ii = i * ws;
@@ -61,14 +67,16 @@ const generateBlueprint = (
           R += srcImage[t(jj + k, ii + l, 0, width)];
           G += srcImage[t(jj + k, ii + l, 1, width)];
           B += srcImage[t(jj + k, ii + l, 2, width)];
+          A += srcImage[t(jj + k, ii + l, 3, width)];
         }
       }
 
       R /= ws * ws;
       G /= ws * ws;
       B /= ws * ws;
+      A /= ws * ws;
 
-      const mostSimilarBlockId = getMostSimilarBlockId(R, G, B, blockImageDataDict);
+      const mostSimilarBlockId = getMostSimilarBlockId(R, G, B, A, blockImageDataDict);
       blueprint[i][j] = mostSimilarBlockId;
     }
   }
