@@ -182,7 +182,7 @@ const ImageConverter = () => {
       </div>
 
       <div className="flex justify-center mt-12 mb-12">
-        <button onClick={handleTransform} className="bg-m-green hover:bg-m-green-light p-2 pr-4 pl-4 rounded">
+        <button onClick={handleTransform} className="bg-m-green hover:bg-m-green-light p-2 pr-4 pl-4">
           <div className="flex items-center">
             {t.CONVERT_BUTTON}
             <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
