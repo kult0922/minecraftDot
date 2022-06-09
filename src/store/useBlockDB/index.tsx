@@ -9,7 +9,12 @@ import glazedTerracotta from "src/json/glazedTerracotta.json";
 import ore from "src/json/ore.json";
 import concrete from "src/json/concrete.json";
 import stone from "src/json/stone.json";
+import soil from "src/json/soil.json";
+import jewel from "src/json/jewel.json";
+import wood from "src/json/wood.json";
+import light from "src/json/light.json";
 import air from "src/json/air.json";
+import glass from "src/json/glass.json";
 import rgb2hsv from "src/functions/rgb2hsv";
 
 const BlockDBContext = createContext(
@@ -32,9 +37,14 @@ export function BlockDBProvider({ children }: { children?: ReactNode }) {
     wool.blocks,
     concrete.blocks,
     terracotta.blocks,
+    glass.blocks,
     glazedTerracotta.blocks,
     ore.blocks,
-    stone.blocks
+    stone.blocks,
+    soil.blocks,
+    wood.blocks,
+    jewel.blocks,
+    light.blocks
   );
 
   for (let index = 0; index < blockDB.length; index++) {

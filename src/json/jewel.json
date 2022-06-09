@@ -1,0 +1,53 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:quartz_block",
+      "bedrockId": "quartz_block",
+      "jname": "クォーツブロック",
+      "imagePath": "/blocks/quartz_block_top.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:obsidian",
+      "bedrockId": "obsidian",
+      "jname": "黒曜石",
+      "imagePath": "/blocks/obsidian.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:redstone_block",
+      "bedrockId": "redstone_block",
+      "jname": "レッドストーンブロック",
+      "imagePath": "/blocks/redstone_block.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:lapis_block",
+      "bedrockId": "lapis_block",
+      "jname": "ラピスラズリブロック",
+      "imagePath": "/blocks/lapis_block.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:gold_block",
+      "bedrockId": "gold_block",
+      "jname": "金ブロック",
+      "imagePath": "/blocks/gold_block.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:emerald_block",
+      "bedrockId": "emerald_block",
+      "jname": "エメラルドブロック",
+      "imagePath": "/blocks/emerald_block.png",
+      "blockGroup": "jewel"
+    },
+    {
+      "javaId": "minecraft:diamond_block",
+      "bedrockId": "diamond_block",
+      "jname": "ダイヤモンドブロック",
+      "imagePath": "/blocks/diamond_block.png",
+      "blockGroup": "jewel"
+    }
+  ]
+}

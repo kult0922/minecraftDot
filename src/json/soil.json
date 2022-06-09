@@ -1,0 +1,25 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:dirt",
+      "bedrockId": "dirt",
+      "jname": "土",
+      "imagePath": "/blocks/dirt.png",
+      "blockGroup": "soil"
+    },
+    {
+      "javaId": "minecraft:clay",
+      "bedrockId": "clay",
+      "jname": "粘土",
+      "imagePath": "/blocks/clay.png",
+      "blockGroup": "soil"
+    },
+    {
+      "javaId": "minecraft:netherrack",
+      "bedrockId": "netherrack",
+      "jname": "ネザーラック",
+      "imagePath": "/blocks/netherrack.png",
+      "blockGroup": "soil"
+    }
+  ]
+}

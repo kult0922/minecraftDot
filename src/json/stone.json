@@ -1,24 +1,10 @@
 {
   "blocks": [
     {
-      "javaId": "minecraft:netherrack",
-      "bedrockId": "netherrack",
-      "jname": "ネザーラック",
-      "imagePath": "/blocks/netherrack.png",
-      "blockGroup": "stone"
-    },
-    {
       "javaId": "minecraft:nether_bricks",
       "bedrockId": "nether_brick",
       "jname": "ネザーレンガ",
       "imagePath": "/blocks/nether_brick.png",
-      "blockGroup": "stone"
-    },
-    {
-      "javaId": "minecraft:clay",
-      "bedrockId": "clay",
-      "jname": "粘土",
-      "imagePath": "/blocks/clay.png",
       "blockGroup": "stone"
     },
     {

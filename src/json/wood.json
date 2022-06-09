@@ -1,0 +1,60 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:oak_planks",
+      "bedrockId": "planks",
+      "jname": "オークの木材",
+      "imagePath": "/blocks/planks_oak.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:birch_planks",
+      "bedrockId": "planks 2",
+      "jname": "白樺の木材",
+      "imagePath": "/blocks/planks_birch.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:spruce_planks",
+      "bedrockId": "planks 1",
+      "jname": "松の木材",
+      "imagePath": "/blocks/planks_spruce.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:dark_oak_planks",
+      "bedrockId": "planks 5",
+      "jname": "ダークオークの木材",
+      "imagePath": "/blocks/planks_big_oak.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:acacia_planks",
+      "bedrockId": "planks 4",
+      "jname": "アカシアの木材",
+      "imagePath": "/blocks/planks_acacia.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:jungle_planks",
+      "bedrockId": "planks 3",
+      "jname": "ジャングルの木材",
+      "imagePath": "/blocks/planks_jungle.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:crimson_planks",
+      "bedrockId": "crimson_planks",
+      "jname": "真紅の木材",
+      "imagePath": "/blocks/crimson_planks.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:warped_planks",
+      "bedrockId": "warped_planks",
+      "jname": "歪んだ木材",
+      "imagePath": "/blocks/warped_planks.png",
+      "blockGroup": "wood"
+    }
+  ]
+}

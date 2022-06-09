@@ -11,12 +11,23 @@ import { useLocale } from "src/i18n/useLocale";
 
 const ImageConverter = () => {
   const { t } = useLocale();
+  const defaultUseBlockGroup = [
+    "wool",
+    "concrete",
+    "terracotta",
+    "glazed",
+    "ore",
+    "stone",
+    "soil",
+    "wood",
+    "jewel",
+  ];
 
-  const initBlockUseFlag = () => {
+  const initBlockUseFlag = (defaultUseBlockGroup: string[]) => {
     const blockUseFlag = new Map<string, Boolean>();
     for (const blockBasic of blockDB) {
       if (blockBasic.blockGroup == "air") continue;
-      blockUseFlag.set(blockBasic.javaId, true);
+      blockUseFlag.set(blockBasic.javaId, defaultUseBlockGroup.includes(blockBasic.blockGroup));
       const array = blockGroupMap.get(blockBasic.blockGroup);
       if (array == undefined) {
         blockGroupMap.set(blockBasic.blockGroup, [blockBasic]);
@@ -27,11 +38,11 @@ const ImageConverter = () => {
     return blockUseFlag;
   };
 
-  const initGroupButtonFlag = () => {
+  const initGroupButtonFlag = (defaultUseBlockGroup: string[]) => {
     const groupButtonFlag = new Map<string, Boolean>();
     for (const blockBasic of blockDB) {
       if (blockBasic.blockGroup == "air") continue;
-      groupButtonFlag.set(blockBasic.blockGroup, true);
+      groupButtonFlag.set(blockBasic.blockGroup, defaultUseBlockGroup.includes(blockBasic.blockGroup));
     }
     return groupButtonFlag;
   };
@@ -47,8 +58,8 @@ const ImageConverter = () => {
   const [isImageUpload, setIsImageUpload] = useState(false);
   const [outSize, setOutSize] = useState(64);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
-  const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag());
-  const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag);
+  const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag(defaultUseBlockGroup));
+  const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag(defaultUseBlockGroup));
 
   const handleTransform = async () => {
     if (srcImage === undefined) return;

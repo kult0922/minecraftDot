@@ -1,0 +1,32 @@
+{
+  "blocks": [
+    {
+      "javaId": "minecraft:glowstone",
+      "bedrockId": "glowstone",
+      "jname": "グロウストーン",
+      "imagePath": "/blocks/glowstone.png",
+      "blockGroup": "light"
+    },
+    {
+      "javaId": "minecraft:jack_o_lantern",
+      "bedrockId": "lit_pumpkin",
+      "jname": "ジャックオーランタン",
+      "imagePath": "/blocks/jack_o_lantern.png",
+      "blockGroup": "light"
+    },
+    {
+      "javaId": "minecraft:sea_lantern",
+      "bedrockId": "sealantern",
+      "jname": "シーランタン",
+      "imagePath": "/blocks/sea_lantern.png",
+      "blockGroup": "light"
+    },
+    {
+      "javaId": "minecraft:shroomlight",
+      "bedrockId": "shroomlight",
+      "jname": "シュルームライト",
+      "imagePath": "/blocks/shroomlight.png",
+      "blockGroup": "light"
+    }
+  ]
+}
