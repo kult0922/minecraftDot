@@ -6,7 +6,9 @@ interface Props {
 
 const BlockNameLabel: React.FC<Props> = ({ blockBasic }) => {
   const { locale } = useLocale();
-  const blockName = locale === "en" ? blockBasic.javaId : blockBasic.jname;
+  const Ename = blockBasic.javaId.split(":")[1].replace("_", " ");
+
+  const blockName = locale === "en" ? Ename : blockBasic.jname;
 
   if (blockBasic === undefined || BlockNameLabel === null) return <></>;
   return (
