@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useLocale } from "src/i18n/useLocale";
 
 const Footer = () => {
@@ -32,7 +33,11 @@ const Footer = () => {
           >
             @KK_sep_TT
           </a>
-          <div></div>
+        </div>
+        <div className="flex justify-center mt-2">
+          <Link href="/privacy">
+            <a className="underline text-decoration">Privacy policy</a>
+          </Link>
         </div>
       </div>
     </>
