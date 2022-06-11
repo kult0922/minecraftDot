@@ -13,6 +13,7 @@ import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
 import CoordinateInput from "./CoordinateInput";
 import { useLocale } from "src/i18n/useLocale";
+import Link from "next/link";
 
 interface Props {
   blueprint: string[][];
@@ -191,7 +192,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <canvas
               id="canvas-out"
               ref={mainCanvas}
-              className="h-auto w-auto max-h-[80vh] max-w-[90vw]"
+              className="h-auto w-auto max-h-[50vh] max-w-[50vw]"
             ></canvas>
           </div>
 
@@ -231,13 +232,20 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
           </div>
         </div>
         <div className="flex justify-center mt-2">
-          <button
-            onClick={handleGenerateCommand}
-            className="p-1 rounded-md disabled:bg-neutral-900 disabled:text-neutral-600 bg-m-green-light text-white"
-            disabled={!isCommandReady}
-          >
-            {t.COMMAND_GENERATION}
-          </button>
+          <div className="my-3 flex flex-col justify-center">
+            <button
+              onClick={handleGenerateCommand}
+              className="p-1 rounded-md disabled:bg-neutral-900 disabled:text-neutral-600 bg-m-green-light text-white"
+              disabled={!isCommandReady}
+            >
+              {t.COMMAND_GENERATION}
+            </button>
+            <div className="my-3">
+              <Link href="/command-help">
+                <a className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</a>
+              </Link>
+            </div>
+          </div>
         </div>
       </Modal>
     </>

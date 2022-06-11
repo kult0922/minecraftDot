@@ -17,6 +17,7 @@ export default {
   BEDROCK_EDITION: "統合版",
 
   // HELP
+  USAGE: "使い方",
   USAGE1: "写真を選択",
   USAGE2: "ドット絵の横幅のブロック数を入力",
   USAGE3: "ドット絵に使いたいブロックを選択",

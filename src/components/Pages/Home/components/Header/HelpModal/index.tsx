@@ -40,18 +40,23 @@ const HelpModal = ({ isModalOpen, setIsModalOpen }: Props) => {
             <CrossButton />
           </button>
         </div>
-        <ol className="list-decimal ml-6">
-          <li className="m-1">{t.USAGE1}</li>
-          <li className="m-1">{t.USAGE2}</li>
-          <li className="m-1">{t.USAGE3}</li>
-          <li className="m-1">{t.USAGE4}</li>
-          <li className="m-1">{t.USAGE5}</li>
-          <li className="m-1">{t.USAGE6}</li>
-        </ol>
+        <div className="ml-6">
+          <div className="mb-3 text-lg">{t.USAGE}</div>
+          <ol className="list-decimal">
+            <li className="mx-4">{t.USAGE1}</li>
+            <li className="mx-4">{t.USAGE2}</li>
+            <li className="mx-4">{t.USAGE3}</li>
+            <li className="mx-4">{t.USAGE4}</li>
+            <li className="mx-4">{t.USAGE5}</li>
+            <li className="mx-4">{t.USAGE6}</li>
+          </ol>
 
-        <Link href="/command-help">
-          <a className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</a>
-        </Link>
+          <div className="my-3">
+            <Link href="/command-help">
+              <a className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</a>
+            </Link>
+          </div>
+        </div>
       </Modal>
     </>
   );

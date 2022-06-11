@@ -17,6 +17,7 @@ export default {
   BEDROCK_EDITION: "Bedrock",
 
   // HELP
+  USAGE: "How to use",
   USAGE1: "Select picture",
   USAGE2: "Input the width of minecraft pixel art",
   USAGE3: "Select blocks you want to use for convert",
