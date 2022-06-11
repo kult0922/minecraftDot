@@ -97,4 +97,8 @@ export default {
   PRIVACY_TEXT3:
     'This service uses "Google Analytics" to analyze your access to our website. Google Analytics uses cookies to collect traffic data. Traffic data is collected anonymously and does not personally identify you.',
   RETURN_HOME: "Return to home",
+
+  SEO_TITLE: "Minecraft Dot",
+  SEO_DESCTIPTION:
+    "An application that can convert photos into Minecraft dots. Images and CSV files can be downloaded. The created dots can also be made into commands to automatically generate dots in the game. Pixel art can be edited in detail in Editor",
 };
