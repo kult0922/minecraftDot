@@ -73,18 +73,22 @@ const generateCommand = (
       let rectBlockNumber = 0;
       /* horizon */
       for (let k = j; k < w; k++) {
-        if (blockId === blueprint[i][k]) horizonBlockNumber++;
+        // if (blockId === blueprint[i][k]) horizonBlockNumber++;
+        if (blockId !== blueprint[i][k]) break;
+        horizonBlockNumber++;
       }
       /* vertical */
       for (let k = i; k < h; k++) {
-        if (blockId === blueprint[k][j]) verticalBlockNumber++;
+        // if (blockId === blueprint[k][j]) verticalBlockNumber++;
+        if (blockId !== blueprint[k][j]) break;
+        verticalBlockNumber++;
       }
       /* rect */
       const edgeLength = Math.min(horizonBlockNumber, verticalBlockNumber);
       let isValidRect = true;
       for (let k = j; k < edgeLength; k++) {
         for (let l = j; l < edgeLength; l++) {
-          if (blockId === blueprint[i + k][j + l]) {
+          if (blockId === blueprint[i + l][j + k]) {
             rectBlockNumber++;
           } else {
             isValidRect = false;
@@ -93,6 +97,8 @@ const generateCommand = (
       }
 
       if (!isValidRect) rectBlockNumber = -1;
+      /* 32768 is limit block nummber of fill command */
+      if (rectBlockNumber >= 32768) rectBlockNumber = -1;
       const startBlueprint = { x: j, y: i };
       let endBlueprint = { x: j, y: i };
       if (rectBlockNumber > verticalBlockNumber && rectBlockNumber > horizonBlockNumber) {

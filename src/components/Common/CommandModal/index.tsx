@@ -76,6 +76,10 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
     const c2: Coordinate3D = { x: coordinate.rtx, y: coordinate.rty, z: coordinate.rtz };
     const c3: Coordinate3D = { x: coordinate.lbx, y: coordinate.lby, z: coordinate.lbz };
 
+    console.log("tryComplement");
+    console.log(expectedWidth, expectedHeight);
+    console.log(c1, c2, c3);
+
     if (validInput(c1, c2, c3, expectedWidth, expectedHeight)) {
       /* if coordinate is valid, show RB coordinate */
       setRBCoordinate(calcRBCoordinate(c1, c2, c3));
@@ -93,7 +97,9 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
   };
 
   useEffect(() => {
+    console.log("use effect");
     if (blueprint === undefined || blueprint.length === 0) return;
+    console.log(blueprint.length);
     tryComplement(cornerCoordinates, blueprint[0].length, blueprint.length);
   }, [cornerCoordinates]);
 
@@ -159,7 +165,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
           </div>
         </div>
 
-        <div className="flex justify-center">{blueprint.length}</div>
+        <div className="flex justify-center">{blueprint[0].length}</div>
 
         <div className="flex justify-between">
           <div className="flex flex-col justify-between items-center">
@@ -174,7 +180,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
                 onChange={(e) => handleChangeCoordinate("ltz", Number(e.target.value))}
               ></CoordinateInput>
             </div>
-            <div>{blueprint[0].length}</div>
+            <div>{blueprint.length}</div>
             <div className="flex flex-col">
               <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("lbx", Number(e.target.value))}
