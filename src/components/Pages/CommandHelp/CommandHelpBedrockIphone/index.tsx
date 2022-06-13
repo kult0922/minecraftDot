@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LanguageSwitch from "src/components/Common/LanguageSwitch";
 import { useLocale } from "src/i18n/useLocale";
 
 const CommandHelpBedrockIphoneComponent = () => {
@@ -6,7 +7,12 @@ const CommandHelpBedrockIphoneComponent = () => {
   return (
     <>
       <div className="m-4">
-        <div className="text-3xl">{t.BEDROCK_IPHONE_COMMAND_TITLE}</div>
+        <div className="flex justify-between">
+          <div className="text-4xl mb-4">{t.BEDROCK_IPHONE_COMMAND_TITLE}</div>
+          <div>
+            <LanguageSwitch path="/command-help/bedrock-iphone/" />
+          </div>
+        </div>
 
         <div className="text-xl font-semibold mt-8 mb-2"> Step1. {t.BEDROCK_IPHONE_COMMAND_SECTION1}</div>
         <div>{t.BEDROCK_IPHONE_COMMAND_TEXT1}</div>

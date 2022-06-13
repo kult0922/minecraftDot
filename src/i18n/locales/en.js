@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   // Home
-  HELP: "help💡",
+  HELP: "Help",
   IMAGE_SELECT: "Please choose an image",
   IMAGE_SELECT_BUTTON: "choose an image",
   WIDTH_BLOCK: "Number of horizontal blocks",

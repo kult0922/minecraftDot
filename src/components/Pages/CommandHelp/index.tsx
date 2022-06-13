@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LanguageSwitch from "src/components/Common/LanguageSwitch";
 import { useLocale } from "src/i18n/useLocale";
 
 const CommandHelpComponent = () => {
@@ -6,7 +7,12 @@ const CommandHelpComponent = () => {
   return (
     <>
       <div className="m-4">
-        <div className="text-4xl mb-4">{t.HOW_TO_RUN_COMMAND}</div>
+        <div className="flex justify-between">
+          <div className="text-4xl mb-4">{t.HOW_TO_RUN_COMMAND}</div>
+          <div>
+            <LanguageSwitch path="/command-help/" />
+          </div>
+        </div>
         <div>{t.COMMAND1}</div>
         <div>{t.COMMAND2}</div>
 
