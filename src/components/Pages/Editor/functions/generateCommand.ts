@@ -118,6 +118,7 @@ const generateCommand = (
       commandLineNumber++;
       if (commandLineNumber === bedrockCommandLimit) {
         commandScripts.push(commandScript);
+        commandScript = "";
         commandLineNumber = 0;
       }
     }
