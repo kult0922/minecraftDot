@@ -59,7 +59,7 @@ export default {
   BEDROCK_COMMAND_TEXT2:
     "zipファイルをクリックして解凍してください．特別なソフトは必要ありません．クリックするだけで大丈夫です．",
   BEDROCK_COMMAND_TEXT3:
-    "Minecraftのフォルダの中にあるdevelopment_behaivior_packsフォルダを開きます．WindowsではC:Users/ユーザ名/AppData/LocalPackages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/gamescom.mojangにあります．そこに先ほど解凍したフォルダ(dot_pack)を丸ごと入れます．最終的に以下のようなフォルダ構成になっていれば大丈夫です．",
+    "Minecraftのフォルダの中にあるdevelopment_behaivior_packsフォルダを開きます．そこに先ほど解凍したフォルダ(dot_pack)を丸ごと入れます．最終的に以下のようなフォルダ構成になっていれば大丈夫です．",
   BEDROCK_COMMAND_TEXT4:
     "Minecraftアプリを開き，コマンドを実行したいワールドの設定画面を開きます．アドオンメニューからベヘイビアーパックを選択します．そしてマイパックの中にある先ほど作成したパックを選択し，有効にします",
   BEDROCK_COMMAND_TEXT5:

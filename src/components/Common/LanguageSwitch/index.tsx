@@ -24,7 +24,7 @@ const LanguageSwitch = ({ path }: Props) => {
     <>
       <div className="">
         <button onClick={handleMenuOpen} className="border-2 px-2 py-1 rounded">
-          <div className="flex">
+          <div className="flex whitespace-nowrap">
             <div className="material-symbols-outlined text-md mr-1">language</div>
             {locale === "ja" ? <div>日本語</div> : <div>English</div>}
           </div>

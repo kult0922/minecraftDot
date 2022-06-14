@@ -59,7 +59,7 @@ export default {
   BEDROCK_COMMAND_TEXT2:
     "Decompress the zip file by clicking zip file You don't need special tools, just click file",
   BEDROCK_COMMAND_TEXT3:
-    "Open development_behavior_packs folder in Minecraft folder. Minecraft folder is in C:Users/Username/AppData/LocalPackagesMicrosoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/gamescom.mojang folder at Windows. In that folder, please put the folder (dot_pack folder) that you extract in step2. You should end up with a folder structure like the one in the below.",
+    "Open development_behavior_packs folder in Minecraft folder. In that folder, please put the folder (dot_pack folder) that you extract in step2. You should end up with a folder structure like the one in the below.",
   BEDROCK_COMMAND_TEXT4:
     "Open Minecraft app, and open world setting that you excute function Please select Behavior Packs in Add-Ons section Next, select behavior pack that you load, and tap activate.",
   BEDROCK_COMMAND_TEXT5:
