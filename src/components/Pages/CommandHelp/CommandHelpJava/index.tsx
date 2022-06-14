@@ -8,7 +8,7 @@ const CommandHelpJavaComponent = () => {
     <>
       <div className="m-4">
         <div className="flex justify-between">
-          <div className="text-4xl mb-4">{t.JAVA_COMMAND_TITLE}</div>
+          <div className="sm:text-4xl text-xl mb-4">{t.JAVA_COMMAND_TITLE}</div>
           <div>
             <LanguageSwitch path="/command-help/java/" />
           </div>

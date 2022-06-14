@@ -8,7 +8,7 @@ const CommandHelpComponent = () => {
     <>
       <div className="m-4">
         <div className="flex justify-between">
-          <div className="text-4xl mb-4">{t.HOW_TO_RUN_COMMAND}</div>
+          <div className="sm:text-4xl text-xl mb-4">{t.HOW_TO_RUN_COMMAND}</div>
           <div>
             <LanguageSwitch path="/command-help/" />
           </div>
@@ -29,6 +29,12 @@ const CommandHelpComponent = () => {
         <div className="mt-2">
           <Link href="/command-help/bedrock-iphone">
             <a className="underline text-decoration">{t.COMMAND_BEDROCK_IPHONE_LINK}</a>
+          </Link>
+        </div>
+
+        <div className="mt-12">
+          <Link href="/">
+            <a className="underline text-decoration">{t.RETURN_HOME}</a>
           </Link>
         </div>
       </div>
