@@ -11,17 +11,7 @@ import { useLocale } from "src/i18n/useLocale";
 
 const ImageConverter = () => {
   const { t } = useLocale();
-  const defaultUseBlockGroup = [
-    "wool",
-    "concrete",
-    "terracotta",
-    "glazed",
-    "ore",
-    "stone",
-    "soil",
-    "wood",
-    "jewel",
-  ];
+  const defaultUseBlockGroup = ["wool", "concrete", "terracotta", "stone", "soil", "wood", "jewel"];
 
   const initBlockUseFlag = (defaultUseBlockGroup: string[]) => {
     const blockUseFlag = new Map<string, Boolean>();
@@ -56,7 +46,7 @@ const ImageConverter = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
   const [isImageUpload, setIsImageUpload] = useState(false);
-  const [outSize, setOutSize] = useState(64);
+  const [outSize, setOutSize] = useState(128);
   const [blueprint, setBlueprint] = useState<string[][]>([]);
   const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag(defaultUseBlockGroup));
   const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag(defaultUseBlockGroup));
@@ -144,7 +134,7 @@ const ImageConverter = () => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setOutSize(Number(event.target.value));
             }}
-            defaultValue={64}
+            defaultValue={outSize}
             type="number"
             className="text-center w-24 bg-neutral-900"
           />
