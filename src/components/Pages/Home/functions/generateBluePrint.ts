@@ -1,4 +1,5 @@
 import get2DArray from "src/functions/get2DArray";
+import rgb2Lab from "src/functions/rgb2lab";
 import { t } from "src/functions/t";
 
 /*
@@ -8,6 +9,10 @@ const t = (x: number, y: number, c: number) => {
   return 4 * (y * w + x) + c;
 };
 */
+
+const RGBCompress = (R: number, G: number, B: number) => {
+  return R + 1000 * G + 1000000 * B;
+};
 
 const getMostSimilarBlockId = (
   R: number,
@@ -24,9 +29,11 @@ const getMostSimilarBlockId = (
 
   for (const [index, blockImageData] of blockImageDataDict.entries()) {
     if (index == "minecraft:air") continue;
-    // ここで差異を計算
+
+    const { L, a, b } = rgb2Lab(R, G, B);
+
     const diff =
-      Math.abs(R - blockImageData.R) + Math.abs(G - blockImageData.G) + Math.abs(B - blockImageData.B);
+      Math.abs(L - blockImageData.L) + Math.abs(a - blockImageData.a) + Math.abs(b - blockImageData.b);
     if (diff < minDiff) {
       minDiff = diff;
       javaId = index;
@@ -43,11 +50,9 @@ const generateBlueprint = (
   blockImageDataDict: Map<string, BlockImageData>
 ) => {
   const width = image.width;
-  const height = image.height;
   const srcImage = image.data;
-
-  // const ws = Math.round(width / wPix);
   const ws = 1;
+  const memo = new Map<number, string>();
 
   const blueprint: Array<Array<string>> = get2DArray(hPix, wPix);
 
@@ -76,10 +81,16 @@ const generateBlueprint = (
       B /= ws * ws;
       A /= ws * ws;
 
-      const mostSimilarBlockId = getMostSimilarBlockId(R, G, B, A, blockImageDataDict);
-      blueprint[i][j] = mostSimilarBlockId;
+      if (memo.has(RGBCompress(R, G, B))) {
+        blueprint[i][j] = memo.get(RGBCompress(R, G, B))!;
+      } else {
+        const mostSimilarBlockId = getMostSimilarBlockId(R, G, B, A, blockImageDataDict);
+        memo.set(RGBCompress(R, G, B), mostSimilarBlockId);
+        blueprint[i][j] = mostSimilarBlockId;
+      }
     }
   }
+  console.log(memo);
 
   return blueprint;
 };

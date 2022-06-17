@@ -15,7 +15,7 @@ import wood from "src/json/wood.json";
 import light from "src/json/light.json";
 import air from "src/json/air.json";
 import glass from "src/json/glass.json";
-import rgb2hsv from "src/functions/rgb2hsv";
+import rgb2Lab from "src/functions/rgb2lab";
 
 const BlockDBContext = createContext(
   {} as {
@@ -87,9 +87,9 @@ export function BlockDBProvider({ children }: { children?: ReactNode }) {
       R /= size * size;
       G /= size * size;
       B /= size * size;
-      const { H, S, V } = rgb2hsv(R, G, B);
+      const { L, a, b } = rgb2Lab(R, G, B);
 
-      blockImageDataDict.set(block.javaId, { imageData: blockImageData, R, G, B, H, S, V });
+      blockImageDataDict.set(block.javaId, { imageData: blockImageData, R, G, B, L, a, b });
       setBlockImageDataDict(blockImageDataDict);
     }
   };
