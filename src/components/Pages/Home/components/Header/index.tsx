@@ -20,7 +20,7 @@ const Header = () => {
           <button onClick={handleModalOpen} className="mr-3">
             {t.HELP}
           </button>
-          <div>
+          <div className="sm:mr-4">
             <LanguageSwitch path="/" />
           </div>
         </div>
