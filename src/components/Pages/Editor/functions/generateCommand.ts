@@ -25,12 +25,19 @@ const generateFillCommand = (blockId: string, coordinate1: Coordinate3D, coordin
 const toMinecraftCoordinate = (
   coordinate: Coordinate,
   LT: Coordinate3D,
+  RT: Coordinate3D,
+  LB: Coordinate3D,
   minecraftAxiosOfX: Axios,
   minecraftAxiosOfY: Axios
 ) => {
   const C = { x: LT.x, y: LT.y, z: LT.z };
-  C[minecraftAxiosOfX] = LT[minecraftAxiosOfX] + coordinate.x;
-  C[minecraftAxiosOfY] = LT[minecraftAxiosOfY] + coordinate.y;
+  let relativeX = coordinate.x;
+  let relativeY = coordinate.y;
+  if (RT[minecraftAxiosOfX] - LT[minecraftAxiosOfX] < 0) relativeX = -relativeX;
+  if (LB[minecraftAxiosOfY] - LT[minecraftAxiosOfY] < 0) relativeY = -relativeY;
+
+  C[minecraftAxiosOfX] = LT[minecraftAxiosOfX] + relativeX;
+  C[minecraftAxiosOfY] = LT[minecraftAxiosOfY] + relativeY;
   return C;
 };
 
@@ -111,8 +118,8 @@ const generateCommand = (
         /* horizon is max */
         endBlueprint = { x: j + horizonBlockNumber - 1, y: i };
       }
-      const start = toMinecraftCoordinate(startBlueprint, LT, minecraftAxiosOfX!, minecraftAxiosOfY!);
-      const end = toMinecraftCoordinate(endBlueprint, LT, minecraftAxiosOfX!, minecraftAxiosOfY!);
+      const start = toMinecraftCoordinate(startBlueprint, LT, RT, LB, minecraftAxiosOfX!, minecraftAxiosOfY!);
+      const end = toMinecraftCoordinate(endBlueprint, LT, RT, LB, minecraftAxiosOfX!, minecraftAxiosOfY!);
       fillVisit(startBlueprint, endBlueprint, visit);
       commandScript += generateFillCommand(blockId, start, end);
       commandLineNumber++;
