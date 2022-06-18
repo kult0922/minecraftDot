@@ -172,23 +172,29 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
             <div className="flex flex-col">
               <CoordinateInput
                 onChange={(e) => handleChangeCoordinate("ltx", Number(e.target.value))}
+                placeholder="x"
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="y"
                 onChange={(e) => handleChangeCoordinate("lty", Number(e.target.value))}
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="z"
                 onChange={(e) => handleChangeCoordinate("ltz", Number(e.target.value))}
               ></CoordinateInput>
             </div>
             <div>{blueprint.length}</div>
             <div className="flex flex-col">
               <CoordinateInput
+                placeholder="x"
                 onChange={(e) => handleChangeCoordinate("lbx", Number(e.target.value))}
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="y"
                 onChange={(e) => handleChangeCoordinate("lby", Number(e.target.value))}
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="z"
                 onChange={(e) => handleChangeCoordinate("lbz", Number(e.target.value))}
               ></CoordinateInput>
             </div>
@@ -205,12 +211,15 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
           <div className="flex flex-col justify-between">
             <div className="flex flex-col">
               <CoordinateInput
+                placeholder="x"
                 onChange={(e) => handleChangeCoordinate("rtx", Number(e.target.value))}
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="y"
                 onChange={(e) => handleChangeCoordinate("rty", Number(e.target.value))}
               ></CoordinateInput>
               <CoordinateInput
+                placeholder="z"
                 onChange={(e) => handleChangeCoordinate("rtz", Number(e.target.value))}
               ></CoordinateInput>
             </div>
