@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
-import { useBlueprintContext } from "src/store/useBlueprint";
-import { useEditorCanvasContext } from "src/store/useEditorCanvas";
-import { useBlockDBContext } from "src/store/useBlockDB";
-import { useEditorContext } from "src/store/useEditor";
-import BlockNameLabel from "src/components/Common/BlockNameLabel";
-import { useHistoryContext } from "src/store/useHistory";
+import { useBlueprintContext } from "src/hooks/useBlueprint";
+import { useEditorCanvasContext } from "src/hooks/useEditorCanvas";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
+import { useEditorContext } from "src/hooks/useEditor";
+import BlockNameLabel from "src/components/CommonComponents/BlockNameLabel";
+import { useHistoryContext } from "src/hooks/useHistory";
 
 const EditorBoard = () => {
   const {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import createCsv from "src/functions/createCsv";
-import { useBlockDBContext } from "src/store/useBlockDB";
-import { useEditorCanvasContext } from "src/store/useEditorCanvas";
-import CommandModal from "../../../../Common/CommandModal";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
+import { useEditorCanvasContext } from "src/hooks/useEditorCanvas";
+import CommandModal from "../../../../CommonComponents/CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
 import ReplaceModal from "../ReplaceMenu";
 import ToolButton from "./ToolButton.tsx";

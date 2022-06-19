@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Modal from "react-modal";
-import CrossButton from "src/components/Common/CrossButton.tsx";
+import CrossButton from "src/components/CommonComponents/CrossButton.tsx";
 import { useLocale } from "src/hooks/useLocale";
 
 interface Props {

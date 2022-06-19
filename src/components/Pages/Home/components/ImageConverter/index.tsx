@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import generateBlueprint from "src/components/Pages/Home/functions/generateBluePrint";
-import { useBlockDBContext } from "src/store/useBlockDB";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
 import getContext from "src/functions/getContext";
 import PreviewModal from "src/components/Pages/Home/components/PreviewModal";
-import BlockButton from "src/components/Common/BlockButton";
+import BlockButton from "src/components/CommonComponents/BlockButton";
 import resizeImageData from "resize-image-data";
 import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
-import CommandModal from "src/components/Common/CommandModal";
+import CommandModal from "src/components/CommonComponents/CommandModal";
 import { useLocale } from "src/hooks/useLocale";
 
 const ImageConverter = () => {

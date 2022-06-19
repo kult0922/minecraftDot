@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import geenrateImageFromBlueprint from "../../functions/generateImageFromBlueprint";
-import { useBlockDBContext } from "src/store/useBlockDB";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
 import Modal from "react-modal";
 import Link from "next/link";
-import { useBlueprintContext } from "src/store/useBlueprint";
+import { useBlueprintContext } from "src/hooks/useBlueprint";
 import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
-import CrossButton from "src/components/Common/CrossButton.tsx";
+import CrossButton from "src/components/CommonComponents/CrossButton.tsx";
 import createCsv from "src/functions/createCsv";
 import { useLocale } from "src/hooks/useLocale";
 

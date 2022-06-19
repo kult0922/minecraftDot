@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { useBlockDBContext } from "src/store/useBlockDB";
-import { useEditorContext } from "src/store/useEditor";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
+import { useEditorContext } from "src/hooks/useEditor";
 
 const BlockPalette = () => {
   const { blockDB } = useBlockDBContext();

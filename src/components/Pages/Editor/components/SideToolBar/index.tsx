@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import ToolButton from "src/components/Pages/Editor/components/SideToolBar/ToolButton";
-import { useBlockDBContext } from "src/store/useBlockDB";
-import { useEditorContext } from "src/store/useEditor";
+import { useBlockDBContext } from "src/hooks/useBlockDB";
+import { useEditorContext } from "src/hooks/useEditor";
 import PenSizeChange from "./PenSIzeChange";
 
 const SideToolBar = () => {

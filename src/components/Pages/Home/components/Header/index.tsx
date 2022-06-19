@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import LanguageSwitch from "src/components/Common/LanguageSwitch";
+import LanguageSwitch from "src/components/CommonComponents/LanguageSwitch";
 import { useLocale } from "src/hooks/useLocale";
 import HelpModal from "./HelpModal";
 

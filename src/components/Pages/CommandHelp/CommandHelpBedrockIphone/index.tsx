@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LanguageSwitch from "src/components/Common/LanguageSwitch";
+import LanguageSwitch from "src/components/CommonComponents/LanguageSwitch";
 import { useLocale } from "src/hooks/useLocale";
 
 const CommandHelpBedrockIphoneComponent = () => {

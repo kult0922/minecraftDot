@@ -1,6 +1,6 @@
 import React from "react";
 import { useCallback, useEffect, useRef } from "react";
-import { useEditorContext } from "src/store/useEditor";
+import { useEditorContext } from "src/hooks/useEditor";
 
 const PenSizeChange = () => {
   const { getPenSize, upPenSize, downPenSize, penSizeIndex } = useEditorContext();
