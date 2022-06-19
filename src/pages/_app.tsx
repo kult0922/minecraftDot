@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { BlueprintProvider } from "src/store/useBlueprint";
 import { BlockDBProvider, useBlockDBContext } from "src/store/useBlockDB";
 import { DefaultSeo } from "next-seo";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 import GoogleAnalytics from "src/components/Common/GoogleAnalytics";
 import usePageView from "src/hooks/usePageView";
 import { pageview } from "src/functions/gtag";

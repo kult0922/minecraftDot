@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import CrossButton from "src/components/Common/CrossButton.tsx";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 import { useBlockDBContext } from "src/store/useBlockDB";
 import { useEditorContext } from "src/store/useEditor";
 import { useEditorCanvasContext } from "src/store/useEditorCanvas";

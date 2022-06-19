@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 
 const Footer = () => {
   const { t } = useLocale();

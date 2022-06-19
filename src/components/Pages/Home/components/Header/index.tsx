@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import LanguageSwitch from "src/components/Common/LanguageSwitch";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 import HelpModal from "./HelpModal";
 
 const Header = () => {

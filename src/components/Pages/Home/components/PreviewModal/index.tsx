@@ -8,7 +8,7 @@ import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/Common/CrossButton.tsx";
 import createCsv from "src/functions/createCsv";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 
 interface Props {
   blueprint: string[][];

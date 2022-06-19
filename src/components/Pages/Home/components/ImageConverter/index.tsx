@@ -7,7 +7,7 @@ import BlockButton from "src/components/Common/BlockButton";
 import resizeImageData from "resize-image-data";
 import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
 import CommandModal from "src/components/Common/CommandModal";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 
 const ImageConverter = () => {
   const { t } = useLocale();

@@ -6,7 +6,7 @@ import CommandModal from "../../../../Common/CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
 import ReplaceModal from "../ReplaceMenu";
 import ToolButton from "./ToolButton.tsx";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 
 const TopToolBar = () => {
   const { t, locale } = useLocale();

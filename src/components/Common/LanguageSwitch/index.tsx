@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 import OutsideClickHandler from "react-outside-click-handler";
 
 interface Props {

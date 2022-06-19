@@ -12,7 +12,7 @@ import generatePackZip from "../../Pages/Editor/functions/generatePackZip";
 import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
 import CoordinateInput from "./CoordinateInput";
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 import Link from "next/link";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { useLocale } from "src/i18n/useLocale";
+import { useLocale } from "src/hooks/useLocale";
 
 interface Props {
   blockBasic: BlockBasic;
