@@ -16,7 +16,6 @@ const LanguageSwitch = ({ path }: Props) => {
   };
 
   const handleMenuClose = () => {
-    console.log("close");
     setIsMenuOpen(false);
   };
 
