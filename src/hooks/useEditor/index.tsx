@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode, useCallback, useEffect } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 
 const EditorContext = createContext(
   {} as {

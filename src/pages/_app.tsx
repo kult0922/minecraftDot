@@ -2,7 +2,7 @@ import "./styles/globals.css";
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import React, { useEffect } from "react";
-import { BlueprintProvider } from "src/store/useBlueprint";
+import { BlueprintProvider } from "src/hooks/useBlueprint";
 import { BlockDBProvider, useBlockDBContext } from "src/hooks/useBlockDB";
 import { DefaultSeo } from "next-seo";
 import { useLocale } from "src/hooks/useLocale";
