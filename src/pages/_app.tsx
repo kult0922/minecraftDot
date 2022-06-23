@@ -29,14 +29,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GoogleAnalytics />
       <DefaultSeo
         defaultTitle={t.SEO_TITLE}
-        canonical="url"
+        canonical="https://www.minecraft-dot.pictures/"
         description={t.SEO_DESCTIPTION}
         openGraph={{
           type: "website",
           title: t.SEO_TITLE,
           description: t.SEO_DESCTIPTION,
           site_name: t.SEO_TITLE,
-          url: "url",
+          url: "https://www.minecraft-dot.pictures/",
         }}
       />
       <BlockDBProvider>
