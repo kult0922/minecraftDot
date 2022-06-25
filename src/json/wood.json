@@ -1,6 +1,48 @@
 {
   "blocks": [
     {
+      "javaId": "minecraft:oak_wood",
+      "bedrockId": "wood",
+      "jname": "オークの木",
+      "imagePath": "/blocks/oak_log.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:birch_wood",
+      "bedrockId": "wood 2",
+      "jname": "白樺の木",
+      "imagePath": "/blocks/birch_log.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:spruce_wood",
+      "bedrockId": "wood 1",
+      "jname": "松の木",
+      "imagePath": "/blocks/spruce_log.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:dark_oak_wood",
+      "bedrockId": "wood 5",
+      "jname": "ダークオークの木",
+      "imagePath": "/blocks/dark_oak_log.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:acacia_wood",
+      "bedrockId": "wood 4",
+      "jname": "アカシアの木",
+      "imagePath": "/blocks/acacia_log.png",
+      "blockGroup": "wood"
+    },
+    {
+      "javaId": "minecraft:jungle_wood",
+      "bedrockId": "wood 3",
+      "jname": "ジャングルの木",
+      "imagePath": "/blocks/jungle_log.png",
+      "blockGroup": "wood"
+    },
+    {
       "javaId": "minecraft:oak_planks",
       "bedrockId": "planks",
       "jname": "オークの木材",
