@@ -101,4 +101,7 @@ export default {
   SEO_TITLE: "Minecraft Dot",
   SEO_DESCTIPTION:
     "An application that can convert photos into Minecraft dots. Images and CSV files can be downloaded. The created dots can also be made into commands to automatically generate dots in the game. Pixel art can be edited in detail in Editor",
+
+  // CSV file
+  USE_BLOCK: "block list",
 };

@@ -101,4 +101,7 @@ export default {
   SEO_TITLE: "Minecraft Dot",
   SEO_DESCTIPTION:
     "写真をマインクラフトのドット絵に変換できるアプリ。画像、CSVファイルのダウンロードもできます。作成したドット絵はコマンドにしてゲーム内でドット絵を自動生成することも可能。ドット絵はエディタで細かく編集可能",
+
+  // CSV file
+  USE_BLOCK: "使用ブロック",
 };

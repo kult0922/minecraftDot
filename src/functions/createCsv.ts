@@ -42,7 +42,8 @@ const createCsv = (
   blueprint: string[][],
   blockData: BlockBasic[],
   javaId2index: Map<string, number>,
-  locale: Locale
+  locale: Locale,
+  useBlockTitle: string
 ) => {
   const nameTable = createNmaeTable(blueprint, blockData, javaId2index, locale);
   const blockAmount = totalUpBlock(blueprint);
@@ -69,7 +70,7 @@ const createCsv = (
   csv += "\n";
   csv += " ";
   csv += ",";
-  csv += "使用ブロック数";
+  csv += useBlockTitle;
   csv += "\n";
   // block amount csv
   for (const [javaId, amount] of blockAmount.entries()) {
