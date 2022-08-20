@@ -27,7 +27,7 @@ const TopToolBar = () => {
     setIsCommandModalOpen(true);
   };
   const handleCSVDownload = () => {
-    const csv = createCsv(getBlueprint(), blockDB, javaId2index, locale as Locale);
+    const csv = createCsv(getBlueprint(), blockDB, javaId2index, locale as Locale, t.USE_BLOCK);
     const blob = new Blob([csv], { type: "text/csv" });
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
