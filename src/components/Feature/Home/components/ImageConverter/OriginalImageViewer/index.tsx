@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState, memo } from "react";
 import getContext from "src/functions/getContext";
-import loadImageFromFile from "src/components/Pages/Home/functions/loadImageFromFile";
+import loadImageFromFile from "src/components/Feature/Home/functions/loadImageFromFile";
 import { useLocale } from "src/hooks/useLocale";
 
 interface Props {

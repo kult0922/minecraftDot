@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import PrivacyComponent from "src/components/Pages/Privacy";
+import PrivacyComponent from "src/components/Feature/Privacy";
 
 const Privacy: NextPage = () => {
   return <PrivacyComponent />;

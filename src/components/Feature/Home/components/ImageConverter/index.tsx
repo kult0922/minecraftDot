@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
-import generateBlueprint from "src/components/Pages/Home/functions/generateBluePrint";
+import generateBlueprint from "src/components/Feature/Home/functions/generateBluePrint";
 import { useBlockDBContext } from "src/hooks/useBlockDB";
-import PreviewModal from "src/components/Pages/Home/components/PreviewModal";
+import PreviewModal from "src/components/Feature/Home/components/PreviewModal";
 import resizeImageData from "resize-image-data";
 import CommandModal from "src/components/CommonComponents/CommandModal";
 import { useLocale } from "src/hooks/useLocale";

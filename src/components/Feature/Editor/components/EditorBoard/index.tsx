@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
+import geenrateImageFromBlueprint from "src/components/Feature/Home/functions/generateImageFromBlueprint";
 import { useBlueprintContext } from "src/hooks/useBlueprint";
 import { useEditorCanvasContext } from "src/hooks/useEditorCanvas";
 import { useBlockDBContext } from "src/hooks/useBlockDB";

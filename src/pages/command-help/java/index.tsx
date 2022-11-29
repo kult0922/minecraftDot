@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import CommandHelpJavaComponent from "src/components/Pages/CommandHelp/CommandHelpJava";
+import CommandHelpJavaComponent from "src/components/Feature/CommandHelp/CommandHelpJava";
 
 const ComamndHelpJava: NextPage = () => {
   return <CommandHelpJavaComponent />;

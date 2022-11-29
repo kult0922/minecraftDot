@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
+import geenrateImageFromBlueprint from "src/components/Feature/Home/functions/generateImageFromBlueprint";
 import { useBlockDBContext } from "src/hooks/useBlockDB";
 import Modal from "react-modal";
 import { useBlueprintContext } from "src/hooks/useBlueprint";
 import getContext from "src/functions/getContext";
 import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/CommonComponents/CrossButton.tsx";
-import { calcRBCoordinate, validInput } from "src/components/Pages/Editor/functions/cornerCoordinate";
-import generateCommand from "src/components/Pages/Editor/functions/generateCommand";
-import generatePackZip from "../../Pages/Editor/functions/generatePackZip";
+import { calcRBCoordinate, validInput } from "src/components/Feature/Editor/functions/cornerCoordinate";
+import generateCommand from "src/components/Feature/Editor/functions/generateCommand";
+import generatePackZip from "../../Feature/Editor/functions/generatePackZip";
 import { saveAs } from "file-saver";
 import EditionButton from "./EditionButton";
 import CoordinateInput from "./CoordinateInput";

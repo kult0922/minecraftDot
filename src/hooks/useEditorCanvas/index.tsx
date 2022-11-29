@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from "react";
-import geenrateImageFromBlueprint from "src/components/Pages/Home/functions/generateImageFromBlueprint";
+import geenrateImageFromBlueprint from "src/components/Feature/Home/functions/generateImageFromBlueprint";
 import getSameBlockCoordinates from "src/hooks/useEditorCanvas/functions/getSameBlockCoordinates";
 import getTargetCoordinates from "src/hooks/useEditorCanvas/functions/getTargetCoordinates";
 import getBufferCanvas from "src/functions/getBufferCanvas";

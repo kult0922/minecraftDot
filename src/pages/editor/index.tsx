@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import EditorPageComponent from "src/components/Pages/Editor";
+import EditorPageComponent from "src/components/Feature/Editor";
 import { EditorProvider } from "src/hooks/useEditor";
 import { EditorCanvasProvider } from "src/hooks/useEditorCanvas";
 import { HistoryProvider } from "src/hooks/useHistory";
