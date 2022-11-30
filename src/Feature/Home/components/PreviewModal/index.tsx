@@ -102,28 +102,30 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal
         </div>
         <div className="flex justify-center">
           <table>
-            <tr>
-              <th></th>
-              <th></th>
-            </tr>
-            <tr>
-              <td className="text-center px-4 py-2">
-                <button onClick={handleImageDownload}> {t.IMAGE_DOWNLOAD} </button>
-              </td>
-              <td className="text-center px-4 py-2">
-                <button onClick={handleCSVDownload}> {t.CSV_DOWNLOAD} </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="text-center px-4 py-2">
-                <button onClick={handleCommandGeneration}> {t.COMMAND_GENERATION}</button>
-              </td>
-              <td className="text-center px-4 py-2">
-                <Link href="/editor">
-                  <a>{t.EDIT}</a>
-                </Link>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <td className="text-center px-4 py-2">
+                  <button onClick={handleImageDownload}> {t.IMAGE_DOWNLOAD} </button>
+                </td>
+                <td className="text-center px-4 py-2">
+                  <button onClick={handleCSVDownload}> {t.CSV_DOWNLOAD} </button>
+                </td>
+              </tr>
+              <tr>
+                <td className="text-center px-4 py-2">
+                  <button onClick={handleCommandGeneration}> {t.COMMAND_GENERATION}</button>
+                </td>
+                <td className="text-center px-4 py-2">
+                  <Link href="/editor">
+                    <a>{t.EDIT}</a>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </Modal>
