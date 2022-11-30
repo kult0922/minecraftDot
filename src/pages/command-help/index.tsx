@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import CommandHelpComponent from "src/components/Feature/CommandHelp";
+import CommandHelpComponent from "src/Feature/CommandHelp";
 
 const ComamndHelp: NextPage = () => {
   return <CommandHelpComponent />;

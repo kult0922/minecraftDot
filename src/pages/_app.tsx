@@ -2,11 +2,11 @@ import "./styles/globals.css";
 import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import React, { useEffect } from "react";
-import { BlueprintProvider } from "src/hooks/useBlueprint";
-import { BlockDBProvider, useBlockDBContext } from "src/hooks/useBlockDB";
+import { BlueprintProvider } from "src/context/useBlueprint";
+import { BlockDBProvider, useBlockDBContext } from "src/context/useBlockDB";
 import { DefaultSeo } from "next-seo";
 import { useLocale } from "src/hooks/useLocale";
-import GoogleAnalytics from "src/components/CommonComponents/GoogleAnalytics";
+import GoogleAnalytics from "src/components/GoogleAnalytics";
 import usePageView from "src/hooks/usePageView";
 import { pageview } from "src/functions/gtag";
 

@@ -11,7 +11,7 @@ import wood from "src/json/wood.json";
 import light from "src/json/light.json";
 import air from "src/json/air.json";
 import glass from "src/json/glass.json";
-import generateCommand from "src/components/Feature/Editor/functions/generateCommand";
+import generateCommand from "src/Feature/Editor/functions/generateCommand";
 
 describe.each([
   {

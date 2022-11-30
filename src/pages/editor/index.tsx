@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import EditorPageComponent from "src/components/Feature/Editor";
-import { EditorProvider } from "src/hooks/useEditor";
-import { EditorCanvasProvider } from "src/hooks/useEditorCanvas";
-import { HistoryProvider } from "src/hooks/useHistory";
+import EditorPageComponent from "src/Feature/Editor";
+import { EditorProvider } from "src/context/useEditor";
+import { EditorCanvasProvider } from "src/context/useEditorCanvas";
+import { HistoryProvider } from "src/context/useHistory";
 
 const Editor: NextPage = () => {
   return (

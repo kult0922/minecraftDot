@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import CommandHelpBedrockIphoneComponent from "src/components/Feature/CommandHelp/CommandHelpBedrockIphone";
+import CommandHelpBedrockIphoneComponent from "src/Feature/CommandHelp/CommandHelpBedrockIphone";
 
 const CommandHelpBedrockIphone: NextPage = () => {
   return <CommandHelpBedrockIphoneComponent />;
