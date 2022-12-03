@@ -8,53 +8,28 @@ import { useLocale } from "src/hooks/useLocale";
 import SizeInput from "./SizeInput";
 import OriginalImageViewer from "./OriginalImageViewer";
 import BlockSelect from "./BlockSelect";
+import { useConvertSettings } from "./hooks/useConverteSettings";
 
 const ImageConverter = () => {
   const { t } = useLocale();
-  const defaultUseBlockGroup = ["wool", "concrete", "terracotta", "stone", "soil", "wood", "jewel"];
-
-  const initBlockUseFlag = (defaultUseBlockGroup: string[]) => {
-    const blockUseFlag = new Map<string, boolean>();
-    for (const blockBasic of blockDB) {
-      if (blockBasic.blockGroup == "air") continue;
-      blockUseFlag.set(blockBasic.javaId, defaultUseBlockGroup.includes(blockBasic.blockGroup));
-      const array = blockGroupMap.get(blockBasic.blockGroup);
-      if (array == undefined) {
-        blockGroupMap.set(blockBasic.blockGroup, [blockBasic]);
-      } else {
-        array.push(blockBasic);
-      }
-    }
-    return blockUseFlag;
-  };
-
-  const initGroupButtonFlag = (defaultUseBlockGroup: string[]) => {
-    const groupButtonFlag = new Map<string, boolean>();
-    for (const blockBasic of blockDB) {
-      if (blockBasic.blockGroup == "air") continue;
-      groupButtonFlag.set(blockBasic.blockGroup, defaultUseBlockGroup.includes(blockBasic.blockGroup));
-    }
-    return groupButtonFlag;
-  };
-
-  const blockGroupMap = new Map<string, Array<BlockBasic>>();
-  const { blockDB } = useBlockDBContext();
+  const {
+    size,
+    blockGroupMap,
+    blockUseFlag,
+    groupButtonFlag,
+    changeSize,
+    setBlockUseFlag,
+    setGroupButtonFlag,
+  } = useConvertSettings();
   const { blockImageDataDict } = useBlockDBContext();
 
+  // 画像処理データ
   const [originalImageData, setOriginalImageData] = useState<ImageData>();
+  const [blueprint, setBlueprint] = useState<string[][]>([]);
+
+  // モーダル表示制御
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
-  const [size, setSize] = useState(128);
-  const [blueprint, setBlueprint] = useState<string[][]>([]);
-  const [blockUseFlag, setBlockUseFlag] = useState(initBlockUseFlag(defaultUseBlockGroup));
-  const [groupButtonFlag, setGroupButtonFlag] = useState(initGroupButtonFlag(defaultUseBlockGroup));
-
-  const changeSize = useCallback(
-    (size: number) => {
-      setSize(size);
-    },
-    [setSize]
-  );
 
   const changeOriginalImageData = useCallback(
     (imageData: ImageData) => {
