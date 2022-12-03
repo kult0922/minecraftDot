@@ -1,73 +1,32 @@
-import { useCallback, useRef, useState } from "react";
-import generateBlueprint from "src/Feature/Home/functions/generateBluePrint";
-import { useBlockDBContext } from "src/context/useBlockDB";
+import { useState } from "react";
 import PreviewModal from "src/Feature/Home/components/PreviewModal";
-import resizeImageData from "resize-image-data";
 import CommandModal from "src/components/CommandModal";
 import { useLocale } from "src/hooks/useLocale";
 import SizeInput from "./SizeInput";
 import OriginalImageViewer from "./OriginalImageViewer";
 import BlockSelect from "./BlockSelect";
-import { useConvertSettings } from "./hooks/useConverteSettings";
+import { useConverter } from "./hooks/useConverter";
 
 const ImageConverter = () => {
   const { t } = useLocale();
   const {
-    size,
+    blueprint,
     blockGroupMap,
     blockUseFlag,
     groupButtonFlag,
     changeSize,
-    setBlockUseFlag,
-    setGroupButtonFlag,
-  } = useConvertSettings();
-  const { blockImageDataDict } = useBlockDBContext();
+    changeGroupButtonFlag,
+    changeOriginalImageData,
+    changeUseBlockFlag,
+    convert,
+  } = useConverter();
 
-  // 画像処理データ
-  const [originalImageData, setOriginalImageData] = useState<ImageData>();
-  const [blueprint, setBlueprint] = useState<string[][]>([]);
-
-  // モーダル表示制御
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
 
-  const changeOriginalImageData = useCallback(
-    (imageData: ImageData) => {
-      setOriginalImageData(imageData);
-    },
-    [setOriginalImageData]
-  );
-
-  const handleTransform = async () => {
-    if (originalImageData === undefined) return;
-    const useBlockImageDataDict = new Map<string, BlockImageData>();
-    for (let [jabaId, blockImageData] of blockImageDataDict) {
-      if (blockUseFlag.get(jabaId)) useBlockImageDataDict.set(jabaId, blockImageData);
-    }
-
-    // need to refactor
-    const height = Math.floor(originalImageData.height * (size / originalImageData.width));
-    const resizedImage = resizeImageData(originalImageData, size, height, "nearest-neighbor");
-
-    setBlueprint(generateBlueprint(resizedImage, size, height, useBlockImageDataDict));
+  const handleConvert = () => {
+    convert();
     setIsModalOpen(true);
-  };
-
-  const changeGroupButtonFlag = (group: string) => {
-    const beforeState = groupButtonFlag.get(group);
-    changeUseFlagByGroup(group, !beforeState);
-    setGroupButtonFlag((map) => new Map(map.set(group, !beforeState)));
-  };
-
-  const changeUseBlockFlag = (javaId: string) => {
-    const beforeState = blockUseFlag.get(javaId);
-    setBlockUseFlag((map) => new Map(map.set(javaId, !beforeState)));
-  };
-
-  const changeUseFlagByGroup = (group: string, state: boolean) => {
-    for (const blockBasic of blockGroupMap.get(group)!) {
-      setBlockUseFlag((map) => new Map(map.set(blockBasic.javaId, state)));
-    }
   };
 
   return (
@@ -87,7 +46,7 @@ const ImageConverter = () => {
         changeGroupButtonFlag={changeGroupButtonFlag}
       ></BlockSelect>
       <div className="flex justify-center mt-12 mb-12">
-        <button onClick={handleTransform} className="bg-m-green hover:bg-m-green-light p-2 pr-4 pl-4">
+        <button onClick={handleConvert} className="bg-m-green hover:bg-m-green-light p-2 pr-4 pl-4">
           <div className="flex items-center">
             {t.CONVERT_BUTTON}
             <span className="material-symbols-outlined">keyboard_double_arrow_right</span>
