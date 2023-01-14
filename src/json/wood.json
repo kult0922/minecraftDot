@@ -90,13 +90,6 @@
       "jname": "真紅の木材",
       "imagePath": "/blocks/crimson_planks.png",
       "blockGroup": "wood"
-    },
-    {
-      "javaId": "minecraft:warped_planks",
-      "bedrockId": "warped_planks",
-      "jname": "歪んだ木材",
-      "imagePath": "/blocks/warped_planks.png",
-      "blockGroup": "wood"
     }
   ]
 }

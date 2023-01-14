@@ -20,6 +20,20 @@
       "jname": "ネザーラック",
       "imagePath": "/blocks/netherrack.png",
       "blockGroup": "soil"
+    },
+    {
+      "javaId": "minecraft:prismarine_bricks",
+      "bedrockId": "prismarine 2",
+      "jname": "プリズマリンレンガ",
+      "imagePath": "/blocks/prismarine_bricks.png",
+      "blockGroup": "soil"
+    },
+    {
+      "javaId": "minecraft:dark_prismarine",
+      "bedrockId": "prismarine 1",
+      "jname": "ダークプリズマリン",
+      "imagePath": "/blocks/prismarine_dark.png",
+      "blockGroup": "soil"
     }
   ]
 }
