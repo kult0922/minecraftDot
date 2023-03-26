@@ -4,13 +4,15 @@ import { useBlockDBContext } from "src/context/useBlockDB";
 import { useEditorCanvasContext } from "src/context/useEditorCanvas";
 import CommandModal from "../../../../components/CommandModal";
 import EditorPreviewModal from "../EditorPreviewModal";
-import ReplaceModal from "../ReplaceMenu";
+import ReplaceModal from "./ReplaceMenu";
 import ToolButton from "./ToolButton.tsx";
 import { useLocale } from "src/hooks/useLocale";
+import ViewMenu from "./ViewMenu";
 
 const TopToolBar = () => {
   const { t, locale } = useLocale();
   const [isReplaceMenuOpen, setIsReplaceMenuOpen] = useState(false);
+  const [isViewMenuOpen, setIsViewMenuOpen] = useState(false);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isCommandModalOpen, setIsCommandModalOpen] = useState(false);
   const { undo, redo, getBlueprint, getMinecraftImage } = useEditorCanvasContext();
@@ -19,6 +21,9 @@ const TopToolBar = () => {
   /* modal managiment functions */
   const handleReplaceMenuOpen = () => {
     setIsReplaceMenuOpen(true);
+  };
+  const handleViewMenuOpen = () => {
+    setIsViewMenuOpen(true);
   };
   const handlePreviewModalOpen = () => {
     setIsPreviewModalOpen(true);
@@ -68,6 +73,12 @@ const TopToolBar = () => {
             <ToolButton onClick={handleReplaceMenuOpen} text={t.REPLACE} />
             <div className="absolute top-8 left-2">
               <ReplaceModal isOpen={isReplaceMenuOpen} setIsOpen={setIsReplaceMenuOpen} />
+            </div>
+          </div>
+          <div className="relative">
+            <ToolButton onClick={handleViewMenuOpen} text={t.VIEW} />
+            <div className="absolute top-8 left-2">
+              <ViewMenu isOpen={isViewMenuOpen} setIsOpen={setIsViewMenuOpen} />
             </div>
           </div>
           <ToolButton onClick={handleImageDownload} text={t.IMAGE_DOWNLOAD} />

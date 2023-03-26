@@ -11,6 +11,8 @@ export default {
   COMMAND_GENERATION: "Generate Command",
   EDIT: "Edit",
   REPLACE: "Replace",
+  VIEW: "View",
+  GRID: "Grid",
   PREVIEW: "Preview",
   BACK_TO_HOME: "Back to home",
   JAVA_EDITION: "Java",

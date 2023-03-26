@@ -11,6 +11,8 @@ export default {
   COMMAND_GENERATION: "コマンド生成",
   EDIT: "編集する",
   REPLACE: "置き換え",
+  VIEW: "表示",
+  GRID: "グリッド",
   PREVIEW: "プレビュー",
   BACK_TO_HOME: "ホームに戻る",
   JAVA_EDITION: "Java版",

@@ -16,6 +16,7 @@ const EditorCanvasContext = createContext(
       heightBlockNumber_: number,
       blueprint_: string[][]
     ) => void;
+    isShowGrid: boolean;
     getBlueprint: () => string[][];
     getMinecraftImage: () => HTMLCanvasElement;
     translate: (x: number, y: number) => void;
@@ -28,6 +29,7 @@ const EditorCanvasContext = createContext(
     pickBlock: (x: number, y: number) => string | undefined;
     undo: () => void;
     redo: () => void;
+    switchGrid: (isShow: boolean) => void;
     clearNaviCanvas: () => void;
     render: () => void;
   }
@@ -49,6 +51,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
   let magnification = 0.5;
   let widthBlockNumber = 0;
   let heightBlockNumber = 0;
+  let isShowGrid = false;
   let mainCanvas: HTMLCanvasElement;
   let naviCanvas: HTMLCanvasElement;
   let mainCanvasContext: CanvasRenderingContext2D;
@@ -142,6 +145,30 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     naviCanvasContext.strokeRect(rectX, rectY, blockSize * size, blockSize * size);
     naviCanvasContext.strokeStyle = "#fff";
     naviCanvasContext.strokeRect(rectX - 5, rectY - 5, blockSize * size + 10, blockSize * size + 10);
+  };
+
+  const switchGrid = (isShow: boolean) => {
+    isShowGrid = isShow;
+  };
+
+  const showGrid = () => {
+    clearNaviCanvas();
+    /* vertical grid */
+    for (let i = 0; i <= widthBlockNumber; i++) {
+      const x = minecraftImageX + (minecraftImageWidth / widthBlockNumber) * i;
+      mainCanvasContext.beginPath();
+      mainCanvasContext.moveTo(x, minecraftImageY);
+      mainCanvasContext.lineTo(x, minecraftImageY + minecraftImageHeight);
+      mainCanvasContext.stroke();
+    }
+    /* horizontal grid */
+    for (let i = 0; i <= heightBlockNumber; i++) {
+      const y = minecraftImageY + (minecraftImageHeight / heightBlockNumber) * i;
+      mainCanvasContext.beginPath();
+      mainCanvasContext.moveTo(minecraftImageX, y);
+      mainCanvasContext.lineTo(minecraftImageX + minecraftImageWidth, y);
+      mainCanvasContext.stroke();
+    }
   };
 
   const putBlock = (x: number, y: number, size: number, javaId: string) => {
@@ -285,9 +312,11 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
       minecraftImageWidth,
       minecraftImageHeight
     );
+    if (isShowGrid) showGrid();
   };
 
   const value = {
+    isShowGrid,
     getMinecraftImage,
     getBlueprint,
     init,
@@ -302,6 +331,7 @@ export function EditorCanvasProvider({ children }: { children?: ReactNode }) {
     putBlock,
     clearNaviCanvas,
     undo,
+    switchGrid,
     redo,
   };
 
