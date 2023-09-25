@@ -12,6 +12,7 @@ export function useImageGeneratorWorker() {
     canvas: HTMLCanvasElement
   ) => {
     setLoading(true);
+    setProgress(0);
     const worker = new Worker(
       new URL("../worker/imageGeneratorWorker", import.meta.url)
     );
