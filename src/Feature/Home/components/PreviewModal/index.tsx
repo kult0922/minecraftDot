@@ -1,15 +1,13 @@
 import { useRef } from "react";
-import geenrateImageFromBlueprint from "../../functions/generateImageFromBlueprint";
 import { useBlockDBContext } from "src/context/useBlockDB";
 import Modal from "react-modal";
 import Link from "next/link";
 import { useBlueprintContext } from "src/context/useBlueprint";
-import getContext from "src/functions/getContext";
-import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/CrossButton.tsx";
 import createCsv from "src/functions/createCsv";
 import { useLocale } from "src/hooks/useLocale";
-
+import { ProgressBar } from "./ProgressBar";
+import { useImageGeneratorWorker } from "./hooks/imageGeneratorWorkerHook";
 interface Props {
   blueprint: string[][];
   isModalOpen: boolean;
@@ -34,26 +32,25 @@ const modalStyles = {
   },
 };
 
-const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal }: Props) => {
+const PreviewModal = ({
+  blueprint,
+  isModalOpen,
+  setIsModalOpen,
+  showCommandModal,
+}: Props) => {
   const { locale, t } = useLocale();
   const { blockDB, javaId2index } = useBlockDBContext();
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null);
+  const { run, progress, loading } = useImageGeneratorWorker();
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  const afterOpenModal = () => {
-    const minecraftImage = geenrateImageFromBlueprint(blueprint, blockImageDataDict);
-
-    /* set minecraftImage to buffer canvs */
-    const bufferCanvas = getBufferCanvas(minecraftImage, minecraftImage.width, minecraftImage.height);
-
-    /* output image */
-    const mainCanvasContext = getContext(mainCanvas.current, minecraftImage.width, minecraftImage.height);
-    mainCanvasContext.drawImage(bufferCanvas, 0, 0, minecraftImage.width, minecraftImage.height);
+  const afterOpenModal = async () => {
+    run(blueprint, blockImageDataDict, mainCanvas.current!);
     setInitBlueprint(blueprint);
   };
 
@@ -66,7 +63,13 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal
   };
 
   const handleCSVDownload = () => {
-    const csv = createCsv(blueprint, blockDB, javaId2index, locale as Locale, t.USE_BLOCK);
+    const csv = createCsv(
+      blueprint,
+      blockDB,
+      javaId2index,
+      locale as Locale,
+      t.USE_BLOCK
+    );
     const blob = new Blob([csv], { type: "text/csv" });
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
@@ -88,46 +91,65 @@ const PreviewModal = ({ blueprint, isModalOpen, setIsModalOpen, showCommandModal
         onAfterOpen={afterOpenModal}
         style={modalStyles}
       >
-        <div className="flex justify-end mb-3">
-          <button onClick={closeModal}>
-            <CrossButton />
-          </button>
-        </div>
-        <div className="flex justify-center">
-          <canvas
-            id="canvas-out"
-            ref={mainCanvas}
-            className="h-auto w-auto max-h-[80vh] max-w-[90vw] border-4 border-neutral-700"
-          ></canvas>
-        </div>
-        <div className="flex justify-center">
-          <table>
-            <tbody>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-              <tr>
-                <td className="text-center px-4 py-2">
-                  <button onClick={handleImageDownload}> {t.IMAGE_DOWNLOAD} </button>
-                </td>
-                <td className="text-center px-4 py-2">
-                  <button onClick={handleCSVDownload}> {t.CSV_DOWNLOAD} </button>
-                </td>
-              </tr>
-              <tr>
-                <td className="text-center px-4 py-2">
-                  <button onClick={handleCommandGeneration}> {t.COMMAND_GENERATION}</button>
-                </td>
-                <td className="text-center px-4 py-2">
-                  <Link href="/editor">
-                    <a>{t.EDIT}</a>
-                  </Link>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <>
+          <div className="flex justify-end mb-3">
+            <button onClick={closeModal}>
+              <CrossButton />
+            </button>
+          </div>
+          <div className="flex justify-center">
+            <canvas
+              id="canvas-out"
+              ref={mainCanvas}
+              className="h-auto w-auto max-h-[80vh] max-w-[90vw] border-4 border-neutral-700"
+              width={0}
+              height={0}
+            ></canvas>
+          </div>
+          <div className="flex justify-center">
+            {loading ? (
+              <div className="w-64">
+                <ProgressBar progress={progress} />
+              </div>
+            ) : (
+              <table>
+                <tbody>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td className="text-center px-4 py-2">
+                      <button onClick={handleImageDownload}>
+                        {" "}
+                        {t.IMAGE_DOWNLOAD}{" "}
+                      </button>
+                    </td>
+                    <td className="text-center px-4 py-2">
+                      <button onClick={handleCSVDownload}>
+                        {" "}
+                        {t.CSV_DOWNLOAD}{" "}
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="text-center px-4 py-2">
+                      <button onClick={handleCommandGeneration}>
+                        {" "}
+                        {t.COMMAND_GENERATION}
+                      </button>
+                    </td>
+                    <td className="text-center px-4 py-2">
+                      <Link href="/editor">
+                        <a>{t.EDIT}</a>
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
+          </div>
+        </>
       </Modal>
     </>
   );

@@ -33,7 +33,9 @@ const getMostSimilarBlockId = (
     const { L, a, b } = rgb2Lab(R, G, B);
 
     const diff =
-      Math.abs(L - blockImageData.L) + Math.abs(a - blockImageData.a) + Math.abs(b - blockImageData.b);
+      Math.abs(L - blockImageData.L) +
+      Math.abs(a - blockImageData.a) +
+      Math.abs(b - blockImageData.b);
     if (diff < minDiff) {
       minDiff = diff;
       javaId = index;
@@ -84,13 +86,18 @@ const generateBlueprint = (
       if (memo.has(RGBCompress(R, G, B))) {
         blueprint[i][j] = memo.get(RGBCompress(R, G, B))!;
       } else {
-        const mostSimilarBlockId = getMostSimilarBlockId(R, G, B, A, blockImageDataDict);
+        const mostSimilarBlockId = getMostSimilarBlockId(
+          R,
+          G,
+          B,
+          A,
+          blockImageDataDict
+        );
         memo.set(RGBCompress(R, G, B), mostSimilarBlockId);
         blueprint[i][j] = mostSimilarBlockId;
       }
     }
   }
-  console.log(memo);
 
   return blueprint;
 };
