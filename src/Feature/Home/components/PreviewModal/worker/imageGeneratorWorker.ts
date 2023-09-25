@@ -1,6 +1,6 @@
 import { t } from "src/functions/t";
 
-const generateImageFromBlueprint = (
+const constructImageFromBlueprint = (
   blueprint: Array<Array<string>>,
   blockImageDataDict: Map<string, BlockImageData>
 ) => {
@@ -47,7 +47,7 @@ const generateImageFromBlueprint = (
 };
 
 self.addEventListener("message", (e) => {
-  const res = generateImageFromBlueprint(
+  const res = constructImageFromBlueprint(
     e.data.blueprint,
     e.data.blockImageDataDict
   );
