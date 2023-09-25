@@ -1,4 +1,5 @@
 import { t } from "src/functions/t";
+
 const generateImageFromBlueprint = (
   blueprint: Array<Array<string>>,
   blockImageDataDict: Map<string, BlockImageData>
@@ -17,9 +18,8 @@ const generateImageFromBlueprint = (
   for (let i = 0; i < rows; i++) {
     if ((i + 1) % step === 0) {
       progress += stepNum;
-      console.log("post progress", i / rows);
       self.postMessage({
-        type: "progress",
+        type: "loading",
         payload: progress,
       });
     }
@@ -51,5 +51,5 @@ self.addEventListener("message", (e) => {
     e.data.blueprint,
     e.data.blockImageDataDict
   );
-  self.postMessage({ type: "result", payload: res });
+  self.postMessage({ type: "complete", payload: res });
 });

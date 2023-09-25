@@ -1,15 +1,13 @@
-import { useRef, useState } from "react";
-import geenrateImageFromBlueprint from "../../functions/generateImageFromBlueprint";
+import { useRef } from "react";
 import { useBlockDBContext } from "src/context/useBlockDB";
 import Modal from "react-modal";
 import Link from "next/link";
 import { useBlueprintContext } from "src/context/useBlueprint";
-import getContext from "src/functions/getContext";
-import getBufferCanvas from "src/functions/getBufferCanvas";
 import CrossButton from "src/components/CrossButton.tsx";
 import createCsv from "src/functions/createCsv";
 import { useLocale } from "src/hooks/useLocale";
 import { ProgressBar } from "./ProgressBar";
+import { useImageGeneratorWorker } from "./hooks/imageGeneratorWorkerHook";
 interface Props {
   blueprint: string[][];
   isModalOpen: boolean;
@@ -45,56 +43,15 @@ const PreviewModal = ({
   const { setInitBlueprint } = useBlueprintContext();
   const { blockImageDataDict } = useBlockDBContext();
   const mainCanvas = useRef<HTMLCanvasElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [isProcessing, setIsProcessing] = useState(true);
+  const { run, progress, loading } = useImageGeneratorWorker();
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   const afterOpenModal = async () => {
-    setIsProcessing(true);
-    const myWorker = new Worker(new URL("./worker", import.meta.url));
-
-    myWorker.onmessage = function (e) {
-      if (e.data.type == "progress") {
-        setProgress(e.data.payload);
-        console.log(e.data.payload);
-        return;
-      }
-
-      console.log("get from worker");
-      console.log(e.data);
-
-      const minecraftImage = e.data.payload;
-
-      console.log("変換完了");
-
-      /* set minecraftImage to buffer canvs */
-      const bufferCanvas = getBufferCanvas(
-        minecraftImage,
-        minecraftImage.width,
-        minecraftImage.height
-      );
-
-      /* output image */
-      const mainCanvasContext = getContext(
-        mainCanvas.current,
-        minecraftImage.width,
-        minecraftImage.height
-      );
-      mainCanvasContext.drawImage(
-        bufferCanvas,
-        0,
-        0,
-        minecraftImage.width,
-        minecraftImage.height
-      );
-      setInitBlueprint(blueprint);
-      setIsProcessing(false);
-    };
-
-    myWorker.postMessage({ blueprint, blockImageDataDict });
+    run(blueprint, blockImageDataDict, mainCanvas.current!);
+    setInitBlueprint(blueprint);
   };
 
   const handleImageDownload = () => {
@@ -150,7 +107,7 @@ const PreviewModal = ({
             ></canvas>
           </div>
           <div className="flex justify-center">
-            {isProcessing ? (
+            {loading ? (
               <div className="w-64">
                 <ProgressBar progress={progress} />
               </div>
