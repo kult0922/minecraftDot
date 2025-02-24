@@ -41,13 +41,16 @@ export default {
   JAVA_COMMAND_SECTION1: "コマンドをダウンロードする",
   JAVA_COMMAND_SECTION2: "zipファイルを解凍",
   JAVA_COMMAND_SECTION3: "データパックとしてマインクラフトに読み込む",
-  JAVA_COMMAND_SECTION4: "コマンドを実行",
+  JAVA_COMMAND_SECTION4: "ファイル名を変更（1.21以降）",
+  JAVA_COMMAND_SECTION5: "コマンドを実行",
   JAVA_COMMAND_TEXT1: "本アプリで画像を変換し，zipファイル(minecraftDot.zip)をダウンロードしておきます．",
   JAVA_COMMAND_TEXT2:
     "zipファイルをクリックして解凍してください．特別なソフトは必要ありません．クリックするだけで大丈夫です．",
   JAVA_COMMAND_TEXT3:
     "./minecraft/savesフォルダを開きます．その中にワールド名のフォルダが並んでいると思うので，コマンドを使用したいワールドを開きます．さらにdatapacksフォルダを開きます．./minecraft/saves/ワールド名/datapacks フォルダを開いていればOKです．その中に先ほど解凍して得られたフォルダ(dotフォルダ)を入れます.",
   JAVA_COMMAND_TEXT4:
+    "functionsフォルダのフォルダ名から「s」を消して「function」に名前を変更します．",
+  JAVA_COMMAND_TEXT5:
     "最後にワールドに入りコマンドを入力します．/function フォルダ名:ファイル名と実行します．フォルダ名とはfunctionsフォルダが入っているフォルダ名です(デフォルトではdot_pack) ファイル名はfunctionsフォルダの中にあるmcfunctionファイルです(デフォルトではcmd)うまく読み込みが成功していれば，/functionを入力している段階でコマンドの候補が出てきます．コマンドに編集を行った場合，/reload を実行してください",
 
   // bedrock COMAMND

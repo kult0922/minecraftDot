@@ -59,6 +59,8 @@ const CommandHelpJavaComponent = () => {
 
         <div className="text-xl font-semibold mt-8 mb-2"> Step4. {t.JAVA_COMMAND_SECTION4}</div>
         <div>{t.JAVA_COMMAND_TEXT4}</div>
+        <div className="text-xl font-semibold mt-8 mb-2"> Step5. {t.JAVA_COMMAND_SECTION5}</div>
+        <div>{t.JAVA_COMMAND_TEXT5}</div>
       </div>
     </>
   );

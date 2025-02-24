@@ -41,13 +41,16 @@ export default {
   JAVA_COMMAND_SECTION1: "Download commands.",
   JAVA_COMMAND_SECTION2: "Decompress the zip fiel.",
   JAVA_COMMAND_SECTION3: "Load commands from minecraft as datapack.",
-  JAVA_COMMAND_SECTION4: "Excute function.",
+  JAVA_COMMAND_SECTION4: "Change folder name（1.21 or later）",
+  JAVA_COMMAND_SECTION5: "Run command",
   JAVA_COMMAND_TEXT1: "Convert image in this app, and download zip file (minecraftDot.zip).",
   JAVA_COMMAND_TEXT2:
     "Decompress the zip file by clicking zip file You don't need special tools, just click file",
   JAVA_COMMAND_TEXT3:
     "Open ./minecraft/saves folder. There are world data folders. Open world folder that you excute command. In world folder, Open datapacks folder. Now you are supposed to open ./minecraft/saves/{world_name}/datapacks. In that folder, please put the folder (dot folder) that you get at step2.",
   JAVA_COMMAND_TEXT4:
+    "Rename from 'functions' to 'function'.",  
+  JAVA_COMMAND_TEXT5:
     "Enter the world and excute commmand like this, /function folderName:fileName folderName is the name of folder that includes functions folder. (dot_pack by default). fileName is the name of mcfunction file. (cmd by default) If the loading is successful, you will be presented with a list of possible commands while typing /function. When you edit commands, please excute /reload",
 
   // bedrock COMAMND
