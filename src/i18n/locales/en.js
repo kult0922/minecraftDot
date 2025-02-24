@@ -42,7 +42,7 @@ export default {
   JAVA_COMMAND_SECTION2: "Decompress the zip fiel.",
   JAVA_COMMAND_SECTION3: "Load commands from minecraft as datapack.",
   JAVA_COMMAND_SECTION4: "Change folder name（1.21 or later）",
-  JAVA_COMMAND_SECTION5: "Run command",
+  JAVA_COMMAND_SECTION5: "Execute function",
   JAVA_COMMAND_TEXT1: "Convert image in this app, and download zip file (minecraftDot.zip).",
   JAVA_COMMAND_TEXT2:
     "Decompress the zip file by clicking zip file You don't need special tools, just click file",
