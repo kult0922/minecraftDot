@@ -71,7 +71,8 @@ const generatePackZip = (commandScripts: string[], edition: Edition) => {
     const mcmeta = generateMcMeta();
     // フォルダの作成
     zip.folder("dot")?.file("pack.mcmeta", mcmeta);
-    zip.folder("dot")?.folder("data")?.folder("dot_pack")?.folder("functions");
+    // the folder name is renamed to 'functions' from 'function' since v1.21 jave edition
+    zip.folder("dot")?.folder("data")?.folder("dot_pack")?.folder("function");
     functionsPath = "dot/data/dot_pack/functions/";
   }
   // functionsの作成
