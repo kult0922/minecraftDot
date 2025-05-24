@@ -41,7 +41,7 @@ const CommandHelpJavaComponent = () => {
                           <ul className="px-8 py-1">
                             <span className="caret">└ 📂 dot_pack</span>
                             <ul className="px-8 py-1">
-                              <span className="caret">└ 📂 functions</span>
+                              <span className="caret">└ 📂 function</span>
                               <ul className="px-8 py-1">
                                 <span className="caret">└ cmd.mcfunction</span>
                               </ul>
