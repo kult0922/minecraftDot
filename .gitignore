@@ -8,9 +8,9 @@
 # testing
 /coverage
 
-# tanstack start / vinxi
-/.vinxi/
-/.output/
+# tanstack start
+.wrangler/
+dist/
 
 # production
 /build
