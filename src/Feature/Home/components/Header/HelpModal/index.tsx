@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import Modal from "react-modal";
 import CrossButton from "src/components/CrossButton.tsx";
 import { useLocale } from "src/hooks/useLocale";
@@ -52,9 +52,7 @@ const HelpModal = ({ isModalOpen, setIsModalOpen }: Props) => {
           </ol>
 
           <div className="my-3">
-            <Link href="/command-help">
-              <a className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</a>
-            </Link>
+            <Link to="/command-help" className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</Link>
           </div>
         </div>
       </Modal>

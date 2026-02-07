@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useBlockDBContext } from "src/context/useBlockDB";
 import Modal from "react-modal";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useBlueprintContext } from "src/context/useBlueprint";
 import CrossButton from "src/components/CrossButton.tsx";
 import createCsv from "src/functions/createCsv";
@@ -140,9 +140,7 @@ const PreviewModal = ({
                       </button>
                     </td>
                     <td className="text-center px-4 py-2">
-                      <Link href="/editor">
-                        <a>{t.EDIT}</a>
-                      </Link>
+                      <Link to="/editor">{t.EDIT}</Link>
                     </td>
                   </tr>
                 </tbody>

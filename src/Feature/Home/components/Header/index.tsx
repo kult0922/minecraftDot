@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 import LanguageSwitch from "src/components/LanguageSwitch";
 import { useLocale } from "src/hooks/useLocale";
@@ -21,7 +20,7 @@ const Header = () => {
             {t.HELP}
           </button>
           <div className="sm:mr-4">
-            <LanguageSwitch path="/" />
+            <LanguageSwitch />
           </div>
         </div>
       </div>

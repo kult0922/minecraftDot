@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LanguageSwitch from "src/components/LanguageSwitch";
 import { useLocale } from "src/hooks/useLocale";
 
@@ -10,7 +9,7 @@ const CommandHelpJavaComponent = () => {
         <div className="flex justify-between">
           <div className="sm:text-4xl text-xl mb-4">{t.JAVA_COMMAND_TITLE}</div>
           <div>
-            <LanguageSwitch path="/command-help/java/" />
+            <LanguageSwitch />
           </div>
         </div>
 

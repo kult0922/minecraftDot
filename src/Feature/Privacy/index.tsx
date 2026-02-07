@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useLocale } from "src/hooks/useLocale";
 
 const PrivacyComponent = () => {
@@ -14,9 +14,7 @@ const PrivacyComponent = () => {
         <div className="text-lg font-semibold">{t.PRIVACY_SECTION3}</div>
         <div className="mb-4">{t.PRIVACY_TEXT3}</div>
 
-        <Link href="/">
-          <a className="underline text-decoration">{t.RETURN_HOME}</a>
-        </Link>
+        <Link to="/" className="underline text-decoration">{t.RETURN_HOME}</Link>
       </div>
     </>
   );

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LanguageSwitch from "src/components/LanguageSwitch";
 import { useLocale } from "src/hooks/useLocale";
 
@@ -10,7 +9,7 @@ const CommandHelpBedrockComponent = () => {
         <div className="flex justify-between">
           <div className="sm:text-4xl text-xl mb-4">{t.BEDROCK_COMMAND_TITLE}</div>
           <div>
-            <LanguageSwitch path="/command-help/bedrock/" />
+            <LanguageSwitch />
           </div>
         </div>
 

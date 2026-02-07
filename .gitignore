@@ -8,9 +8,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# tanstack start / vinxi
+/.vinxi/
+/.output/
 
 # production
 /build

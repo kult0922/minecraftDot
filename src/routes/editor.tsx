@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
+import { createFileRoute } from "@tanstack/react-router";
 import EditorPageComponent from "src/Feature/Editor";
 import { EditorProvider } from "src/context/useEditor";
 import { EditorCanvasProvider } from "src/context/useEditorCanvas";
 import { HistoryProvider } from "src/context/useHistory";
 
-const Editor: NextPage = () => {
+function EditorPage() {
   return (
     <HistoryProvider>
       <EditorCanvasProvider>
@@ -14,6 +14,8 @@ const Editor: NextPage = () => {
       </EditorCanvasProvider>
     </HistoryProvider>
   );
-};
+}
 
-export default Editor;
+export const Route = createFileRoute("/editor")({
+  component: EditorPage,
+});
