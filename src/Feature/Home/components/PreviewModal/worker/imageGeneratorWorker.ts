@@ -1,4 +1,4 @@
-import { t } from "src/functions/t";
+import { t } from "../../../../../functions/t";
 
 const constructImageFromBlueprint = (
   blueprint: Array<Array<string>>,

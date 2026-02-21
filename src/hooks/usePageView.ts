@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "@tanstack/react-router";
 import { existsGaId, pageview } from "src/functions/gtag";
 
 export default function usePageView() {
@@ -10,14 +10,10 @@ export default function usePageView() {
       return;
     }
 
-    const handleRouteChange = (path: string) => {
-      pageview(path);
-    };
+    const unsubscribe = router.subscribe("onResolved", (event) => {
+      pageview(event.toLocation.pathname);
+    });
 
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+    return unsubscribe;
+  }, [router]);
 }

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { useLocale } from "src/hooks/useLocale";
 
 const Footer = () => {
@@ -35,9 +35,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="flex justify-center mt-2">
-          <Link href="/privacy">
-            <a className="underline text-decoration">Privacy policy</a>
-          </Link>
+          <Link to="/privacy" className="underline text-decoration">Privacy policy</Link>
         </div>
       </div>
     </>

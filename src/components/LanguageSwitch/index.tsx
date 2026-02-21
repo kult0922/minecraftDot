@@ -1,14 +1,9 @@
-import Link from "next/link";
 import { useState } from "react";
-import { useLocale } from "src/hooks/useLocale";
+import { useLocaleContext } from "src/context/useLocaleContext";
 import OutsideClickHandler from "react-outside-click-handler";
 
-interface Props {
-  path: string;
-}
-
-const LanguageSwitch = ({ path }: Props) => {
-  const { t, locale } = useLocale();
+const LanguageSwitch = () => {
+  const { locale, setLocale } = useLocaleContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuOpen = () => {
@@ -17,6 +12,11 @@ const LanguageSwitch = ({ path }: Props) => {
 
   const handleMenuClose = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleSetLocale = (newLocale: "en" | "ja") => {
+    setLocale(newLocale);
+    handleMenuClose();
   };
 
   return (
@@ -38,14 +38,10 @@ const LanguageSwitch = ({ path }: Props) => {
           {isMenuOpen && (
             <div className="absolute">
               <div className="bg-neutral-900 hover:bg-m-green w-24 p-1 text-right border-b border-neutral-600">
-                <Link href={path} locale="en" passHref>
-                  <a onClick={handleMenuClose}>English</a>
-                </Link>
+                <button onClick={() => handleSetLocale("en")}>English</button>
               </div>
               <div className="bg-neutral-900 hover:bg-m-green w-24 p-1 text-right">
-                <Link href={path} locale="ja" passHref>
-                  <a onClick={handleMenuClose}>日本語</a>
-                </Link>
+                <button onClick={() => handleSetLocale("ja")}>日本語</button>
               </div>
             </div>
           )}

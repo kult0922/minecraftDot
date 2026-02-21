@@ -1,9 +1,6 @@
-import { useRouter } from "next/router";
-import en from "../i18n/locales/en";
-import ja from "../i18n/locales/ja";
+import { useLocaleContext } from "src/context/useLocaleContext";
 
 export const useLocale = () => {
-  const { locale } = useRouter();
-  const t = locale === "en" ? en : ja;
+  const { locale, t } = useLocaleContext();
   return { locale, t };
 };

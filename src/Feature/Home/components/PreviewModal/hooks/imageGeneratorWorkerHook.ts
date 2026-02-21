@@ -14,7 +14,8 @@ export function useImageGeneratorWorker() {
     setLoading(true);
     setProgress(0);
     const worker = new Worker(
-      new URL("../worker/imageGeneratorWorker", import.meta.url)
+      new URL("../worker/imageGeneratorWorker", import.meta.url),
+      { type: "module" }
     );
 
     worker.onmessage = function (e) {

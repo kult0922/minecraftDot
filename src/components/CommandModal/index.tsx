@@ -9,11 +9,12 @@ import CrossButton from "src/components/CrossButton.tsx";
 import { calcRBCoordinate, validInput } from "src/Feature/Editor/functions/cornerCoordinate";
 import generateCommand from "src/Feature/Editor/functions/generateCommand";
 import generatePackZip from "../../Feature/Editor/functions/generatePackZip";
-import { saveAs } from "file-saver";
+import fileSaver from "file-saver";
+const { saveAs } = fileSaver;
 import EditionButton from "./EditionButton";
 import CoordinateInput from "./CoordinateInput";
 import { useLocale } from "src/hooks/useLocale";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 
 interface Props {
   blueprint: string[][];
@@ -249,9 +250,7 @@ const CommandModal = ({ blueprint, isModalOpen, setIsModalOpen }: Props) => {
               {t.COMMAND_GENERATION}
             </button>
             <div className="my-3">
-              <Link href="/command-help">
-                <a className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</a>
-              </Link>
+              <Link to="/command-help" className="underline text-decoration">{t.HOW_TO_RUN_COMMAND}</Link>
             </div>
           </div>
         </div>
